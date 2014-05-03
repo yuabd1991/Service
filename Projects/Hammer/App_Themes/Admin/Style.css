@@ -1,0 +1,132 @@
+﻿body 
+{
+	font-size: 12px;
+	font-family: Verdana, Tahoma, Arial, "Helvetica Neue" , Helvetica, Sans-Serif;
+	margin: 0px;
+	height: 100%;
+	padding: 0px;
+}
+#DivTop
+{
+	width: 100%;
+	background: url(Images/head_bg.png) repeat-x 0 0;
+	height: 52px;
+	padding: 0px;
+	color: #FEFFFF;
+}
+
+.divTrunLeft {
+	background: url("Images/turnleft.gif") no-repeat;
+	background-color: #F6F6F6;
+	float: left;
+	height: 31px;
+	width: 10px;
+	vertical-align: middle;
+	margin-top: 200px;
+	cursor: pointer;
+	position: absolute;
+	left: 157px;
+}
+.divTrunRight {
+	background: url("Images/turnright.gif") no-repeat;
+	float: left;
+	height: 31px;
+	width: 10px;
+	vertical-align: middle;
+	margin-top: 200px;
+	cursor: pointer;
+	display: none;
+	position: absolute;
+	left: 0;
+}
+/* --------------------------------------------------
+
+					othders
+
+-------------------------------------------------*/
+
+
+/* --------------------------------------------------
+
+					Left
+
+-------------------------------------------------*/
+.left_body {
+	width: 155px;
+	border: 1px solid #BAC0C7;
+	background-color: #F6F6F6;
+	padding-top: 3px;
+}
+.left_head {
+	margin: 6px 2px 6px 2px;
+	height: 23px;
+	cursor: pointer;
+	border: 1px solid #1B1F2C;
+}
+.left_head .first {
+background: none repeat scroll 0 0 #3C455F;
+width: 5px;
+height: 20px;
+}
+.left_head .mid {
+background: none repeat scroll 0 0 #3C455F;
+height: 20px;
+}
+.left_head .last {
+background: none repeat scroll 0 0 #3C455F;
+width: 16px;
+height: 20px;
+}
+.left_head div {
+float: left;
+padding-top: 3px;
+}
+.left_head span {
+text-align: left;
+padding-left: 15px;
+padding-right: 10px;
+width: 88px;
+padding-top: 4px;
+color: #FFFFFF;
+font-weight: bold;
+float: left;
+font-size: 12px;
+font-family: 宋体 sans-serif;
+}
+.ModuleIco {
+background: none repeat scroll 0 0 #3C455F;
+height: 15px;
+}
+.leftitle {
+text-align: center;
+line-height: 10px;
+}
+.HideIcoUp {
+background: url("Images/left_layout_button_up.gif") no-repeat;
+height: 15px;
+width: 15px;
+cursor: pointer;
+}
+.HideIcoDown {
+background: url("Images/left_layout_button_down.gif") no-repeat;
+height: 15px;
+width: 15px;
+cursor: pointer;
+}
+.left_Menu {
+	padding-left: 2px;
+	color: #1C3B72;
+	display: none;
+}
+.left_Menu div {
+	height: 20px;
+	padding-top: 4px;
+	padding-left: 26px;
+	cursor: pointer;
+	font-size: 12px;
+}
+.left_Menu .menu_select {
+	background: url("Images/left_select_bg.gif") no-repeat;
+	width: 125px;
+	color: White;
+}

@@ -1,0 +1,151 @@
+﻿@{
+	var menus = ViewBag.AllMenus;
+	var pages = ViewBag.AllPages;
+	<script>
+	var arrayAllMenus = new Array(); //创建一个数组,用来保存菜单
+	
+	@{foreach (var item in menus)
+   {
+			@:arrayAllMenus.push("@item.ID|@item.MenuName|@item.Selected|@item.ParentID|@item.OrderIndex");
+		}
+	}
+
+var arrayAllPages = new Array(); //创建一个数组,用来保存页面
+@foreach (var item in pages)
+{
+	@:arrayAllPages.push("@item.ID|@item.MenuName|@item.Selected|@item.ParentID|@item.PageUrl");
+}
+//arrayAllPages.push("525|首页|Y|405|/Admin/Menu/MenuList|Admin.settings.Index");
+	</script>
+}
+<div class="TopBg">
+	<div class="TopHead">
+		<div class="Logo">
+		</div>
+		<div class="LoginMsg">
+		</div>
+		<div id="DivHelp" class="top_help">
+			<span style="font-size: 13px; font-weight: bolder; padding-right: 10px;">厦门巨易网络科技有限公司</span>
+			<a href="/" target="_blank" class="top-menu-icon"><span class="menu_help gerenshouye"
+				title="首页"></span></a>@*<a href="javascript:void(0)" class="top-menu-icon" onclick="TF.LoadSetUp('Admin')">
+				<span class="menu_help gerenshezhi" title="设置"></span></a>*@
+			<script>
+				$(function () {
+					$('#recyclsp').show();
+				});
+			</script>
+			@*<span id="recyclsp" style="" title="回收站"><a href="javascript:void(0)" id="recycl"
+				class="top-menu-icon" onclick="TF.LoadRecycl()"><span class="menu_help lajitong">
+				</span></a></span><a href="javascript:void(0)" id="mark" class="top-menu-icon" title="书签">
+					<span class="menu_help shuqian"></span></a><span class="menu_help bangzhu" title="帮助">
+					</span><a href="javascript:void(0)" id="actionLog" class="top-menu-icon" title="操作记录">
+						<span class="menu_help caozuojilu"></span></a>*@ <a id="logout" title="退出" class="top-menu-icon"
+							href="/Login/Logout"><span class="menu_help tuichu"></span></a>
+		</div>
+		<div id="timer" style="float: right; padding-right: 23px">
+		</div>
+		<script>
+			var d = new Date();
+			//        	$.post("/Default/CurrentTime", null, function (res) {
+			//        		d = new Date(res.year, res.month, res.day, res.hour, res.minute, res.second);
+			//        	});
+
+			function getNow() {
+				var s;
+				s = "" + (d.getFullYear()) + "-" + ((d.getMonth()) < 10 ? "0" + (d.getMonth()) : (d.getMonth())) + "-" + (d.getDate() < 10 ? "0" + d.getDate() : d.getDate()) + " ";
+				var c = ":";
+				s += " " + ((d.getHours()) < 10 ? "0" + (d.getHours()) : (d.getHours())) + c;
+				s += ((d.getMinutes()) < 10 ? "0" + (d.getMinutes()) : (d.getMinutes())) + c;
+				s += ((d.getSeconds()) < 10 ? "0" + (d.getSeconds()) : (d.getSeconds()));
+				$('#timer').html(s);
+				d.setTime(d.getTime() + 1000);
+
+				//        		if ((d.getMinutes() % 10 == 0) && (d.getSeconds() % 60 == 0)) {
+				//        			$.post("/Default/CurrentTime", null, function (res) {
+				//        				d = new Date(res.year, res.month, res.day, res.hour, res.minute, res.second);
+				//        			});
+				//        		}
+			}
+			getNow();
+			setInterval("getNow()", 1000);
+		</script>
+	</div>
+</div>
+<div id="TopMenu" class="TopBar">
+	<span class="welcomeinfo" style="width: 155px; padding-top: 10px;"><span style="display: inline-block;
+		max-width: 135px;"><span class="menu_title">@EasyUI.Helpers.LoginHelper.UserName</span><span
+			class="menu_title" style="font-weight: normal; padding-top: 5px; padding-left: 3px;
+			text-align: center">欢迎您<span class="rightarrow" style="display: inline-block;"></span></span>
+	</span></span>
+	<div class="TopBar-normal">
+		<div id="1" class="menu_button">
+			<div class="menu_top shouye">
+			</div>
+			<div class="menu_title">
+				首页</div>
+		</div>
+	</div>
+	<script>
+		$(function () {
+			$('#1').parent().addClass("TopBar-select");
+			LF.UpdateLeftByTop('1');
+		});
+	</script>
+	<div class="TopBar-normal">
+		<div id="2" class="menu_button">
+			<div class="menu_top xitongguanli">
+			</div>
+			<div class="menu_title">
+				系统设置</div>
+		</div>
+	</div>
+	@*<div class="TopBar-normal">
+            <div id="2" class="menu_button">
+                <div class="menu_top xinxiguanli">
+                </div>
+                <div class="menu_title">我的地带</div>
+            </div>
+        </div>
+        <div class="TopBar-normal">
+            <div id="18" class="menu_button">
+                <div class="menu_top shangpingguanli">
+                </div>
+                <div class="menu_title">商品管理</div>
+            </div>
+        </div> 
+        <div class="TopBar-normal">
+            <div id="46" class="menu_button">
+                <div class="menu_top dindanguanli">
+                </div>
+                <div class="menu_title">订单管理</div>
+            </div>
+        </div> 
+        <div class="TopBar-normal">
+            <div id="49" class="menu_button">
+                <div class="menu_top qudaozhongxin">
+                </div>
+                <div class="menu_title">渠道管理</div>
+            </div>
+        </div> 
+        <div class="TopBar-normal">
+            <div id="30" class="menu_button">
+                <div class="menu_top diaoduzhongxin">
+                </div>
+                <div class="menu_title">配发调拨</div>
+            </div>
+        </div> 
+        <div class="TopBar-normal">
+            <div id="63" class="menu_button">
+                <div class="menu_top caiwuguanli">
+                </div>
+                <div class="menu_title">财务结算</div>
+            </div>
+        </div> 
+        <div class="TopBar-normal">
+            <div id="432" class="menu_button">
+                <div class="menu_top baobiaozhongxin">
+                </div>
+                <div class="menu_title">报表中心</div>
+            </div>
+        </div> *@
+</div>

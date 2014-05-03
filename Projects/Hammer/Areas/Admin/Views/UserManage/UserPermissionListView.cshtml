@@ -1,0 +1,105 @@
+﻿@{
+    ViewBag.Title = "UserPermissionListView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="toolBar">
+    <table cellpadding="0" cellspacing="0">
+        <tr>
+            <td>
+                <a href="javascript:void(0)" class="easyui-linkbutton" plain="false" iconcls="icon-add"
+                    onclick="Save()">确定</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="menuList">
+</div>
+
+<script language="javascript" type="text/javascript">
+    InitMenuAuthorityList = function () {
+        var queryParams = {};
+        $('#menuList').treegrid({
+            //queryParams: queryParams,
+            width: "auto",
+            height: "auto",
+            rownumbers: true,
+            nowrap: true,
+            animate: true,
+            collapse: false,
+            url: '/Admin/UserManage/UserPermissionListJson',
+            idField: 'idtype',
+            treeField: 'MenuName',
+            singleSelect: false,
+            fitColumns: false, //列根据宽度调整
+            //fit: true,
+            columns: [[
+                    { field: 'ck', title: '选择', checkbox: true },
+					{ field: 'MenuName', title: '名称', align: 'left', width: 200 },
+            //{ field: 'MenuUrl', title: '路径', align: 'left', width: 300, formatter: urlFormat },
+                    {field: 'Type', title: '类型', align: 'left', width: 70, formatter: typeFormat },
+            //{ field: 'RightKey', title: '权限key', align: 'left', width: 300 },
+            //{field: 'Selected', title: '默认打开', align: 'left', width: 60, formatter: selectFormat },
+            //{ field: 'op', title: '操作', align: 'left', width: 130, formatter: opFormat }
+				]],
+            toolbar: [],
+            //选择列
+            onHeaderContextMenu: function (e, field) {
+                DataGridExtend.headerContextMenu(e, field, $(this).attr('id'), pageTag + '.' + $(this).attr('id'))
+            },
+            //加载成功的时候，初始化隐藏列
+            onLoadSuccess: function (data) {
+                DataGridExtend.loadSuccessInit($(this).attr('id'), pageTag + '.' + $(this).attr('id'));
+                //expandAll();
+            },
+            onLoadError: function () {
+                alert("数据加载错误，请重新登陆系统");
+            }
+        });
+        $(window).resize(function () {
+            $("#menuList").treegrid("resize");
+        });
+        //搜素栏
+        //$(".datagrid-toolbar").append($(".searchBar"));
+        //工具栏
+        $(".datagrid-toolbar").append($(".toolBar"));
+    };
+    /*全部展开*/
+    expandAll = function () {
+        $("#menuList").treegrid('expandAll');
+    };
+    /*全部收起*/
+//    collapseAll = function () {
+//        $("#menuList").treegrid('collapseAll');
+//    };
+
+    /*类型列*/
+    typeFormat = function (val, row, rowIndex) {
+        if (row.Type == "Menu")
+            return "菜单";
+        else
+            return "页面";
+    };
+
+    function Save() {
+
+    }
+    
+    /*初始化加载*/
+    $(function () {
+        InitMenuAuthorityList();
+        $("#menuList").treegrid('expandAll');
+        var str = '@ViewBag.IDS'.split(';');
+        //alert(str);
+        for (var i = 0; i < str.length; i++) {
+            if (str != "") {
+                //alert(str[i].toString());
+                var item = str[i].toString();
+                //alert(item);
+                $("#menuList").treegrid('select', item);
+            }
+
+        }
+    });
+</script>
+

@@ -1,0 +1,115 @@
+﻿@{
+    ViewBag.Title = "ImageArticleListView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="searchBar">
+	<ul>
+        <li>
+			<span class="title">标题：</span>
+			<input col="Title" type="text" />
+		</li>
+        <li>
+            <span class="title">栏目: </span>
+            <select id="ColumnID" col="ColumnID" class="dropdown">
+				<option value="">请选择文章栏目</option>
+				@foreach (var item in ViewBag.Category)
+				{
+					<option value="@item.ID">@item.Name</option>
+				}
+			</select>
+        </li>
+	</ul>
+</div>
+<div class="toolBar">
+	<table cellpadding="0" cellspacing="0">
+        <tr>
+            @*<td>
+                <span>
+                    <input type="checkbox" id="IsViewImg" checked="checked" onclick="IsViewImg(this)" />显示图片</span>
+            </td>
+            <td>
+                <div class="toolBar_separator">
+                </div>
+            </td>*@
+            <td>
+	            <a href="javascript:void(0)" class="easyui-linkbutton" plain="false" iconcls="icon-add"
+	               onclick="Add()">新增图文集</a>
+				   @*<input type="hidden" id="CategoryID" value=""/>*@
+            </td>
+        </tr>
+    </table>
+</div>
+<div id="DataGrid">
+</div>
+<script>
+    Search = function () {
+        Reflesh();
+    };
+
+    var categoryID = '@ViewBag.CategoryID';
+
+    var url = "/Admin/ArticleManage/ImageArticleListJson";
+    //刷新
+    function Reflesh() {
+        var param = $(".searchBar").GetPostData();
+        
+        DataGridExtend.searchGrid("DataGrid", param, url);
+    };
+
+    $(function () {
+        $("#ColumnID").val(categoryID);
+        var param = $('.searchBar').GetPostData();
+        $('#DataGrid').U1EasyGrid({
+            queryParams: param,
+            singleSelect: false,
+            url: url,
+            columns: [[
+                { field: 'ck', title: '选择', checkbox: true },
+                { field: 'Title', title: '标题', align: 'center', width: 250, formatter: titleFormat },
+            //{ field: 'IsPublic', title: '是否显示主页', align: 'center', width: 80 },
+                {field: 'DateCreated', title: '更新时间', sortable: true, align: 'center', width: 180, formatter: DataGridExtend.datetimeFormat },
+				{ field: 'UpdateUser', title: '操作用户', align: 'center', width: 100 },
+				{ field: 'PageVisits', title: '访问量', sortable: true, align: 'center', width: 100 },
+                { field: 'op', title: '操作', align: 'center', formatter: opFormat, width: 150 }
+          ]]
+        });
+        
+    });
+
+    //操作列
+    function opFormat(val, row, rowIndex) {
+        var html = "";
+        html = "<a href=\"javascript:void(0)\"  onClick=\"Edit('" + row.ID + "')\" >编辑</a> | ";
+        html += "<a href=\"javascript:void(0)\"  onClick=\"Del('" + row.ID + "')\" >删除</a>";
+        return html;
+    }
+
+    function Add() {
+        openPage('新增图文集', '/admin/articlemanage/ImageArticleAddView?tab=' + getTabTitle() + '&columnID=' + categoryID);
+    }
+
+    function Edit(id) {
+        openPage('编辑图文集', '/admin/articlemanage/ImageArticleEditView?id=' + id + "&tab=" + getTabTitle());
+    }
+
+    function titleFormat(val, row, rowIndex) {
+        var str = "";
+        str += row.Title + "<br />";
+        str += "<img src='/Content/Upload/images/" + row.Photo + "' width='100' height='100' />";
+        return str;
+    }
+
+    function Del(id) {
+        if (confirm('确认要删除该文章吗？')) {
+            $.U1Ajax('/admin/ArticleManage/DeleteArticleImageJson/' + id, null, function (result) {
+                if (result.Tag == 1) {
+                    alert("删除成功！");
+                    Reflesh();
+                } else {
+                    alert(result.Message);
+                }
+            }, false);
+        }
+    }
+</script>

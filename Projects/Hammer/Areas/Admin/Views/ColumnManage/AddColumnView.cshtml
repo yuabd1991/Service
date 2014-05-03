@@ -1,0 +1,111 @@
+﻿@{
+    ViewBag.Title = "AddColumnView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="pagetable">
+	<tr>
+		<td class="title">
+			<span class="red">* 栏目名称：</span>
+		</td>
+		<td>
+			<input col="ColumnName" class="textbox" validtype="required(栏目名称)|maxLen(30)" type="text" />
+		</td>
+	</tr>
+	<tr>
+		<td class="title">
+			<span class="red">* 内容模型：</span>
+		</td>
+		<td>
+			<select col="ContentTemplateID" id="ContentTemplateID" class="u1cc_select" validtype="required(内容模型)">
+				<option value="">请选择内容模型</option>
+				@foreach (var item in ViewBag.Content)
+				{
+					<option value="@item.ID">@item.Name</option>
+				}
+			</select>
+		</td>
+	</tr>
+    <tr id="page" style="display: none;">
+        <td class="title">
+            页面:
+        </td>
+        <td>
+            <input id="pageName" type="text" />
+            <input type="hidden" id="pageID" col="PageID" />
+        </td>
+    </tr>
+	<tr>
+		<td class="title">是否显示栏目：</td>
+		<td id="Public">
+			<input type="radio" name="isPublic" value="Y" checked="checked"/> 是
+			<input type="radio" name="isPublic" value="N" /> 否
+		</td>
+	</tr>
+	<tr>
+		<td class="title">
+			SEO标题：
+		</td>
+		<td>
+			<input type="text" class="textbox" style="width: 300px;" col="PageTitle" validtype="maxLen(150)"/>
+		</td>
+	</tr>
+	<tr>
+		<td class="title">关键字：</td>
+		<td>
+			<input type="text" class="textbox" style="width: 300px;" col="MetaKeywords" validtype="maxLen(200)"/>
+			<span class="icon-tip" style="padding-left: 18px; margin-left: 18px;">栏目关键字(多个关键字之间用,隔开)</span>
+		</td>
+	</tr>
+	<tr>
+		<td class="title">栏目描述：</td>
+		<td>
+			<textarea col="MetaDescription" class="textarea" cols="50" rows="8" validtype="maxLen(300)"></textarea>
+		</td>
+	</tr>
+	<tr>
+		<td class="title">
+			排列顺序： 
+		</td>
+		<td>
+			<input col="SortOrder" class="textbox" value="0" validtype="required(排列顺序)|Num" />
+		</td>
+	</tr>
+	<tr>
+		<td class="title"></td>
+		<td>
+			<input type="button" onclick="Save()" value="保存" />
+		</td>
+	</tr>
+</table>
+<script>
+    $(function () {
+
+        $("#ContentTemplateID").change(function () {
+            if ($(this).find("option:selected").text() == '单页文档') {
+                $("#page").show();
+            }
+            else {
+                $("#page").hide();
+            }
+        });
+    });
+
+	function Save() {
+		if (!$.validatebox.valid()) {
+			return;
+		}
+
+		var param = $(".pagetable").GetPostData();
+		param.IsPublic = $("#Public input:radio:checked").val();
+		
+		$.U1Ajax("/Admin/ColumnManage/AddColumnJson", param, function (result) {
+			if (result.Tag > 0) {
+				alert('保存成功! ');
+				closeSelectTab(request.QueryString("tab"));
+			} else {
+				alert(result.Message);
+			}
+		}, false);
+    }
+</script>

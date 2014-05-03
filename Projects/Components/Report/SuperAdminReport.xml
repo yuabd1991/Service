@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+	<report id="ArticleImageList" name="图文集列表">
+		<sql>
+			<![CDATA[
+	  select b.*, (select top 1 PictureUrl from picture p where type = 'ArticleImage' and p.TargetID = b.id order by p.IsDefault desc) as Photo
+	  from (select a.* from ArticleImage a) b
+      ]]>
+		</sql>
+		<dynamic prepend ="WHERE ">
+			<isNotEmpty property="" prepend="And" value="fixed" type="">
+				<![CDATA[b.IsDelete <> 'Y']]>
+			</isNotEmpty>
+			<isNotEmpty property="Title" prepend="And" value="" type="">
+				<![CDATA[ b.Title like CONCAT('%',@Title,'%') ]]>
+			</isNotEmpty>
+			<isNotEmpty property="ColumnID" prepend="And" value="" type="">
+				<![CDATA[ b.ColumnID = @ColumnID ]]>
+			</isNotEmpty>
+			<isNotEmpty property="Author" prepend="And" value="" type="">
+				<![CDATA[ b.Author like '%'+@Author+'%' ]]>
+			</isNotEmpty>
+			<isNotEmpty property="Source" prepend="And" value="" type="">
+				<![CDATA[ b.Source like '%'+@Source+'%' ]]>
+			</isNotEmpty>
+		</dynamic>
+		<endsql>
+			order by b.ID desc
+		</endsql>
+	</report>
+	<report id="DocumentsList" name="用户列表">
+		<sql>
+			<![CDATA[
+        select a.* from [document] a
+      ]]>
+		</sql>
+		<dynamic prepend ="WHERE ">
+			<isNotEmpty property="Title" prepend="And" value="" type="">
+				<![CDATA[ a.Title like '%' + @Title + '%' ]]>
+			</isNotEmpty>
+			<isNotEmpty property="StartDate" prepend="And" value="" type="">
+				<![CDATA[ a.DateCreated >= @StartDate ]]>
+			</isNotEmpty>
+			<isNotEmpty property="EndDate" prepend="And" value="" type="">
+				<![CDATA[ a.DateCreated <= @EndDate ]]>
+			</isNotEmpty>
+		</dynamic>
+	</report>
+	<report id="ColumnList" name="用户列表">
+		<sql>
+			<![CDATA[
+        select a.*, b.UserName from [column] a
+		left join [user] b on a.UpdateUser = b.ID
+      ]]>
+		</sql>
+		<dynamic prepend ="WHERE ">
+			<isNotEmpty property="ColumnName" prepend="And" value="" type="">
+				<![CDATA[ a.ColumnName like '%'+@ColumnName+'%' ]]>
+			</isNotEmpty>
+			<isNotEmpty property="StartDate" prepend="And" value="" type="">
+				<![CDATA[ a.UpdateDate >= @StartDate ]]>
+			</isNotEmpty>
+			<isNotEmpty property="EndDate" prepend="And" value="" type="">
+				<![CDATA[ a.UpdateDate <= @EndDate ]]>
+			</isNotEmpty>
+		</dynamic>
+	</report>
+	<report id="ArticleList" name="文章列表">
+		<sql>
+			<![CDATA[
+        select a.id, a.PageVisits, a.UpdateTime, a.UpdateUser, a.title,
+        a.ShortTitle, a.SortOrder, b.ColumnName, a.IsPublic from article a
+        left join [column] b on a.ColumnID = b.ID
+      ]]>
+		</sql>
+		<dynamic prepend ="WHERE ">
+			<isNotEmpty property="" prepend="And" value="Fixed" type="">
+				<![CDATA[ a.IsDelete <> 'Y']]>
+			</isNotEmpty>
+			<isNotEmpty property="Title" prepend="And" value="" type="">
+				<![CDATA[ a.Title like '%'+@Title+'%' ]]>
+			</isNotEmpty>
+			<isNotEmpty property="ColumnID" prepend="And" value="" type="">
+				<![CDATA[ a.ColumnID = @ColumnID ]]>
+			</isNotEmpty>
+			<isNotEmpty property="Author" prepend="And" value="" type="">
+				<![CDATA[ a.Author like '%'+@Author+'%' ]]>
+			</isNotEmpty>
+			<isNotEmpty property="Source" prepend="And" value="" type="">
+				<![CDATA[ a.Source like '%'+@Source+'%' ]]>
+			</isNotEmpty>
+		</dynamic>
+	</report>
+	<report id="UserList" name="用户列表">
+		<sql>
+			<![CDATA[
+        select a.* from user a
+      ]]>
+		</sql>
+		<dynamic prepend ="WHERE ">
+			<isNotEmpty property="UserName" prepend="And" value="" type="">
+				<![CDATA[ a.UserName like '%'+@UserName+'%' ]]>
+			</isNotEmpty>
+			<isNotEmpty property="StartDate" prepend="And" value="" type="">
+				<![CDATA[ a.DateCreated >= @StartDate ]]>
+			</isNotEmpty>
+			<isNotEmpty property="EndDate" prepend="And" value="" type="">
+				<![CDATA[ a.DateCreated <= @EndDate ]]>
+			</isNotEmpty>
+		</dynamic>
+	</report>
+	<report id="SidebarList" name="边栏列表">
+		<sql>
+			<![CDATA[
+        select a.* from sidebar a
+      ]]>
+		</sql>
+		<dynamic prepend ="WHERE ">
+			<isNotEmpty property="Title" prepend="And" value="" type="">
+				<![CDATA[ a.Title like '%'+@Title+'%' ]]>
+			</isNotEmpty>
+			<isNotEmpty property="StartDate" prepend="And" value="" type="">
+				<![CDATA[ a.UpdateDate >= @StartDate ]]>
+			</isNotEmpty>
+			<isNotEmpty property="EndDate" prepend="And" value="" type="">
+				<![CDATA[ a.UpdateDate <= @EndDate ]]>
+			</isNotEmpty>
+		</dynamic>
+	</report>
+
+</root>

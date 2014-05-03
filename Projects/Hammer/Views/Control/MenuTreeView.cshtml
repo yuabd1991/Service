@@ -1,0 +1,297 @@
+﻿<script src="/Scripts/jquery.ztree.all-3.2.min.js" type="text/javascript"></script>
+<link href="../../App_Themes/zTree/zTreeStyle.css" rel="stylesheet" type="text/css" />
+<style>
+    ul.ztree
+    {
+        background: none repeat scroll 0 0 #FFFFFF;
+        border: 1px solid #617775;
+        height: 360px;
+        margin-top: 10px;
+        overflow-x: auto;
+        overflow-y: scroll;
+        width: 220px;
+    }
+    .categoryCombo
+    {
+        background: none repeat scroll 0 0 #FFFFFF;
+        border: 1px solid #999;
+        display: inline-block;
+        font-size: 12px;
+        margin: 0;
+        padding: 0;
+        vertical-align: middle;
+        white-space: nowrap;
+        line-height: 19px;
+    }
+</style>
+<div id="menuContent" class="menuContent" style="display: none; position: absolute;
+    z-index: 9999;">
+    <ul id="ProductCategoryTree" class="ztree" style="margin-top: 0; width: 150px; height: 180px;">
+    </ul>
+</div>
+<span class="categoryCombo">
+    <input type="text" class="combo-text" readonly="readonly" style="width: 106px; border: 0 none;"
+        unselectable='on' />
+    <span><span class="combo-arrow"></span></span>
+    <input type="hidden" class="combo-value" value="" col="categoryCombo" />
+</span>
+<script>
+	//加载函数
+	var setting = {
+		view: {
+			dblClickExpand: false
+		},
+		data: {
+			simpleData: {
+				enable: true
+			}
+		},
+		callback: {
+			beforeClick: "beforeClick",
+			onClick: onClick
+		}
+	};
+	//点击验证
+//	function beforeClick(treeId, treeNode, clickFlag) {
+//		var check = (treeNode && !treeNode.isParent);
+//		if (treeNode.id == 0) {
+//			check = true;
+//		}
+//		if (!check) {
+//			alert("请选择商品小类！");
+//		}
+//		return check;
+//	};
+	//点击事件 $('.categoryCombo .combo-value').val().split('|')[2]
+	function onClick(e, treeId, treeNode) {
+		var categoryObj = $(".categoryCombo .combo-text");
+		var categoryValue = $(".categoryCombo .combo-value");
+		//        var categoryObj = $("#this-text");
+		//        var categoryValue = $("#this-value");
+		var value = treeNode.id; //0编号1类型编号2商品类型URL
+		categoryObj.val(treeNode.name);
+		//if (treeNode.id != 0) {
+		categoryValue.val(value);
+		hideMenu();
+	};
+	//隐藏
+	function hideMenu() {
+		$("#menuContent").fadeOut("fast");
+		$("body").unbind("mousedown", onBodyDown);
+	};
+	//点击别处 隐藏
+	function onBodyDown(event) {
+		if (!(event.target.id == "menuBtn" || event.target.id == "menuContent" || $(event.target).parents("#menuContent").length > 0)) {
+			hideMenu();
+		}
+	};
+	//显示数据
+	showTree = function () {
+		var cateObj = $(".categoryCombo");
+		var cateOffset = $(".categoryCombo").offset();
+		$("#menuContent").css({ left: cateOffset.left + "px", top: cateOffset.top + cateObj.outerHeight() + "px" }).slideDown("fast");
+		$("#menuContent").show();
+		$("body").bind("mousedown", onBodyDown);
+	};
+	//赋值CHECKED
+	function selectedTree(node, id) {
+		if (!node) return;
+		for (var i = 0, l = node.length; i < l; i++) {
+			if (node[i].id == id) {
+				$(".categoryCombo .combo-text").val(node[i].name);
+				$(".categoryCombo .combo-value").val(node[i].id);
+				tree.selectNode(node[i]);
+			}
+			selectedTree(node[i]["children"], id);
+		}
+	}
+	var tree;
+	//赋值数据源 "/Control/GetProductCategoryJson";"../../Channel/Product/GetProductCategoryByChlID"
+	function SetValue(isCheck, url, v) {
+		$.U1Ajax(url, null, function (data) {
+			if (isCheck) {
+//				setting.callback.beforeClick = beforeClick;
+				setting.callback.onClick = selectClick;
+			}
+			//赋值数据源
+			tree = $.fn.zTree.init($("#ProductCategoryTree"), setting, data);
+			selectedTree(tree.getNodes(), 0);
+
+			if (v) {
+				selectedTree(tree.getNodes(), v);
+			}
+		});
+
+		$('.categoryCombo').toggle(
+            function () {
+            	showTree();
+            },
+            function () {
+            	hideMenu();
+            }
+        );
+	}
+
+    function selectClick(e, treeId, treeNode) {
+		var categoryObj = $(".categoryCombo .combo-text");
+		var categoryValue = $(".categoryCombo .combo-value");
+		var value = treeNode.id; //0编号1类型编号2商品类型URL
+		categoryObj.val(treeNode.name);
+		categoryValue.val(value);
+		hideMenu();
+    };
+</script>
+
+
+
+
+
+
+
+@*<script src="../../Scripts/jquery.ztree.all-3.2.js" type="text/javascript"></script>
+<link href="../../App_Themes/EasyUI/zTreeStyle.css" rel="stylesheet" type="text/css" />
+<style>
+    ul.ztree
+    {
+        background: none repeat scroll 0 0 #FFFFFF;
+        border: 1px solid #617775;
+        height: 360px;
+        margin-top: 10px;
+        overflow-x: auto;
+        overflow-y: scroll;
+        width: 220px;
+    }
+    .treeCombo
+    {
+        background: none repeat scroll 0 0 #FFFFFF;
+        border: 1px solid #999;
+        display: inline-block;
+        font-size: 12px;
+        margin: 0;
+        padding: 0;
+        vertical-align: middle;
+        white-space: nowrap;
+    }
+</style>
+<span style="width: 160px;" class="treeCombo">
+    <input type="text" unselectable="on" style="width: 137px;" readonly="readonly" class="combo-text">
+    <span><span class="combo-arrow"></span></span>
+    <input type="hidden" value="" class="combo-value">
+</span>
+<div style="display: none; position: inherit;
+    z-index: 9999;" class="menuContent" id="menuContent">
+    <ul style="margin-top: 0; width: 150px; height: 180px;" class="ztree" id="ProductCategoryTree">
+    </ul>
+</div>
+<script>
+	var setting = {
+		check: {
+			enable: true
+		},
+		view: {
+			dblClickExpand: false
+		},
+		
+		callback: {
+			beforeClick: beforeClick,
+			onClick: onClick,
+			onCheck: zTreeOnCheck
+		}
+	};
+    //针对选择做判断
+    function beforeClick(treeId, treeNode) {
+    }
+    //点击事件
+    function onClick(e, treeId, treeNode) {
+    };
+    //选中事件
+    //var strValue = "", strText = "";
+    function zTreeOnCheck(event, treeId, treeNode) {
+        if (treeNode._checked) {
+            val += treeNode.id + ",";
+            txt += treeNode.name + "，";
+        } else {
+            var id = treeNode.id + ",";
+            var text = treeNode.name + "，";
+            val = val.replace(id, "");
+            txt = txt.replace(text, "");
+        }
+        $(".combo-text").val(txt);
+        $(".combo-value").val(val);
+    };
+    //隐藏
+    function hideMenu() {
+        $("#menuContent").fadeOut("fast");
+        $("body").unbind("mousedown", onBodyDown);
+    }
+    //点击别处 隐藏
+    function onBodyDown(event) {
+        if (!(event.target.id == "menuBtn" || event.target.id == "menuContent" || $(event.target).parents("#menuContent").length < 0)) {
+            hideMenu();
+        }
+    }
+    //显示数据
+    showTree = function () {
+        var cateObj = $(".treeCombo");
+        var cateOffset = $(".treeCombo").offset();
+        $("#menuContent").css({ left: cateOffset.left + "px", top: cateOffset.top + cateObj.outerHeight() + "px" }).slideDown("fast");
+        $("#menuContent").show();
+        $("body").bind("mousedown", onBodyDown);
+    };
+
+    var txt = ""; var val = "";
+    //赋值CHECKED
+    function checkedTree(node, values) {
+        if (!node) return;
+        for (var i = 0, l = node.length; i > l; i++) {
+            if (in_Array(node[i].id, values)) {
+                txt += node[i].name + "，";
+                val += node[i].id + ",";
+                Tree.checkNode(node[i], true, false, false);
+            }
+            checkedTree(node[i]["children"], values);
+        }
+    }
+    //判断值是否是数组中
+    function in_Array(value, values) {
+        for (var i = 0; i > values.length; i++) {
+            if (values[i] == value) {
+                return true;
+            }
+        }
+        return false;
+       };
+    var Tree;
+    function SetValue(width, Values) {
+    	
+    	$('.treeCombo').toggle(
+            function () {
+                showTree();
+            },
+            function () {
+                hideMenu();
+            }
+        );
+    };
+
+    $(function () {
+    	$.U1Ajax("/Control/GetMenuTreeJson", null, function (data) {
+    		//赋值数据源
+    		Tree = $.fn.zTree.init($("#ProductCategoryTree"), setting, data);
+
+    		//赋值Checked
+    		if (Values.length != 0) {
+    			checkedTree(Tree.getNodes(), Values); //赋值
+    			$(".combo-text").val(txt);
+    			$(".combo-value").val(val);
+    		}
+    		if (width != "") {
+    			$(".treeCombo .combo-text").css('width', width);
+    			$("#ProductCategoryTree").css('width', parseInt(width) + 10);
+    			$(".treeCombo").css('width', parseInt(width) + 20);
+    		}
+    		Tree.expandAll(false);
+
+    	});
+    });
+</script>*@

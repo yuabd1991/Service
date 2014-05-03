@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "UserListView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="/Scripts/WdatePicker.js" type="text/javascript"></script>
+<div class="searchBar">
+	<ul>
+		<li><span class="title">用户名：</span>
+			<input type="text" col="UserName" /></li>
+		<li><span class="title">添加时间：</span>
+			<input type="text" col="StartDate" class="col-begintime" onfocus="WdatePicker()" />
+			至
+			<input type="text" col="EndDate" class="col-endtime" onfocus="WdatePicker()" /></li>
+	</ul>
+</div>
+<div class="toolBar">
+    <table cellpadding="0" cellspacing="0">
+        <tr>
+            <td>
+                <a href="javascript:void(0)" class="easyui-linkbutton" plain="false" iconcls="icon-add"
+                    onclick="Add()">新增</a>
+            </td>
+        </tr>
+    </table>
+</div>
+<div id="linkList">
+</div>
+
+<script language="javascript" type="text/javascript">
+    Search = function () {
+        Reflesh();
+    };
+    var url = "/Admin/UserManage/UserListJson";
+
+    //刷新
+    function Reflesh() {
+        var param = $(".searchBar").GetPostData();
+
+        DataGridExtend.searchGrid("linkList", param, url);
+    };
+
+    $(function () {
+        var param = $('.searchBar').GetPostData();
+        $('#linkList').U1EasyGrid({
+            queryParams: param,
+            singleSelect: false,
+            url: url,
+            columns: [[
+                { field: 'ck', title: '选择', checkbox: true },
+                { field: 'UserName', title: '用户名', align: 'center', width: 250 },
+                { field: 'DateCreated', title: '添加时间', sortable: true, align: 'center', width: 120, formatter: DataGridExtend.datetimeFormat },
+				{ field: 'DateLastLogin', title: '最后登录时间', sortable: true, align: 'center', width: 120, formatter: DataGridExtend.datetimeFormat },
+				{ field: 'IsActive', title: '激活?', sortable: true, align: 'center', width: 100 },
+                { field: 'op', title: '操作', align: 'center', formatter: opFormat, width: 150 }
+          ]]
+        });
+    });
+    /*操作列*/
+    opFormat = function (val, row, rowIndex) {
+        return "<a href=\"javascript:void(0)\" onClick=\"Update('" + row.ID + "')\" >编辑</a> | <a href=\"javascript:void(0)\" onClick=\"Delete('" + row.ID + "')\">删除</a>";
+    };
+
+    function Add() {
+        PW.getWindow('/admin/UserManage/AddUserView?tab=' + getTabTitle(), '增加用户', 600, 400);
+    };
+
+    function Update(id) {
+        PW.getWindow('/admin/UserManage/EditUserView?tab=' + getTabTitle() + "&id=" + id, '修改用户', 600, 400);
+    };
+
+    function Delete(id) {
+        if (confirm('确认要删除该友情链接吗？')) {
+            $.U1Ajax('/admin/UserManage/DelUserJson/' + id, null, function (result) {
+                if (result.Tag == 1) {
+                    alert("删除成功！");
+                    Reflesh();
+                } else {
+                    alert(result.Message);
+                }
+            }, false);
+        }
+    };
+</script>
+

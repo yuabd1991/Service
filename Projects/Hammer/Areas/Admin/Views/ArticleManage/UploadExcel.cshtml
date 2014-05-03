@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "UploadExcel";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>UploadExcel</h2>
+@using (Html.BeginForm("UploadExcel", "ArticleManage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+	<input type="file" name="file" />
+	<button type="submit">提交</button>
+}

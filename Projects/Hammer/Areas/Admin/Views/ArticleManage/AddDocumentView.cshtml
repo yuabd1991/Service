@@ -1,0 +1,104 @@
+﻿@{
+    ViewBag.Title = "AddDocumentView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="@Url.Content("~/Components/KindEditor/default/default.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Components/KindEditor/kindeditor-min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Components/KindEditor/zh_CN.js")" type="text/javascript"></script>
+<script>
+    var editor;
+    KindEditor.ready(function (K) {
+        editor = K.create('textarea[id="Content"]', {
+        	resizeType: 1,
+            allowPreviewEmoticons: true,
+            allowImageUpload: true
+        });
+    });
+</script>
+<table class="pagetable">
+    <tr>
+        <td class="title">
+            <span class="red">
+                文档标题：
+            </span>
+        </td>
+        <td>
+            <input class="textbox width400" type="text" col="Title" validtype="required(标题)|maxLen(100)" />
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            内容摘要：
+        </td>
+        <td>
+            <textarea col="Overview" class="textarea" cols="50" rows="5" validtype="maxLen(300)"></textarea>
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            内容:
+        </td>
+        <td>
+            <textarea class="textarea" style="width: 90%; height: 300px;" id="Content"></textarea>
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            页面标题：
+        </td>
+        <td>
+            <input class="textbox" type="text" col="PageTitle" validtype="maxLen(50)" />
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            页面关键字：
+        </td>
+        <td>
+            <input class="textbox" type="text" col="MetaKeywords" validtype="maxLen(200)" />
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            页面描述：
+        </td>
+        <td>
+            <textarea col="MetaDescription" class="textarea" cols="50" id="MetaDescription" validtype="maxLen(300)"></textarea>
+        </td>
+    </tr>
+    <tr>
+		<td class="title"></td>
+		<td>
+			<input onclick="Save()" type="button" value="保存"/>
+		</td>
+	</tr>
+</table>
+<script>
+    function Save() {
+        if (!$.validatebox.valid()) {
+            return;
+        }
+
+        var param = $('.pagetable').GetPostData();
+        var description = "";
+        if (editor)
+            description = editor.html();
+        if (description.length > 5000) {
+            alert("内容不能超过5000个字符！！");
+        }
+        if (description.length == 0) {
+            alert("内容不能为空！！");
+        }
+
+        param.Content = description;
+
+        $.U1Ajax('/admin/ArticleManage/AddDocumentJson', param, function (result) {
+            if (result.Tag > 0) {
+                alert('保存成功! ');
+                closeSelectTab(request.QueryString("tab"));
+            } else {
+                alert(result.Message);
+            }
+        }, false);
+    }
+</script>

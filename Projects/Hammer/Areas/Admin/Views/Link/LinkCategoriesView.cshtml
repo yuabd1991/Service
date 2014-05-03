@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "LinkCategoriesView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="searchBar">
+	<ul>
+		<li><span class="title">分类名称：</span>
+			<input type="text" id="Name" /></li>
+		<li><span class="title">发布时间：</span>
+			<input type="text" id="startdate" class="col-begintime" onfocus="WdatePicker()" />
+			至
+			<input type="text" id="enddate" class="col-endtime" onfocus="WdatePicker()" /></li>
+	</ul>
+</div>
+<div class="toolBar">
+    <table cellpadding="0" cellspacing="0">
+        <tr>
+            <td>
+                <a href="javascript:void(0)" class="easyui-linkbutton" plain="false" iconcls="icon-add"
+                    onclick="Add()">新增</a>
+            </td>
+        </tr>
+    </table>
+</div>
+<div id="DataGrid">
+</div>
+
+<script language="javascript" type="text/javascript">
+	Search = function () {
+		Reflesh();
+	};
+	var url = "/Admin/Link/LinkCategoriesJson";
+
+	//刷新
+	function Reflesh() {
+		var param = $(".searchBar").GetPostData();
+
+		DataGridExtend.searchGrid("DataGrid", param, url);
+	};
+
+	$(function () {
+		var param = $('.searchBar').GetPostData();
+		$('#DataGrid').U1EasyGrid({
+			queryParams: param,
+			singleSelect: false,
+			url: url,
+			columns: [[
+                { field: 'ck', title: '选择', checkbox: true },
+                { field: 'Name', title: '分类名称', align: 'center', width: 250 },
+				{ field: 'SortOrder', title: '排序', sortable: true, align: 'center', width: 100 },
+                { field: 'op', title: '操作', align: 'center', formatter: opFormat, width: 150 }
+          ]]
+		});
+	});
+	/*操作列*/
+	opFormat = function (val, row, rowIndex) {
+		return "<a href=\"javascript:void(0)\" onClick=\"Update('" + row.ID + "')\" >编辑</a> | <a href=\"javascript:void(0)\" onClick=\"Delete('" + row.ID + "')\">删除</a>";
+	};
+
+	function Add() {
+		PW.getWindow('/admin/Link/AddLinkCategoryView?tab=' + getTabTitle(), '增加友情链接分类', 500, 200);
+	};
+
+	function Update(id) {
+		PW.getWindow('/admin/Link/EditLinkCategoryView?tab=' + getTabTitle() + "&id=" + id, '修改友情链接分类', 500, 200);
+	};
+
+	function Delete(id) {
+		if (confirm('确认要删除该友情链接吗？')) {
+			$.U1Ajax('/admin/Link/DelLinkCategoryJson/' + id, null, function (result) {
+				if (result.Tag == 1) {
+					alert("删除成功！");
+					Reflesh();
+				} else {
+					alert(result.Message);
+				}
+			}, false);
+		}
+	};
+</script>

@@ -1,0 +1,141 @@
+﻿@{
+    ViewBag.Title = "EditMenu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="pagetable">
+    <tr>
+        <td class="title">
+            <span class="red">*</span>名称：
+        </td>
+        <td>
+            <input validtype="required(名称)|maxLen(100)" value="" col="MenuName" class="textbox" id="txtName" type="text" />
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            类型：
+        </td>
+        <td>
+            <div id="typeDiv">
+                <input col="Type" name="type" id="Menu" value="Menu" checked="checked" type="radio">菜单
+                <input col="Type" name="type" id="Page" value="Page" type="radio">页面
+            </div>
+        </td>
+    </tr>
+    <tr id="urlTd" style="display: none;">
+        <td class="title">
+            URL：
+        </td>
+        <td>
+	        <input id="MenuUrl" col="MenuUrl" class="textbox" style="width: 176px;" type="text" />
+        </td>
+    </tr>
+    @*<tr style="display: none;" id="rightKeyTd">
+        <td class="title">
+            RightKey：
+        </td>
+        <td>
+            <input id="txtRightKey" class="textbox" type="text">
+        </td>
+    </tr>*@
+    <tr style="display: table-row;" id="openTd">
+        <td class="title">
+            默认打开：
+        </td>
+        <td>
+            <div id="op">
+                <input name="Selected" id="rdoY" value="Y" type="radio" />是
+                <input name="Selected" id="rdoN" value="N" checked="checked" type="radio" />否
+				@*<input type="hidden" id="Selected" value="" />*@
+            </div>
+        </td>
+    </tr>
+    <tr style="display: table-row;" id="orderTd">
+        <td class="title">
+            排序值：
+        </td>
+        <td>
+            <input id="OrderIndex" class="easyui-validatebox textbox validatebox-text" 
+			validtype="Num|required" value="" col="OrderIndex" type="text" />
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+        </td>
+        <td>
+			<input type="hidden" id="ID" value="" col="ID" />
+            <input id="btnSave" value=" 保 存 " class="button" type="button" />
+        </td>
+    </tr>
+</table>
+<script>
+	$(function () {
+		var yN = $("#Selected").val();
+
+		//alert('@ViewBag.Type');
+
+		if ('@ViewBag.Type' == "Page") {
+			$("#txtName").val('@ViewBag.Page.PageName');
+			$("#MenuUrl").val('@ViewBag.Page.PageUrl');
+			$("#OrderIndex").val('@ViewBag.Page.OrderIndex');
+			$("#Page").attr("checked", "checked");
+			$("#ID").val('@ViewBag.Page.ID');
+			if ("@ViewBag.Page.Selected" == "Y") {
+				$("#rdoY").attr("checked", "checked");
+			}
+			else {
+				$("#rdoN").attr("checked", "checked");
+			}
+			$('#urlTd').show();
+		}
+		else {
+			$("#txtName").val('@ViewBag.Menu.MenuName');
+			$("#OrderIndex").val('@ViewBag.Menu.OrderIndex');
+			$("#Page").attr("checked", "checked");
+			$("#ID").val('@ViewBag.Menu.ID');
+			if ("@ViewBag.Menu.Selected" == "Y") {
+				$("#rdoY").attr("checked", "checked");
+			}
+			else {
+				$("#rdoN").attr("checked", "checked");
+			}
+
+			$('#urlTd').hide();
+		}
+
+		$('#typeDiv input').change(function () {
+			if (this.id == "Page") {
+				$('#urlTd').show();
+				//$('#rightKeyTd').show();
+			} else {
+				$('#urlTd').hide();
+				//$('#rightKeyTd').hide();
+			}
+		});
+
+		$("#rdo" + yN).attr("checked", "checked");
+		$('#btnSave').click(function () {
+			if (!$.validatebox.valid()) {
+				return;
+			}
+
+			var select = $('#op input:radio:checked').val();
+			var param = $(".pagetable").GetPostData();
+			//			param.ParentID = $('.combo-value').val();
+			param.Selected = select;
+			param.Type = '@ViewBag.Type';
+			$.U1Ajax("/Admin/Menu/EditMenuJson", param, function (result) {
+				if (result.Tag > 0) {
+					alert('保存成功! ');
+
+					PW.closeWindow();
+					getCD().reflesh();
+				}
+				else {
+					alert(result.Message);
+				}
+			}, false);
+		});
+	});
+</script>

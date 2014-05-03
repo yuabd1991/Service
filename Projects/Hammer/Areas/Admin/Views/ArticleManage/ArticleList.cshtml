@@ -1,0 +1,108 @@
+﻿@{
+    ViewBag.Title = "ArticleList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="searchBar">
+	<ul>
+        <li>
+			<span class="title">标题：</span>
+			<input col="Title" type="text" />
+		</li>
+        <li>
+            <span class="title">栏目: </span>
+            <select id="ColumnID" col="ColumnID" class="dropdown">
+				<option value="">请选择文章栏目</option>
+				@foreach (var item in ViewBag.Category)
+				{
+					<option value="@item.ID">@item.Name</option>
+				}
+			</select>
+        </li>
+	</ul>
+</div>
+<div class="toolBar">
+	<table cellpadding="0" cellspacing="0">
+        <tr>
+            <td>
+                <a href="javascript:void(0)" class="easyui-linkbutton" plain="false" iconcls="icon-add"
+	               onclick="Add()">新增文章</a>
+            </td>
+            <td>
+                <div class="toolBar_separator">
+                </div>
+            </td>
+            <td>
+	            <a href="javascript:void(0)" class="easyui-linkbutton" plain="false" iconcls="icon-add"
+	               onclick="Del()">批量删除</a>
+            </td>
+        </tr>
+    </table>
+</div>
+<div id="DataGrid">
+</div>
+<script>
+	Search = function() {
+		Reflesh();
+	};
+    
+    var categoryID = '@ViewBag.CategoryID';
+
+	var url = "/Admin/ArticleManage/ArticleListJson";
+	//刷新
+	function Reflesh() {
+	    var param = $(".searchBar").GetPostData();
+
+		DataGridExtend.searchGrid("DataGrid", param, url);
+	};
+
+	$(function () {
+	    $("#ColumnID").val(categoryID);
+		var param = $('.searchBar').GetPostData();
+		
+		$('#DataGrid').U1EasyGrid({
+			queryParams: param,
+			singleSelect: false,
+			url: url,
+			columns: [[
+                { field: 'ck', title: '选择', checkbox: true },
+                { field: 'Title', title: '标题', align: 'center', width: 250 },
+//                { field: 'IsPublic', title: '是否显示主页', align: 'center', width: 80 },
+                { field: 'ColumnName', title: '栏目名称', align: 'center', width: 80 },
+                { field: 'UpdateTime', title: '更新时间', sortable: true, align: 'center', width: 180, formatter: DataGridExtend.datetimeFormat },
+				{ field: 'UpdateUser', title: '操作用户', align: 'center', width: 100 },
+				{ field: 'PageVisits', title: '访问量', sortable: true, align: 'center', width: 100 },
+                { field: 'op', title: '操作', align: 'center', formatter: opFormat, width: 150 }
+          ]]
+		});
+	});
+
+	//操作列
+	function opFormat(val, row, rowIndex) {
+		var html = "";
+		html = "<a href=\"javascript:void(0)\"  onClick=\"Edit('" + row.ID + "')\" >编辑</a> | ";
+		html += "<a href=\"javascript:void(0)\"  onClick=\"Del('" + row.ID + "')\" >删除</a>";
+		return html;
+	}
+
+	function Add() {
+		openPage('新增文章', '/admin/articlemanage/addarticle?tab=' + getTabTitle() + '&columnID=' + categoryID);
+	}
+
+	function Edit(id) {
+	    openPage('编辑文章', '/admin/articlemanage/EditArticleView?id=' + id + "&tab=" + getTabTitle());
+	}
+
+	function Del(id) {
+	    if (confirm('确认要删除该文章吗？')) {
+	        $.U1Ajax('/admin/ArticleManage/DeleteArticleJson/' + id, null, function (result) {
+	            if (result.Tag == 1) {
+	                alert("删除成功！");
+	                Reflesh();
+	            } else {
+	                alert(result.Message);
+	            }
+	        }, false);
+	    }
+	}
+</script>

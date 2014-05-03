@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "AddLinkCategoryView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="pagetable">
+	<tr>
+		<td class="title">
+			<span class="red">
+				分类名称：
+			</span>
+		</td>
+		<td>
+			<input type="text" class="textbox" col="Name" validtype="required(分类名称)"/>
+		</td>
+	</tr>
+	<tr>
+		<td class="title">
+			<span class="red">
+				排序：
+			</span>
+		</td>
+		<td>
+			<input type="text" class="textbox" value="0" col="SortOrder" validtype="required(排序)|PositiveInteger"/>
+		</td>
+	</tr>
+	<tr>
+		<td class="title">
+			操作：
+		</td>
+		<td>
+			<input type="button" value="保存" onclick="Save()" />
+		</td>
+	</tr>
+</table>
+<script>
+	function Save() {
+		if (!$.validatebox.valid()) {
+			return;
+		}
+		var param = $(".pagetable").GetPostData();
+
+		$.U1Ajax("/Admin/Link/AddLinkCategoryJson", param, function (result) {
+			if (result.Tag > 0) {
+				alert('保存成功! ');
+				getCD().Reflesh();
+				PW.closeWindow();
+			} else {
+				alert(result.Message);
+			}
+		}, false);
+	}
+</script>

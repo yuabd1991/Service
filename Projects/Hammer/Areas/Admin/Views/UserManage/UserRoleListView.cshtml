@@ -1,0 +1,76 @@
+﻿@{
+    ViewBag.Title = "UserRoleListView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="toolBar">
+    <table cellpadding="0" cellspacing="0">
+        <tr>
+            <td>
+                <a href="javascript:void(0)" class="easyui-linkbutton" plain="false" iconcls="icon-add"
+                    onclick="Add()">新增</a>
+            </td>
+        </tr>
+    </table>
+</div>
+<div id="linkList">
+</div>
+
+<script language="javascript" type="text/javascript">
+    Search = function () {
+        Reflesh();
+    };
+    var url = "/Admin/UserManage/UserRoleListJson";
+
+    //刷新
+    function Reflesh() {
+        //var param = $(".searchBar").GetPostData();
+
+        DataGridExtend.searchGrid("linkList", null, url);
+    };
+
+    $(function () {
+        //var param = $('.searchBar').GetPostData();
+        $('#linkList').U1EasyGrid({
+            //queryParams: null,
+            singleSelect: false,
+            url: url,
+            columns: [[
+                { field: 'ck', title: '选择', checkbox: true },
+                { field: 'RoleName', title: '用户名', align: 'center', width: 250 },
+                { field: 'op', title: '操作', align: 'center', formatter: opFormat, width: 150 }
+          ]]
+        });
+    });
+    /*操作列*/
+    opFormat = function (val, row, rowIndex) {
+        var str = "<a href=\"javascript:void(0)\" onClick=\"Update('" + row.ID + "')\" >编辑</a> | <a href=\"javascript:void(0)\" onClick=\"Delete('" + row.ID + "')\">删除</a>";
+        str += " | <a href=\"javascript:void(0)\" onClick=\"Permission('" + row.ID + "')\" >权限设置</a>";
+        return str;
+    };
+
+    function Permission(id) {
+        PW.getWindow('/admin/UserManage/UserPermissionListView?tab=' + getTabTitle() + "&id=" + id, '权限设置', 400, 400);
+    }
+
+    function Add() {
+        PW.getWindow('/admin/UserManage/AddUserRoleView?tab=' + getTabTitle(), '增加角色', 450, 100);
+    };
+
+    function Update(id) {
+        PW.getWindow('/admin/UserManage/EditUserRoleView?tab=' + getTabTitle() + "&id=" + id, '修改角色', 450, 100);
+    };
+
+    function Delete(id) {
+        if (confirm('确认要删除该角色吗？')) {
+            $.U1Ajax('/admin/UserManage/DelUserRoleJson/' + id, null, function (result) {
+                if (result.Tag == 1) {
+                    alert("删除成功！");
+                    Reflesh();
+                } else {
+                    alert(result.Message);
+                }
+            }, false);
+        }
+    };
+</script>

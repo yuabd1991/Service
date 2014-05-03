@@ -1,0 +1,167 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="searchBar">
+    <ul>
+        <li><span class="title">公告标题：</span>
+            <input type="text" id="title" /></li>
+        <li><span class="title">发布时间：</span>
+            <input type="text" id="startdate" class="col-begintime" onfocus="WdatePicker()" />
+            至
+            <input type="text" id="enddate" class="col-endtime" onfocus="WdatePicker()" /></li>
+    </ul>
+</div>
+<div class="toolBar">
+    <table cellpadding="0" cellspacing="0">
+        <tr>
+            <td>
+                <a href="javascript:void(0)" class="easyui-linkbutton" plain="false" iconcls="icon-add"
+                    btnkey="10103" onclick="Add()">新增</a>
+            </td>
+			<td>
+				
+			</td>
+            <td>
+                <a href="javascript:void(0)" class="easyui-linkbutton" plain="false" iconcls="icon-remove"
+                    btnkey="10104" onclick="BathDelete()">批量删除</a>
+            </td>
+        </tr>
+    </table>
+</div>
+<div id="GridDiv">
+</div>
+
+@*新增表格<table class="pagetable">
+	<tr>
+		<td class="title">标题：<span class="red">*</span></td>
+		<td>
+			<input class="textbox easyui-validatebox" validType="required(标题)"  />
+		</td>
+	</tr>
+	<tr>
+		<td class="title"></td>
+		<td>
+			<input type="button" onclick="save()" value="新增" />
+		</td>
+	</tr>
+</table>*@
+
+<script language="javascript" type="text/javascript">
+//	$(function () {
+//        SetValue(false, "/Control/GetProductCategoryJson");
+//        $(".searchBar").U1CC();
+//        var param = $('.searchBar').GetPostData();
+//        $('#ProductGrid').U1EasyGrid({
+//            queryParams: param,
+//            singleSelect: false,
+//            url: "../../Admin/Product/ProductListJson",
+//            //列
+//            columns: [
+//            [
+//                { field: 'ck', title: '选择', checkbox: true },
+//                { field: 'ProductName', title: '商品名称', sortable: true, align: 'center', width: 250, formatter: namecodeFormat, notFmt: true },
+//                { field: 'CategoryName', title: '商品分类', sortable: true, align: 'center', width: 150 },
+//                { field: 'BrandName', title: '品牌', sortable: true, align: 'center', width: 150 },
+//                { field: 'StockNum', title: '库存', sortable: true, align: 'center', width: 150, formatter: StockNumFormat },
+//                { field: 'IsEnable', title: '是否启用', align: 'center', width: 100, formatter: vsbFormat },
+//                { field: 'AddTime', title: '发布时间', sortable: true, align: 'center', width: 150, formatter: DataGridExtend.formatTime },
+//                { field: 'op', title: '操作', align: 'center', formatter: opFormat, width: 250 }
+//            ]]
+//        });
+
+	function Search() {
+		Reflesh();
+	}
+
+	/*开始加载数据*/
+	var columns = [
+            [
+                { field: 'ck', title: '选择', checkbox: true },
+                { field: 'ProductName', title: '商品名称', sortable: true, align: 'center', width: 250},
+                { field: 'CategoryName', title: '商品分类', sortable: true, align: 'center', width: 150 },
+                { field: 'BrandName', title: '品牌', sortable: true, align: 'center', width: 150 },
+                { field: 'StockNum', title: '库存', sortable: true, align: 'center', width: 150 },
+                { field: 'IsEnable', title: '是否启用', align: 'center', width: 100 },
+                { field: 'AddTime', title: '发布时间', sortable: true, align: 'center', width: 150, formatter: DataGridExtend.formatTime },
+                { field: 'op', title: '操作', align: 'center', formatter: opFormat, width: 250 }
+            ]];
+	var url = "/Admin/settings/indexJson";
+	$(function () {
+		$("#GridDiv").U1EasyGrid({ url: url, columns: columns, singleSelect: false, nowrap: false });
+	});
+	//刷新
+	function Reflesh() {
+		var param = {
+			title: $("#title").val(),
+			startdate: $("#startdate").val(),
+			enddate: $("#enddate").val()
+		}
+		DataGridExtend.searchGrid("GridDiv", param, url);
+	};
+
+	function LevelsTextFormat(value, row, index) {
+		var html = "";
+		var css = "";
+		switch (row.LevelsText) {
+			case "重要":
+				css = "zhongyao"; break;
+			case "紧急":
+				css = "jinji"; break;
+			case "普通":
+				css = "putong"; break;
+			default:
+		}
+		html += "<span class='" + css + "' title='" + row.LevelsText + "'></span>";
+		return html;
+	}
+
+	function opFormat(value, row, index) {
+		var html = "";
+		html += "<a href=\"javascript:void(0)\" btnkey=\"10105\" onclick=\"Edit('" + row.ID + "')\">编辑</a> | <a href=\"javascript:void(0)\" btnkey=\"10106\" onclick=\"Delete('" + row.ID + "')\">删除</a> | <a href=\"javascript:void(0)\" btnkey=\"10107\" onclick=\"SendSMS('" + row.ID + "')\">发送短信</a>";
+		return html;
+	}
+
+	function Add() {
+		openPage('新增公告', '/Admin/Notice/NoticeAddView?tab=' + getTabTitle());
+	}
+//	function Deletelist()
+//	{ }
+	function LookFormat(value, row, index) {
+		return "<a href=\"javascript:void(0)\" onclick=\"Look('" + row.ID + "')\">" + value + "</a>"
+	}
+	function Edit(id) {
+		openPage('编辑', '/Admin/Notice/NoticeEditView?tab=' + getTabTitle() + '&id=' + id);
+	}
+	function Look(id) {
+		openPage('查看', '/Admin/Notice/NoticeDetailView?id=' + id);
+	}
+
+//	function Delete(id) {
+//		if (confirm('确定要删除？') == true) {
+//			$.U1Ajax("/Admin/Notice/DeleteNotice", { ids: id, key: "noticefile" }, function (result) {
+//				alert("删除成功！");
+//				location.href = location.href;
+//			}, false);
+//		}
+//	}
+
+//	function BathDelete() {
+//		var id = new Array();
+//		var rows = $('#GridDiv').datagrid('getSelections');
+
+//		for (var i in rows) {
+//			id.push(rows[i].ID)
+//		}
+
+//		if (id.length == 0) return alert("请选择需要删除的选项！");
+
+//		if (confirm('确定要删除？') == true) {
+//			$.U1Ajax("/Admin/Notice/DeleteNotice", { ids: id.join(","), key: "noticefile" }, function (result) {
+//				alert("删除成功！");
+//				location.href = location.href;
+//			}, false);
+//		}
+//	}
+</script>

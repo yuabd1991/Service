@@ -1,0 +1,118 @@
+﻿@model Entity.Entities.ColumnEntity
+@{
+    ViewBag.Title = "EditColumnView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="pagetable">
+	<tr>
+		<td class="title">
+			<span class="red">* 栏目名称：</span>
+		</td>
+		<td>
+			<input col="ColumnName" value="@Model.ColumnName" class="textbox" validtype="required(栏目名称)|maxLen(30)" type="text" />
+		</td>
+	</tr>
+	<tr>
+		<td class="title">
+			<span class="red">* 内容模型：</span>
+		</td>
+		<td>
+			<select id="ContentTemplateID" col="ContentTemplateID" class="u1cc_select" validtype="required(内容模型)">
+				<option value="">请选择内容模型</option>
+				@foreach (var item in ViewBag.Content)
+				{
+					<option value="@item.ID">@item.Name</option>
+				}
+			</select>
+		</td>
+	</tr>
+    <tr id="page" style="display: none;">
+        <td class="title">
+            页面:
+        </td>
+        <td>
+            <input id="pageName" type="text" value="@Model.PageID" />
+            <input type="hidden" id="pageID" value="@Model.PageID" col="PageID"  />
+        </td>
+    </tr>
+	<tr>
+		<td class="title">是否显示栏目：</td>
+		<td id="Public">
+			<input type="radio" name="isPublic" value="Y" checked="checked"/> 是
+			<input type="radio" name="isPublic" value="N" /> 否
+		</td>
+	</tr>
+	<tr>
+		<td class="title">
+			SEO标题：
+		</td>
+		<td>
+			<input type="text" value="@Model.PageTitle" class="textbox" style="width: 300px;" col="PageTitle" validtype="maxLen(150)"/>
+		</td>
+	</tr>
+	<tr>
+		<td class="title">关键字：</td>
+		<td>
+			<input type="text" value="@Model.MetaKeywords" class="textbox" style="width: 300px;" col="MetaKeywords" validtype="maxLen(200)"/>
+			<span class="icon-tip" style="padding-left: 18px; margin-left: 18px;">栏目关键字(多个关键字之间用,隔开)</span>
+		</td>
+	</tr>
+	<tr>
+		<td class="title">栏目描述：</td>
+		<td>
+			<textarea col="MetaDescription" value="@Model.MetaDescription" class="textarea" cols="50" rows="8" validtype="maxLen(300)"></textarea>
+		</td>
+	</tr>
+	<tr>
+		<td class="title">
+			排列顺序： 
+		</td>
+		<td>
+			<input col="SortOrder" value="@Model.SortOrder" class="textbox" value="0" validtype="required(排列顺序)|Num" />
+		</td>
+	</tr>
+	<tr>
+		<td class="title"></td>
+		<td>
+            <input type="hidden" col="ID" value="@Model.ID" />
+			<input type="button" onclick="Save()" value="保存" />
+		</td>
+	</tr>
+</table>
+<script>
+    function Save() {
+        if (!$.validatebox.valid()) {
+            return;
+        }
+
+        var param = $(".pagetable").GetPostData();
+        param.IsPublic = $("#Public input:radio:checked").val();
+
+        $.U1Ajax("/Admin/ColumnManage/EditColumnJson", param, function (result) {
+            if (result.Tag > 0) {
+                alert('保存成功! ');
+                closeSelectTab(request.QueryString("tab"));
+            } else {
+                alert(result.Message);
+            }
+        }, false);
+    }
+
+    $(function () {
+        $("#ContentTemplateID").val('@Model.ContentTemplateID');
+        if ($(this).find("option:selected").text() == '单页文档') {
+            $("#page").show();
+        }
+        $("#Public input[name='@Model.IsPublic']").attr("checked", "checked");
+
+        $("#ContentTemplateID").change(function () {
+            if ($(this).find("option:selected").text() == '单页文档') {
+                $("#page").show();
+            }
+            else {
+                $("#page").hide();
+            }
+        });
+    });
+</script>

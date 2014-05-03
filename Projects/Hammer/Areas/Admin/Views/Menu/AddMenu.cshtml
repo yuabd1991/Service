@@ -1,0 +1,109 @@
+﻿@{
+    ViewBag.Title = "AddMenu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="pagetable">
+	<tr>
+        <td class="title">
+            父节点：
+        </td>
+        <td>
+			@Html.Partial("../Control/MenuTreeView")
+            @*<select id="txtPName" style="width: 150px;">
+            </select>*@
+            <span class="icon-tip" style="padding-left: 18px; margin-left: 18px;">为空，默认新增主菜单！</span>
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            <span class="red">*</span>名称：
+        </td>
+        <td>
+            <input validtype="required(名称)" col="MenuName" class="easyui-validatebox textbox validatebox-text" id="txtName" type="text">
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            类型：
+        </td>
+        <td>
+            <div id="typeDiv">
+                <input col="Type" name="type" id="Menu" value="Menu" checked="checked" type="radio">菜单
+                <input col="Type" name="type" id="Page" value="Page" type="radio">页面
+                @*<input name="type" id="Button" value="Button" type="radio">按钮*@
+            </div>
+        </td>
+    </tr>
+    <tr id="urlTd" style="display: none;">
+        <td class="title">
+            URL：
+        </td>
+        <td>
+            <input id="MenuUrl" col="MenuUrl" class="textbox" style="width: 176px;" type="text">
+        </td>
+    </tr>
+    <tr style="display: table-row;" id="openTd">
+        <td class="title">
+            默认打开：
+        </td>
+        <td>
+            <div id="op">
+                <input name="Selected" id="rdoY" value="Y" type="radio" />是
+                <input name="Selected" id="rdoN" value="N" checked="checked" type="radio" />否
+            </div>
+        </td>
+    </tr>
+    <tr style="display: table-row;" id="orderTd">
+        <td class="title">
+            排序值：
+        </td>
+        <td>
+            <input id="OrderIndex" class="easyui-validatebox textbox validatebox-text" 
+			validtype="Num|required" value="0" col="OrderIndex" type="text" />
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+        </td>
+        <td>
+            <input id="btnSave" value=" 保 存 " class="button" type="button" />
+        </td>
+    </tr>
+</table>
+<script>
+	$(function () {
+		SetValue(true, "../../Control/GetMenuTreeJson");
+
+		$('#typeDiv input').change(function () {
+			if (this.id == "Page") {
+				$('#urlTd').show();
+				//$('#rightKeyTd').show();
+			} else {
+				$('#urlTd').hide();
+				//$('#rightKeyTd').hide();
+
+			}
+		});
+
+		$('#btnSave').click(function () {
+			if (!$.validatebox.valid()) {
+				return;
+			}
+
+			var select = $('#op input:radio:checked').val();
+			var param = $(".pagetable").GetPostData();
+			param.ParentID = $('.combo-value').val();
+			param.Selected = select;
+			$.U1Ajax("/Admin/Menu/AddMenuJson", param, function (result) {
+				if (result.Tag > 0) {
+					alert('保存成功! ');
+					closeSelectTab(request.QueryString("tab"));
+				}
+				else {
+					alert(result.Message);
+				}
+			}, false);
+		});
+	});
+</script>

@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "GetContentTemplateView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="searchBar">
+	<ul>
+        <li>
+			<span class="title">模板名称：</span>
+			<input col="ContentName" class="textbox" type="text" />
+		</li>
+	</ul>
+</div>
+<div id="DataGrid">
+</div>
+<script>
+	Search = function () {
+		Reflesh();
+	};
+	var url = "/Admin/ColumnManage/ContentTempJson";
+	//刷新
+	function Reflesh() {
+		var param = $(".searchBar").GetPostData();
+
+		DataGridExtend.searchGrid("DataGrid", param, url);
+	};
+
+	$(function () {
+		var param = $('.searchBar').GetPostData();
+		$('#DataGrid').U1EasyGrid({
+			queryParams: param,
+			singleSelect: false,
+			url: url,
+			columns: [[
+                { field: 'ck', title: '选择', checkbox: true },
+                { field: 'ContentName', title: '内容模板名称', align: 'center', width: 250 },
+                { field: 'Enable', title: '是否启用', align: 'center', width: 80, formatter: enableFormat },
+                { field: 'UpdateDate', title: '更新时间', sortable: true, align: 'center', width: 180, formatter: DataGridExtend.datetimeFormat },
+				{ field: 'UpdateUser', title: '操作用户', align: 'center', width: 100 },
+//				{ field: 'SortOrder', title: '排序', sortable: true, align: 'center', width: 100 },
+                { field: 'op', title: '操作', align: 'center', formatter: opFormat, width: 150 }
+          ]]
+		});
+	});
+
+	function enableFormat(val, row) {
+		var html = "启用";
+		if (val.toString() == "N") {
+			html = "禁用";
+		}
+		return html;
+	}
+
+	function opFormat(val, row, rowIndex) {
+		var html = "";
+		html = "<a href=\"javascript:void(0)\"  onClick=\"Edit('" + row.ID + "')\" >编辑</a>";
+		return html;
+	}
+
+	function Edit(id) {
+		openPage('编辑栏目', '/admin/columnManage/EditContentTempView/?tab=' + getTabTitle() + "&id=" + id);
+	}
+</script>

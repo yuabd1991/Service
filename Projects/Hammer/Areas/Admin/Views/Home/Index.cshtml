@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <title>后台管理</title>
+	<link href="@Url.Content("~/App_Themes/EasyUI/easyui.css")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/App_Themes/Admin/Default.css")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/App_Themes/Icons/icon.css")" rel="stylesheet" type="text/css" />
+
+	<script src="@Url.Content("~/Scripts/JQuery.js")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Scripts/jquery.easyui.js")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Scripts/body.js")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Scripts/loadmask.min.js")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Plugins/artDialog/jquery.artDialog.source.js?skin=blue")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Plugins/artDialog/plugins/iframeTools.js")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Scripts/json2.js")" type="text/javascript"></script>
+</head>
+<body>
+	<div id="DivTop">
+		@{
+			Html.RenderAction("Top", "Home", new { Areas = "admin" });
+        }
+	</div>
+	<div id="divMiddle" style="height: 100%;">
+		<div id="LeftModule" style="float: left; height: 100%;">
+			@{
+				Html.RenderAction("Left", "Home", new { Areas = "admin" });
+			}
+		</div>
+		<div class="divTrunLeft" onclick="LF.TurnLeft()">
+        </div>
+		<div class="divTrunRight" onclick="LF.TurnRight()">
+        </div>
+		<div id="MiddleModule" style="margin: 0px 0 0px 157px;">
+			@{
+				Html.RenderAction("Middle", "Home", new { Areas = "admin" });
+			}
+		</div>
+	</div>
+	<div id="footer">
+		Copyright © 2010-2013 
+	</div>
+</body>
+</html>
+
+<div id="tab_menu" style="width: 120px; display: none;">
+    <div iconcls="icon-reload-tab" id="refresh">
+        刷新</div>
+    <div iconcls="icon-close-tab" id="closeItem">
+        关闭标签页</div>
+    <div iconcls="icon-close-tab" id="closeOthers">
+        关闭其它标签页</div>
+    @*<div iconcls="icon-addbookmark-tab" id="addbookmark">
+        新增到书签</div>*@
+    <div iconcls="icon-lock-tab" id="lockTab">
+        锁定标签</div>
+    <div iconcls="icon-unlock-tab" id="unlockTab">
+        解锁标签</div>
+</div>

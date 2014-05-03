@@ -1,0 +1,155 @@
+﻿@model Entity.Entities.SysConfig
+@{
+    ViewBag.Title = "SysConfigView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="pagetable">
+    <tr>
+        <td class="title">
+            参数说明
+        </td>
+        <td>
+            参数值
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            网站名称：
+        </td>
+        <td>
+            <input type="text" value="@Model.WebsiteName" class="textbox" col="WebsiteName" validtype="maxLen(30)" />
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            页面标题：
+        </td>
+        <td>
+            <input type="text" value="@Model.PageTitle" class="textbox" col="PageTitle" validtype="maxLen(50)" />
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            网站版权信息：
+        </td>
+        <td>
+           <textarea col="Copyright" row="4" class="textarea" style="width:98%;height:50px">@Model.Copyright
+           </textarea>
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            站点默认关键字：
+        </td>
+        <td>
+            <input type="text" value="@Model.MetaKeywords" class="textbox" col="MetaKeywords" validtype="maxLen(150)" />
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            站点描述：
+        </td>
+        <td>
+           <textarea col="MetaDescription" row="4" class="textarea" style="width:98%;height:50px">@Model.MetaDescription
+           </textarea>
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            网站备案号：
+        </td>
+        <td>
+           <input type="text" value="@Model.ICP" class="textbox" col="ICP" validtype="maxLen(50)" />
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            管理员邮箱：
+        </td>
+        <td>
+           <input type="text" value="@Model.AdminEmail" class="textbox" col="AdminEmail" validtype="maxLen(50)|email" />
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            smtp服务器：
+        </td>
+        <td>
+           <input type="text" value="@Model.SmtpHost" class="textbox" col="SmtpHost" validtype="maxLen(50)" />
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            smtp服务器端口：
+        </td>
+        <td>
+           <input type="text" value="@Model.SmtpPort" class="textbox" col="SmtpPort" validtype="maxLen(50)" />
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            SMTP服务器的用户邮箱：
+        </td>
+        <td>
+           <input type="text" value="@Model.SmtpEmail" class="textbox" col="SmtpEmail" validtype="maxLen(50)|email" />
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            SMTP服务器的用户帐号：
+        </td>
+        <td>
+           <input type="text" value="@Model.SmtpUserAccount" class="textbox" col="SmtpUserAccount" validtype="maxLen(50)" />
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            SMTP服务器的用户密码：
+        </td>
+        <td>
+           <input type="password" value="@Model.SmtpPassword" class="textbox" col="SmtpPassword" validtype="maxLen(50)" />
+        </td>
+    </tr>
+    @*<tr>
+        <td class="title">
+            是否使用伪静态：
+        </td>
+        <td id="Static">
+           <input type="radio" class="textbox" name="IsStatic" checked="checked" value="Y" /> 是
+           <input type="radio" class="textbox" name="IsStatic" value="N" /> 否
+        </td>
+    </tr>*@
+    <tr>
+        <td class="title">
+            操作:
+        </td>
+        <td>
+           <input type="button" value="保存" onclick="Save()" />
+        </td>
+    </tr>
+</table>
+<script>
+    function Save() {
+        if (!$.validatebox.valid()) {
+            return;
+        }
+
+        var s = $("#Static input:checked").val();
+
+        var param = $(".pagetable").GetPostData();
+
+        param.IsStatic = s;
+
+        $.U1Ajax("/Admin/Settings/SysConfigJson", param, function (result) {
+            if (result.Tag > 0) {
+                alert('保存成功! ');
+            } else {
+                alert(result.Message);
+            }
+        }, false);
+    }
+//    $(function () {
+//        $("#Static input:radio[value='@Model.IsStatic']").attr("checked", "checked");
+//    });
+</script>

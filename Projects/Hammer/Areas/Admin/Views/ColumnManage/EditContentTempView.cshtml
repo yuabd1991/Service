@@ -1,0 +1,97 @@
+﻿@{
+    ViewBag.Title = "EditContentTempView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="pagetable">
+	<tr>
+		<td class="title">
+			内容模板名称：
+		</td>
+		<td>
+			<input type="text" class="textbox" value="@ViewBag.Content.ContentName" col="ContentName" validtype="required(内容模板名称)"/>
+		</td>
+	</tr>
+	<tr>
+		<td class="title">是否启用</td>
+		<td>
+			<div id="op">
+				<input name="enable" id="rdoY" value="Y" type="radio" />是
+				<input name="enable" id="rdoN" value="N" type="radio" />否
+			</div>
+		</td>
+	</tr>
+	@*<tr>
+		<td class="title">档案发布程序：</td>
+		<td>
+			<input type="text" class="textbox" value="@ViewBag.Content.AdminAddUrl" col="AdminAddUrl" validtype="required(档案发布程序)"/>
+		</td>
+	</tr>
+	<tr>
+		<td class="title">档案修改程序：</td>
+		<td>
+			<input type="text" class="textbox" col="AdminEditUrl" value="@ViewBag.Content.AdminEditUrl" validtype="required(档案修改程序)"/>
+		</td>
+	</tr>*@
+	<tr>
+		<td class="title">档案列表程序：</td>
+		<td>
+			<input type="text" class="textbox" col="AdminListUrl" value="@ViewBag.Content.AdminListUrl" validtype="required(档案列表程序)"/>
+		</td>
+	</tr>
+	@*<tr>
+		<td class="title">档案删除程序：</td>
+		<td>
+			<input type="text" class="textbox" col="AdminDelUrl" value="@ViewBag.Content.AdminDelUrl" validtype="required(档案删除程序)"/>
+		</td>
+	</tr>*@
+	<tr>
+		<td class="title">前台列表程序：</td>
+		<td>
+			<input type="text" class="textbox" col="WebListUrl" value="@ViewBag.Content.WebListUrl" validtype="required(前台列表程序)"/>
+		</td>
+	</tr>
+	<tr>
+		<td class="title">前台详情程序：</td>
+		<td>
+			<input type="text" class="textbox" col="WebDetailUrl" value="@ViewBag.Content.WebDetailUrl" validtype="required(前台详情程序)"/>
+		</td>
+	</tr>
+	<tr>
+		<td class="title"></td>
+		<td>
+			<input type="hidden" value="@ViewBag.Content.ID" col="ID" />
+			<input type="button" class="button" value="保存" onclick="Save()"/>
+		</td>
+	</tr>
+</table>
+<script>
+	$(function () {
+		var enable = '@ViewBag.Content.Enable';
+		if (enable == "Y") {
+			$("#rdoY").attr('checked', 'checked');
+		} else {
+			$("#rdoN").attr('checked', 'checked');
+		}
+	});
+
+	function Save() {
+		if (!$.validatebox.valid()) {
+			return;
+		} 
+		var select = $('#op input:radio:checked').val();
+		var param = $(".pagetable").GetPostData();
+		param.Enable = select;
+
+		$.U1Ajax("/Admin/ColumnManage/EditContentTempJson", param, function (result) {
+			if (result.Tag > 0) {
+				alert('保存成功! ');
+				closeSelectTab(request.QueryString("tab"));
+//				Reflesh();
+			}
+			else {
+				alert(result.Message);
+			}
+		}, false);
+	}
+</script>

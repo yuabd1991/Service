@@ -1,0 +1,97 @@
+﻿@{
+    ViewBag.Title = "AddLinkView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="pagetable">
+	<tr>
+		<td class="title">
+			<span class="red">*</span> 网站名称：
+		</td>
+		<td>
+			<input type="text" class="textbox" col="Name" validtype="required(网站名称)|maxLen(200)"/>
+		</td>
+	</tr>
+	<tr>
+		<td class="title">
+			<span class="red">*</span> 链接：
+		</td>
+		<td>
+			<input type="text" class="textbox" col="LinkUrl" validtype="required(网站名称)|url"/>
+			<span class="icon-tip" style="padding-left: 18px; margin-left: 18px;">例如：http://www.henhaoji.com.cn</span>
+		</td>
+	</tr>
+	<tr>
+		<td class="title">
+			<span class="red">*</span> 分类：
+		</td>
+		<td>
+			<select col="LinkCategoryID" validtype="required(分类)">
+				<option value=""> - 请选择分类 - </option>
+				@foreach (var item in ViewBag.List)
+				{
+					<option value="@item.ID">@item.Name</option>
+				}
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td class="title">
+			排序：
+		</td>
+		<td>
+			<input type="text" col="SortOrder" class="textbox" validtype="PositiveInteger|required(排序)" value="0"/>
+		</td>
+	</tr>
+	<tr>
+		<td class="title">
+			描述：
+		</td>
+		<td>
+			<textarea class="textarea" col="Description" validtype="maxLen(200)"></textarea>
+		</td>
+	</tr>
+	<tr>
+		<td class="title">
+			联系人：
+		</td>
+		<td>
+			<input type="text" class="textbox" col="Contact" validtype="maxLen(50)"/>
+		</td>
+	</tr>
+	<tr>
+		<td class="title">
+			联系人Email：
+		</td>
+		<td>
+			<input type="text" class="textbox" col="Email" validtype="email"/>
+		</td>
+	</tr>
+	<tr>
+		<td class="title">
+			操作：
+		</td>
+		<td>
+			<input type="button" value="保存" onclick="Save()"/>
+		</td>
+	</tr>
+</table>
+
+<script>
+	function Save() {
+		if (!$.validatebox.valid()) {
+			return;
+		}
+		var param = $(".pagetable").GetPostData();
+
+		$.U1Ajax("/Admin/Link/AddLinkJson", param, function (result) {
+			if (result.Tag > 0) {
+				alert('保存成功! ');
+				getCD().Reflesh();
+				PW.closeWindow();
+			} else {
+				alert(result.Message);
+			}
+		}, false);
+	}
+</script>
