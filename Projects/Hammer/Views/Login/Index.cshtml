@@ -2,83 +2,86 @@
 	ViewBag.Title = "Index";
 	Layout = "~/Views/Shared/_SiteLayout.cshtml";
 }
-@section head{
-	<style>
-		#container dl dd
-		{
-			margin: 10px 0;
-		}
-		#container dd span
-		{
-			width: 120px;
-			display: inline-block;
-			text-align: left;
-			font-size: 14px;
-		}
-		#container dd input
-		{
-			border: 1px solid #BEBEBE;
-			font-size: 14px;
-			height: 38px;
-			line-height: 38px;
-			margin-right: 10px;
-			text-align: left;
-			vertical-align: middle;
-			width: 168px;
-			padding: 0 5px;
-		}
-		#container dd textarea
-		{
-			border: 1px solid #BEBEBE;
-			font-size: 14px;
-			height: 98px !important;
-			line-height: 38px;
-			margin-bottom: 20px;
-			margin-right: 10px;
-			text-align: left;
-			vertical-align: top;
-			width: 408px !important;
-		}
-		#container dd input#submit
-		{
-			background: #00a4ea;
-			text-align: center;
-			color: #ffffff;
-			font-size: 18px;
-			cursor: pointer;
-		}
-	</style>
+@section scripts{
+	<script src="/assets/plugins/bootstrap/js/bootstrap3-validation.js" type="text/javascript"></script>
+	<script>
+		$(function () {
+			$('.form-horizontal').validation();
+			$("#submit").on('click', function (event) {
+				// 2.最后要调用 valid()方法。
+				if ($(".form-horizontal").valid() == false) {
+					$("#error-text").text("填写信息不完整。")
+					return false;
+				}
+			})
+		});
+	</script>
 }
-<div class="wl f_l">
-	<div class="CurrentLocation">
-		当前位置： <a href="/">首页</a> &gt; 学院动态
-	</div>
-	<div class="wcentent">
-		<form id="container" action="/Login/Login" method="post" enctype="multipart/form-data">
-		<dl>
-			<dd>
-				<span>用户名：</span><input type="text" name="UserID" value="">
-				<span class="help-inline p_tip hide"></span><span class="help-inline p_chk hide">
-				</span>
-			</dd>
-			<dd>
-				<span>密码：</span><input type="password" name="password" value="">
-				<span class="help-inline p_tip hide"></span><span class="help-inline p_chk hide">
-				</span>
-			</dd>
-			@*<dd>
-					<span>验证码：</span><input type="text" name="ValidCode" value="">
-					<img width="68px" height="30px" title="刷新验证码" id="imgCheckCode" src="" style="margin-left: 3px;
-						vertical-align: middle; cursor: pointer;" onclick="ChangeCheckCode()">（点击更换验证码）
-					<span class="help-inline p_tip hide"></span><span class="help-inline p_chk hide">
-					</span>
-				</dd>*@
-			<dd>
-				<label style="color: Red;">@ViewBag.LoginError</label></dd>
-			<dd style="border-top: #e0e0e0 1px solid; padding-top: 30px; margin-top: 20px; margin-bottom: 10px;">
-				<span></span>
-				<input id="submit" type="submit" value="登录"></dd>
-		</dl>
-		</form>
+<header class="page-heading clearfix">
+    <h1 class="heading-title pull-left">用户注册</h1>
+    <div class="breadcrumbs pull-right">
+        <ul class="breadcrumbs-list">
+            <li class="breadcrumbs-label">您的位置:</li>
+            <li><a href="/">首页</a><i class="fa fa-angle-right"></i></li>
+            <li><a href="/login.html">登录</a></li>
+        </ul>
+    </div><!--//breadcrumbs-->
+</header>
+<div class="page-content">
+	<div class="row page-row">
+		<aside class="page-sidebar col-md-2 col-sm-4 affix-top">                    
+            <section class="widget">
+                <ul class="nav">
+                    <li><a href="/register.html">用户注册</a></li>
+                    <li class="active"><a href="/login.html">登录</a></li>
+                </ul>                    
+            </section><!--//widget-->
+        </aside>
+		<!--//page-sidebar-->
+		<div class="content-wrapper col-md-10 col-sm-8">
+			<div class="page-row">
+				<h1 class="no-margin-top has-divider text-highlight">
+					登录</h1>
+				<div class="row">
+					<div class="col-md-8">
+						<form class="form-horizontal" action="/login/index.html" method="post" role="form">
+						<div class="form-group">
+							<label for="UserName" class="col-sm-2 control-label">
+								用户名</label>
+							<div class="col-sm-6">
+								<input type="email" class="form-control" check-type="required" minlength="4" id="UserName"
+									placeholder="用户名..." />
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="Password" class="col-sm-2 control-label">
+								密码</label>
+							<div class="col-sm-6">
+								<input type="password" class="form-control" check-type="required" id="Password" placeholder="密码..." />
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<div class="checkbox">
+									<label>
+										<input type="checkbox">
+										记住我
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<button type="submit" id="submit" class="btn btn-default">
+									登录</button>
+							</div>
+						</div>
+						</form>
+					</div>
+					<div class="col-md-4">
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>

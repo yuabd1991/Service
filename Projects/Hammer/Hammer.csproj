@@ -320,8 +320,6 @@
     <Content Include="App_Themes\Icons\icons\up_sel.png" />
     <Content Include="App_Themes\Icons\icons\warning.gif" />
     <Content Include="App_Themes\Icons\icons\warrant.png" />
-    <Content Include="App_Themes\Site\screen.css" />
-    <Content Include="App_Themes\Site\site.css" />
     <Content Include="App_Themes\zTree\img\diy\1_close.png" />
     <Content Include="App_Themes\zTree\img\diy\1_open.png" />
     <Content Include="App_Themes\zTree\img\diy\2.png" />
@@ -338,6 +336,7 @@
     <Content Include="App_Themes\zTree\img\zTreeStandard.png" />
     <Content Include="App_Themes\zTree\zTreeStyle.css" />
     <Content Include="assets\css\styles.css" />
+    <Content Include="assets\css\valid.css" />
     <Content Include="assets\images\logo.png" />
     <Content Include="assets\images\news\news-thumb-1.jpg" />
     <Content Include="assets\images\news\news-thumb-2.jpg" />
@@ -357,6 +356,7 @@
     <Content Include="assets\plugins\bootstrap-hover-dropdown.min.js" />
     <Content Include="assets\plugins\bootstrap\css\bootstrap.min.css" />
     <Content Include="assets\plugins\bootstrap\js\bootstrap.min.js" />
+    <Content Include="assets\plugins\bootstrap\js\bootstrap3-validation.js" />
     <Content Include="assets\plugins\flexslider\flexslider.css" />
     <Content Include="assets\plugins\flexslider\images\bg_direction_nav.png" />
     <Content Include="assets\plugins\flexslider\jquery.flexslider-min.js" />
@@ -593,7 +593,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Themes\Site\images\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Content\Upload\Images\Cache\201311\" />

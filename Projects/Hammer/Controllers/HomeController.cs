@@ -23,7 +23,7 @@ namespace EasyUI.Controllers
 
 		public ActionResult Index()
 		{
-			//ViewBag.Home = "current";
+			ViewBag.Home = "home-page";
 			return View();
 		}
 	}
