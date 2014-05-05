@@ -512,7 +512,7 @@ namespace Logic.Models
 
 		public string Description { get; set; }
 
-
+		public int  { get; set; }
 	}
 
 	#endregion
