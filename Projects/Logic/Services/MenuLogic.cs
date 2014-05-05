@@ -18,10 +18,11 @@ namespace Logic.Services
 
 		}
 
-		public List<MenuEntity> GetAllPages()
+        public List<MenuEntity> GetAllPages(List<UserRolePermissionEntity> list)
 		{
+            var qu = list.Select(m => m.TargetID).Distinct().ToArray();
 			var query = (from l in _db.Pages
-						 where l.Enable == PublicType.Yes
+                         where l.Enable == PublicType.Yes && qu.Contains(l.ID)
 						 orderby l.OrderIndex descending
 						 select new MenuEntity
 						 {
@@ -36,10 +37,12 @@ namespace Logic.Services
 			return query;
 		}
 
-		public List<MenuEntity> GetAllMenus()
+		public List<MenuEntity> GetAllMenus(List<UserRolePermissionEntity> list)
 		{
+            var qu = list.Select(m => m.TargetID).Distinct().ToArray();
+
 			var query = (from l in _db.Menus
-						 where l.Enable == PublicType.Yes
+                         where l.Enable == PublicType.Yes && qu.Contains(l.ID)
 						 orderby l.OrderIndex descending
 						 select new MenuEntity
 						 {

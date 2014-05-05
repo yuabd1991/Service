@@ -28,7 +28,7 @@
 			order by b.ID desc
 		</endsql>
 	</report>
-	<report id="DocumentsList" name="用户列表">
+	<report id="DocumentsList" name="单页文档">
 		<sql>
 			<![CDATA[
         select a.* from [document] a
@@ -46,7 +46,7 @@
 			</isNotEmpty>
 		</dynamic>
 	</report>
-	<report id="ColumnList" name="用户列表">
+	<report id="ColumnList" name="栏目列表">
 		<sql>
 			<![CDATA[
         select a.*, b.UserName from [column] a
@@ -94,7 +94,7 @@
 	<report id="UserList" name="用户列表">
 		<sql>
 			<![CDATA[
-        select a.* from user a
+        select a.* from [user] a
       ]]>
 		</sql>
 		<dynamic prepend ="WHERE ">
@@ -109,23 +109,23 @@
 			</isNotEmpty>
 		</dynamic>
 	</report>
-	<report id="SidebarList" name="边栏列表">
-		<sql>
-			<![CDATA[
-        select a.* from sidebar a
+  <report id="IndustryList" name="用户列表">
+    <sql>
+      <![CDATA[
+        select a.*, (select UserName from [user] where ID = a.UserID) as UserName from [Industry] a
       ]]>
-		</sql>
-		<dynamic prepend ="WHERE ">
-			<isNotEmpty property="Title" prepend="And" value="" type="">
-				<![CDATA[ a.Title like '%'+@Title+'%' ]]>
-			</isNotEmpty>
-			<isNotEmpty property="StartDate" prepend="And" value="" type="">
-				<![CDATA[ a.UpdateDate >= @StartDate ]]>
-			</isNotEmpty>
-			<isNotEmpty property="EndDate" prepend="And" value="" type="">
-				<![CDATA[ a.UpdateDate <= @EndDate ]]>
-			</isNotEmpty>
-		</dynamic>
-	</report>
+    </sql>
+    <dynamic prepend ="WHERE ">
+      <isNotEmpty property="IndustryName" prepend="And" value="" type="">
+        <![CDATA[ a.IndustryName like '%' + @IndustryName + '%' ]]>
+      </isNotEmpty>
+      <isNotEmpty property="StartDate" prepend="And" value="" type="">
+        <![CDATA[ a.AddDate >= @StartDate ]]>
+      </isNotEmpty>
+      <isNotEmpty property="EndDate" prepend="And" value="" type="">
+        <![CDATA[ a.AddDate <= @EndDate ]]>
+      </isNotEmpty>
+    </dynamic>
+  </report>
 
 </root>

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Collections;
 using Component;
+using Component.Component;
 
 namespace EasyUI.Areas.Admin.Controllers
 {
@@ -22,8 +23,9 @@ namespace EasyUI.Areas.Admin.Controllers
 		public ActionResult Top()
 		{
 			var str = new ArrayList();
-			var allMenus = new Helpers.SystemHelper().GetAllMenus();
-			var allPages = new Helpers.SystemHelper().GetAllPages();
+            var listRoles = new Helpers.SystemHelper().GetPermissionList(User.Identity.Name.Uint());
+            var allMenus = new Helpers.SystemHelper().GetAllMenus(listRoles.Where(m => m.Type.ToLower() == "menu").ToList());
+            var allPages = new Helpers.SystemHelper().GetAllPages(listRoles.Where(m => m.Type.ToLower() == "page").ToList());
 
 			ViewBag.AllMenus = allMenus;
 			ViewBag.AllPages = allPages;

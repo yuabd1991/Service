@@ -24,7 +24,7 @@ namespace EasyUI.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				var loginMessage = new LoginHelper().Login(model.UserID, model.Password, model.RememberMe);
+                var loginMessage = new LoginHelper().Login(model.UserName, model.Password, model.RememberMe);
 
 				if (loginMessage.Tag > 0)
 				{

@@ -50,7 +50,7 @@
     };
 
     function Permission(id) {
-        PW.getWindow('/admin/UserManage/UserPermissionListView?tab=' + getTabTitle() + "&id=" + id, '权限设置', 400, 400);
+        openPage('权限设置','/admin/UserManage/UserPermissionListView?tab=' + getTabTitle() + "&id=" + id);
     }
 
     function Add() {

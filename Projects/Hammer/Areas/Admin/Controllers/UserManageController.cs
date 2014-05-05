@@ -40,7 +40,7 @@ namespace EasyUI.Areas.Admin.Controllers
 
 		public ActionResult UserPermissionListView(int id)
 		{
-			var ids = new Helpers.SystemHelper().GetPermissionList(id);
+            var ids = new Helpers.SystemHelper().GetPermissionListForUpdate(id);
 			ViewBag.IDS = ids;
 			return View();
 		}

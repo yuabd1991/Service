@@ -36,16 +36,23 @@ namespace Entity.Entities
 		public int RoleID { get; set; }
 	}
 
-	public class UserRolePermissionEntity
-	{
-		public int ID { get; set; }
+    public class UserRolePermissionEntity
+    {
+        public int ID { get; set; }
 
-		public int RoleID { get; set; }
+        public int RoleID { get; set; }
 
-		public int TargetID { get; set; }
+        public int TargetID { get; set; }
 
-		public string Type { get; set; } //Menu or Button or Page
+        public string Type { get; set; } //Menu or Button or Page
 
-		public string IsManage { get; set; }
-	}
+        public string IsManage { get; set; }
+    }
+
+    //public class PermissionEntity
+    //{
+    //    public int TargetID { get; set; }
+
+    //    public string Type { get; set; }
+    //}
 }

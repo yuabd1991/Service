@@ -96,7 +96,7 @@
                 //alert(str[i].toString());
                 var item = str[i].toString();
                 //alert(item);
-                $("#menuList").treegrid('select', item);
+                $("#menuList").treegrid('select', item.split(',')[0]);
             }
 
         }

@@ -35,7 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework">
-      <HintPath>E:\EC-DRP\tags\dll\EntityFramework.dll</HintPath>
+      <HintPath>..\..\..\YingHuangsx\bin\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -66,6 +66,7 @@
     <Compile Include="Areas\Admin\Controllers\ArticleManageController.cs" />
     <Compile Include="Areas\Admin\Controllers\ColumnManageController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\IndustryController.cs" />
     <Compile Include="Areas\Admin\Controllers\LinkController.cs" />
     <Compile Include="Areas\Admin\Controllers\MenuController.cs" />
     <Compile Include="Areas\Admin\Controllers\SettingsController.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\IndustryHelper.cs" />
     <Compile Include="Helpers\LoginHelper.cs" />
     <Compile Include="Helpers\SystemHelper.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
@@ -643,6 +645,9 @@
     <Content Include="Areas\Admin\Views\ArticleManage\ImageArticleAddView.cshtml" />
     <Content Include="Areas\Admin\Views\ArticleManage\ImageArticleEditView.cshtml" />
     <Content Include="Areas\Admin\Views\ArticleManage\UploadExcel.cshtml" />
+    <Content Include="Areas\Admin\Views\Industry\IndustryListView.cshtml" />
+    <Content Include="Areas\Admin\Views\Industry\AddIndustryView.cshtml" />
+    <Content Include="Areas\Admin\Views\Industry\EditIndustryView.cshtml" />
     <None Include="assets\plugins\font-awesome\fonts\fontawesome-webfont.ttf" />
     <None Include="assets\plugins\font-awesome\fonts\fontawesome-webfont.woff" />
     <None Include="Plugins\uploadify\com\adobe\air\logging\FileTarget.as" />

@@ -512,7 +512,13 @@ namespace Logic.Models
 
 		public string Description { get; set; }
 
-		public int  { get; set; }
+		public string CompanyName { get; set; }
+
+        public string Email { get; set; }
+
+        public string QQ { get; set; }
+
+        public string Website { get; set; }
 	}
 
 	#endregion

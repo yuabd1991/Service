@@ -17,19 +17,19 @@ namespace EasyUI.Helpers
 
 		#region Menus
 
-		public List<MenuEntity> GetAllMenus()
+        public List<MenuEntity> GetAllMenus(List<UserRolePermissionEntity> list)
 		{
 			using (MenuLogic logic = new MenuLogic())
 			{
-				return logic.GetAllMenus();
+				return logic.GetAllMenus(list);
 			}
 		}
 
-		public List<MenuEntity> GetAllPages()
+        public List<MenuEntity> GetAllPages(List<UserRolePermissionEntity> list)
 		{
 			using (MenuLogic logic = new MenuLogic())
 			{
-				return logic.GetAllPages();
+				return logic.GetAllPages(list);
 			}
 		}
 
@@ -597,13 +597,20 @@ namespace EasyUI.Helpers
 
 		#region 权限
 
-		public string GetPermissionList(int id)
+        public List<UserRolePermissionEntity> GetPermissionList(int id)
 		{
 			using (UserLogic logic = new UserLogic())
 			{
 				return logic.GetPermissionList(id);
 			}
 		}
+        public string GetPermissionListForUpdate(int id)
+        {
+            using (UserLogic logic = new UserLogic())
+            {
+                return logic.GetPermissionListForUpdate(id);
+            }
+        }
 
 		#endregion
 

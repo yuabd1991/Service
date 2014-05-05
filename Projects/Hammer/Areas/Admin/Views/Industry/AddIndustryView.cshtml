@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "AddIndustryView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="pagetable">
+    <tr>
+        <td class="title"><span class="red">*</span>行业名称:</td>
+        <td>
+            <input type="text" class="textbox" col="IndustryName" validtype="required(行业名称)|maxLen(50)" />
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            描述:
+        </td>
+        <td>
+            <textarea col="Description" validtype="maxLen(1000)" rows="8" cols="50"></textarea>
+        </td>
+    </tr>
+    <tr>
+        <td class="title"></td>
+        <td>
+            <input type="button" onclick="Save()" value="保存" />
+        </td>
+    </tr>
+</table>
+<script>
+    function Save() {
+        if (!$.validatebox.valid()) {
+            return;
+        }
+
+        var param = $('.pagetable').GetPostData();
+
+        $.U1Ajax('/admin/Industry/AddIndustryJson', param, function (result) {
+            if (result.Tag > 0) {
+                alert('保存成功! ');
+                getCD().Reflesh();
+                PW.closeWindow();
+            } else {
+                alert(result.Message);
+            }
+        }, false);
+    }
+</script>
+

@@ -7,7 +7,7 @@ using Component;
 
 namespace EasyUI.Controllers
 {
-	public class ControlController : BaseController
+	public class ControlController : Controller
     {
         //
         // GET: /Control/
@@ -17,6 +17,7 @@ namespace EasyUI.Controllers
             return PartialView();
         }
 
+        [HttpPost]
 		public ActionResult GetMenuTreeJson()
 		{
 			var menus = new Helpers.SystemHelper().GetTreeMenu();

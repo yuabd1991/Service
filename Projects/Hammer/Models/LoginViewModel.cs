@@ -9,7 +9,7 @@ namespace EasyUI.Models
 	public class LoginViewModel
 	{
 		[Required(ErrorMessage = "Required")]
-		public string UserID { get; set; }
+		public string UserName { get; set; }
 
 		[Required(ErrorMessage = "Required")]
 		public string Password { get; set; }

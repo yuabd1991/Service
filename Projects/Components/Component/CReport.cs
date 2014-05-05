@@ -31,7 +31,7 @@ namespace Component.Component
 		//获取报表路径
 		internal static string GetReportPath()
 		{
-			string reportPath = string.Format(ConfigContext.AdminReportPath, System.Configuration.ConfigurationSettings.AppSettings["DBType"].ToString());
+            string reportPath = string.Format(ConfigContext.SuperAdminReportPath);
 			//switch (systemID)
 			//{
 			//    case 1:
