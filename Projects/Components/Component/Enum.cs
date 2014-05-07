@@ -5,6 +5,15 @@ using System.Text;
 
 namespace Component
 {
+    /// <summary>
+    /// 用户类型
+    /// </summary>
+    public static class UserType
+    {
+        public const string Personal = "Personal";
+
+        public const string Company = "Company";
+    }
 	/// <summary>
 	/// 图片类型
 	/// </summary>

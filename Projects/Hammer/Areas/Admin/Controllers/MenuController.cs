@@ -65,7 +65,7 @@ namespace EasyUI.Areas.Admin.Controllers
 		public ActionResult EditMenuJson(MenuEntity menu)
 		{
 			var result = new BaseObject();
-			if (menu.Type == "page")
+            if (menu.Type.ToLower() == "page")
 			{
 				result = new Helpers.SystemHelper().EditPage(menu);
 			}
@@ -73,7 +73,6 @@ namespace EasyUI.Areas.Admin.Controllers
 			{
 				result = new Helpers.SystemHelper().EditMenu(menu);
 			}
-			
 
 			return Json(result);
 		}

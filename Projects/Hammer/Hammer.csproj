@@ -65,13 +65,14 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\ArticleManageController.cs" />
     <Compile Include="Areas\Admin\Controllers\ColumnManageController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CoursesController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\IndustryController.cs" />
     <Compile Include="Areas\Admin\Controllers\LinkController.cs" />
     <Compile Include="Areas\Admin\Controllers\MenuController.cs" />
     <Compile Include="Areas\Admin\Controllers\SettingsController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserManageController.cs" />
-    <Compile Include="Controllers\ControlController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ControlController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
@@ -629,7 +630,7 @@
     <Content Include="Areas\Admin\Views\Menu\EditMenu.cshtml" />
     <Content Include="Areas\Admin\Views\Menu\MenuList.cshtml" />
     <Content Include="Areas\Admin\Views\Settings\Index.cshtml" />
-    <Content Include="Views\Control\MenuTreeView.cshtml" />
+    <Content Include="Areas\Admin\Views\Control\MenuTreeView.cshtml" />
     <Content Include="Areas\Admin\Views\ArticleManage\EditArticleView.cshtml" />
     <Content Include="Areas\Admin\Views\ColumnManage\EditColumnView.cshtml" />
     <Content Include="Areas\Admin\Views\ArticleManage\DocumentsListView.cshtml" />

@@ -20,7 +20,7 @@
             <span class="red">*</span>名称：
         </td>
         <td>
-            <input validtype="required(名称)" col="MenuName" class="easyui-validatebox textbox validatebox-text" id="txtName" type="text">
+            <input validtype="required(名称)" col="MenuName" class="easyui-validatebox textbox validatebox-text" id="txtName" type="text" />
         </td>
     </tr>
     <tr>
@@ -29,8 +29,8 @@
         </td>
         <td>
             <div id="typeDiv">
-                <input col="Type" name="type" id="Menu" value="Menu" checked="checked" type="radio">菜单
-                <input col="Type" name="type" id="Page" value="Page" type="radio">页面
+                <input col="Type" name="type" id="Menu" value="Menu" checked="checked" type="radio" />菜单
+                <input col="Type" name="type" id="Page" value="Page" type="radio" />页面
                 @*<input name="type" id="Button" value="Button" type="radio">按钮*@
             </div>
         </td>
@@ -40,7 +40,7 @@
             URL：
         </td>
         <td>
-            <input id="MenuUrl" col="MenuUrl" class="textbox" style="width: 176px;" type="text">
+            <input id="PageUrl" col="PageUrl" class="textbox" style="width: 176px;" type="text" />
         </td>
     </tr>
     <tr style="display: table-row;" id="openTd">
@@ -72,8 +72,8 @@
     </tr>
 </table>
 <script>
-	$(function () {
-		SetValue(true, "/Control/GetMenuTreeJson");
+    $(function () {
+		SetValue(false, '@Url.Content("~/Admin/Control/GetMenuTreeJson")');
 
 		$('#typeDiv input').change(function () {
 			if (this.id == "Page") {

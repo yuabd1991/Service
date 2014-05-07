@@ -28,7 +28,7 @@
             URL：
         </td>
         <td>
-	        <input id="MenuUrl" col="MenuUrl" class="textbox" style="width: 176px;" type="text" />
+	        <input id="PageUrl" col="PageUrl" class="textbox" style="width: 176px;" type="text" />
         </td>
     </tr>
     @*<tr style="display: none;" id="rightKeyTd">
@@ -77,7 +77,7 @@
 
 		if ('@ViewBag.Type' == "Page") {
 			$("#txtName").val('@ViewBag.Page.PageName');
-			$("#MenuUrl").val('@ViewBag.Page.PageUrl');
+			$("#PageUrl").val('@ViewBag.Page.PageUrl');
 			$("#OrderIndex").val('@ViewBag.Page.OrderIndex');
 			$("#Page").attr("checked", "checked");
 			$("#ID").val('@ViewBag.Page.ID');

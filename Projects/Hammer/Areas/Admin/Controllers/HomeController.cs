@@ -24,8 +24,8 @@ namespace EasyUI.Areas.Admin.Controllers
 		{
 			var str = new ArrayList();
             var listRoles = new Helpers.SystemHelper().GetPermissionList(User.Identity.Name.Uint());
-            var allMenus = new Helpers.SystemHelper().GetAllMenus(listRoles.Where(m => m.Type.ToLower() == "menu").ToList());
-            var allPages = new Helpers.SystemHelper().GetAllPages(listRoles.Where(m => m.Type.ToLower() == "page").ToList());
+            var allMenus = new Helpers.SystemHelper().GetAllMenus(listRoles).ToList();
+            var allPages = new Helpers.SystemHelper().GetAllPages(listRoles).ToList();
 
 			ViewBag.AllMenus = allMenus;
 			ViewBag.AllPages = allPages;

@@ -18,7 +18,60 @@ namespace Entity.Entities
 		public DateTime? DateLastLogin { get; set; }
 
 		public string IsActive { get; set; }
+
+        public string PhotoFile { get; set; }
+
+        public string Question { get; set; }
+
+        public string Answer { get; set; }
+
+        public string Contact { get; set; }
+
+        public string RealName { get; set; }
+
+        public string Email { get; set; }
+
+        public string QQ { get; set; }
+
+        public string Type { get; set; }
 	}
+
+    public class RegisterUser
+    {
+        public string UserName { get; set; }
+
+        public string Password { get; set; }
+
+        public DateTime? DateCreated { get; set; }
+
+        public DateTime? DateLastLogin { get; set; }
+
+        public string IsActive { get; set; }
+
+        public string PhotoFile { get; set; }
+
+        public string Question { get; set; }
+
+        public string Answer { get; set; }
+
+        public string Contact { get; set; }
+
+        public string RealName { get; set; }
+
+        public string Email { get; set; }
+
+        public string QQ { get; set; }
+
+        public string Type { get; set; }
+
+        public string Address { get; set; }
+
+        public string Description { get; set; }
+
+        public string CompanyName { get; set; }
+
+        public string Website { get; set; }
+    }
 
 	public class UserRoleEntity
 	{
@@ -35,6 +88,13 @@ namespace Entity.Entities
 
 		public int RoleID { get; set; }
 	}
+
+    public class UserAuth
+    {
+        public string IsManage { get; set; }
+
+        public List<UserRolePermissionEntity> UserRolePermissionEntities { get; set; }
+    }
 
     public class UserRolePermissionEntity
     {

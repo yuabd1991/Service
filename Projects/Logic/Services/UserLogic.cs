@@ -132,31 +132,37 @@ namespace Logic.Services
 
         #region 权限设置
 
-        public List<UserRolePermissionEntity> GetPermissionList(int id)
+        public UserAuth GetPermissionList(int id)
         {
-            var list = (from l in _db.UserRolePermissions
-                        join u in _db.UserRoleJoins on l.RoleID equals u.RoleID
-                        join m in _db.Users on u.UserID equals m.ID
-                        //join m in _db.Users on l.RoleID equals m.
-                        where m.ID == id
-                        select new UserRolePermissionEntity
-                        {
-                            TargetID = l.TargetID,
-                            Type = l.Type,
-                            ID = l.ID,
-                            IsManage = l.IsManage,
-                            RoleID = l.RoleID
-                        }).ToList();
-            //var ll = new List<string>();
-            //string str = "";
-            //foreach (var item in list)
-            //{
-            //    str += item.TargetID.ToString() + "," + item.Type + ";";
-            //}
+            UserAuth param = new UserAuth() { IsManage = PublicType.No };
+            var list = new List<UserRolePermissionEntity>();
 
-            //string str = string.Join(";", ll);
+            var userRoles = (from l in _db.UserRoles
+                             join m in _db.UserRoleJoins on l.ID equals m.RoleID
+                             where m.UserID == id
+                             select l).ToList();
 
-            return list;
+            if (userRoles.Any(m => m.IsManage == PublicType.Yes))
+            {
+                param.IsManage = PublicType.Yes;
+            }
+
+            list = (from l in _db.UserRolePermissions
+                    join u in _db.UserRoleJoins on l.RoleID equals u.RoleID
+                    join m in _db.Users on u.UserID equals m.ID
+                    //join m in _db.Users on l.RoleID equals m.
+                    where m.ID == id
+                    select new UserRolePermissionEntity
+                    {
+                        TargetID = l.TargetID,
+                        Type = l.Type,
+                        ID = l.ID,
+                        RoleID = l.RoleID
+                    }).ToList();
+
+            param.UserRolePermissionEntities = list;
+
+            return param;
         }
 
         public string GetPermissionListForUpdate(int id)
@@ -168,7 +174,6 @@ namespace Logic.Services
                             TargetID = l.TargetID,
                             Type = l.Type,
                             ID = l.ID,
-                            IsManage = l.IsManage,
                             RoleID = l.RoleID
                         }).ToList();
             //var ll = new List<string>();

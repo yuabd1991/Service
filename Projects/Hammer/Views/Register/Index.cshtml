@@ -1,21 +1,59 @@
 ﻿@{
-	ViewBag.Title = "Index";
-	Layout = "~/Views/Shared/_SiteLayout.cshtml";
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_SiteLayout.cshtml";
+}
+@section head{
+    <style>
+        .smallT
+        {
+            font-size: 12px;
+        }
+    </style>
 }
 @section scripts{
-	<script src="/assets/plugins/bootstrap/js/bootstrap3-validation.js" type="text/javascript"></script>
-	<script>
-		$(function () {
-			$('.form-horizontal').validation();
-			$("#submit").on('click', function (event) {
-				// 2.最后要调用 valid()方法。
-				if ($(".form-horizontal").valid() == false) {
-					$("#error-text").text("填写信息不完整。")
-					return false;
-				}
-			})
-		});
-	</script>
+    <script src="/assets/plugins/bootstrap/js/bootstrap3-validation.js" type="text/javascript"></script>
+    <script>
+        $(function () {
+            var type = $("#Type").val();
+            $('.form-horizontal').validation();
+            if (type == "Company") {
+                //$('.form-horizontal').validation();
+            }
+            else {
+                //$('#per').validation();
+            }
+            $("#submit").on('click', function (event) {
+                // 2.最后要调用 valid()方法。
+
+                if (type == "Company") {
+                    if ($(".form-horizontal").valid() == false) {
+                        $("#error-text").text("填写信息不完整。")
+                        return false;
+                    }
+                }
+                else {
+                    if ($("#per").valid() == false) {
+                        $("#error-text").text("填写信息不完整。")
+                        return false;
+                    }
+                }
+            })
+        });
+
+        function change(value) {
+            $(this).addClass("smallT");
+            $("#Type").val(value);
+
+            if (value == "Company") {
+                $("#com").show();
+                //$('.form-horizontal').validation();
+            }
+            else {
+                $("#com").hide();
+                //$('#per').validation();
+            }
+        }
+    </script>
 }
 <header class="page-heading clearfix">
     <h1 class="heading-title pull-left">用户注册</h1>
@@ -29,8 +67,8 @@
     </div><!--//breadcrumbs-->
 </header>
 <div class="page-content">
-	<div class="row page-row">
-		<aside class="page-sidebar col-md-2 col-sm-4 affix-top">                    
+    <div class="row page-row">
+        <aside class="page-sidebar col-md-2 col-sm-4 affix-top">                    
             <section class="widget">
                 <ul class="nav">
                     <li class="active"><a href="/register.html">用户注册</a></li>
@@ -38,37 +76,148 @@
                 </ul>                    
             </section><!--//widget-->
         </aside>
-		<!--//page-sidebar-->
-		<div class="content-wrapper col-md-10 col-sm-8">
-			<div class="page-row">
-				<h1 class="no-margin-top has-divider text-highlight">
-					个人注册 企业注册</h1>
-				<div class="row">
-					<div class="col-md-8">
-						@*<div class="bs-example">*@
-						<form class="form-horizontal" role="form">
-						<div class="form-group">
-							<label for="UserName" class="col-sm-2 control-label">
-								用户名</label>
-							<div class="col-sm-6">
-								<input type="email" class="form-control" check-type="required" minlength="4" id="UserName" placeholder="用户名..." />
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="Password" class="col-sm-2 control-label">
-								密码</label>
-							<div class="col-sm-6">
-								<input type="password" class="form-control" check-type="required" id="Password" placeholder="密码..." />
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="Password2" class="col-sm-2 control-label">
-								确认密码</label>
-							<div class="col-sm-6">
-								<input type="password" class="form-control" check-type="required" id="Password2" placeholder="确认密码..." />
-							</div>
-						</div>
-						@*<div class="form-group">
+        <!--//page-sidebar-->
+        <div class="content-wrapper col-md-10 col-sm-8">
+            <div class="page-row">
+                <h1 class="no-margin-top has-divider text-highlight">
+                    <a href="javascript:change('Personal');">个人注册</a> <a href="javascript:change('Company');">
+                        企业注册</a></h1>
+                <div class="row">
+                    <div class="col-md-8">
+                        @*<div class="bs-example">*@
+                        <form class="form-horizontal" action="/register/post.html" role="form">
+                            <input type="hidden" name="Type" value="Personal" id="Type" />
+                            <div class="form-group">
+                                <label for="UserName" class="col-sm-2 control-label">
+                                    用户名:</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" check-type="required" minlength="4" maxlength="20"
+                                        id="UserName" name="UserName" placeholder="用户名..." />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="Password" class="col-sm-2 control-label">
+                                    密码:</label>
+                                <div class="col-sm-6">
+                                    <input type="password" class="form-control" check-type="required" id="Password" maxlength="20"
+                                        name="Password" placeholder="密码..." />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="Password2" class="col-sm-2 control-label">
+                                    确认密码:</label>
+                                <div class="col-sm-6">
+                                    <input type="password" class="form-control" check-type="required" id="Password2"
+                                        maxlength="20" name="Password2" placeholder="确认密码..." />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="Question" class="col-sm-2 control-label">
+                                    提示问题:
+                                </label>
+                                <div class="col-sm-6">
+                                    <select class="form-control" id="Question" name="Question" check-type="required">
+                                        <option value="" selected="selected">请选择任一问题</option>
+                                        <option value="你在哪所中学读初中？">你在哪所中学读初中？</option>
+                                        <option value="你的宠物叫什么名字？">你的宠物叫什么名字？</option>
+                                        <option value="你最喜欢的音乐是？">你最喜欢的音乐是？</option>
+                                        <option value="你最喜欢的球队是？">你最喜欢的球队是？</option>
+                                        <option value="你最喜欢的书是？">你最喜欢的书是？</option>
+                                        <option value="你最好的朋友是？">你最好的朋友是？</option>
+                                        <option value="你的出生年月是？">你的出生年月是？</option>
+                                        <option value="你爱人的名字是？">你爱人的名字是？</option>
+                                        <option value="你父亲的名字是？">你父亲的名字是？</option>
+                                        <option value="你母亲的名字是？">你母亲的名字是？</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="Answer" class="col-sm-2 control-label">
+                                    提示答案:
+                                </label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" check-type="required" maxlength="50" id="Answer"
+                                        name="Answer" placeholder="请输入密码提示答案!" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="RealName" class="col-sm-2 control-label">
+                                    姓名:
+                                </label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" check-type="required" maxlength="20" id="RealName"
+                                        name="RealName" placeholder="请输入真实姓名" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="Email" class="col-sm-2 control-label">
+                                    Email:
+                                </label>
+                                <div class="col-sm-6">
+                                    <input type="email" class="form-control" check-type="required mail" maxlength="50"
+                                        id="Email" name="Email" placeholder="Email.建议使用QQ,163,gmail等" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="Contact" class="col-sm-2 control-label">
+                                    联系电话:
+                                </label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" maxlength="20" id="Contact" name="Contact"
+                                        placeholder="请输入联系方式，如0592-6150545" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="QQ" class="col-sm-2 control-label">
+                                    QQ:
+                                </label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" maxlength="15" id="QQ" name="QQ" placeholder="QQ号" />
+                                </div>
+                            </div>
+                        
+                            <div class="page-row box box-border">
+                                <h3>
+                                    机构信息</h3>
+                            </div>
+                            <div class="form-group">
+                                <label for="CompanyName" class="col-sm-2 control-label">
+                                    机构名称:
+                                </label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" check-type="required" maxlength="50" id="CompanyName"
+                                        name="CompanyName" placeholder="机构名称" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="Address" class="col-sm-2 control-label">
+                                    机构地址:
+                                </label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" check-type="required" maxlength="150" id="Address"
+                                        name="Address" placeholder="机构地址" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="Website" class="col-sm-2 control-label">
+                                    网址:
+                                </label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" check-type="url" maxlength="150" id="Website"
+                                        name="Website" placeholder="网站地址" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="Description" class="col-sm-2 control-label">
+                                    简介:
+                                </label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" check-type="required" minlength="50" maxlength="500"
+                                        id="Description" name="Description" placeholder="机构简介" />
+                                </div>
+                            </div>
+                        
+                        @*<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-10">
 								<div class="checkbox">
 									<label>
@@ -78,14 +227,14 @@
 								</div>
 							</div>
 						</div>*@
-						<div class="form-group">
-							<div class="col-sm-offset-2 col-sm-10">
-								<button type="submit" id="submit" class="btn btn-default">
-									提交注册</button>
-							</div>
-						</div>
-						</form>
-						@*</div>*@ @*<dl>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" id="submit" class="btn btn-default">
+                                    提交注册</button>
+                            </div>
+                        </div>
+                        </form>
+                        @*</div>*@ @*<dl>
 							<dt>用户名:</dt>
 							<dd><input type="text" class="form-control" /></dd>
 							<dt>密码:</dt>
@@ -93,11 +242,11 @@
 							<dt>确认密码:</dt>
 							<dd><input type="password" class="form-control" /></dd>
 						</dl>*@
-					</div>
-					<div class="col-md-4">
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                    </div>
+                    <div class="col-md-4">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -17,7 +17,7 @@ namespace EasyUI.Helpers
 
 		#region Menus
 
-        public List<MenuEntity> GetAllMenus(List<UserRolePermissionEntity> list)
+        public List<MenuEntity> GetAllMenus(UserAuth list)
 		{
 			using (MenuLogic logic = new MenuLogic())
 			{
@@ -25,7 +25,7 @@ namespace EasyUI.Helpers
 			}
 		}
 
-        public List<MenuEntity> GetAllPages(List<UserRolePermissionEntity> list)
+        public List<MenuEntity> GetAllPages(UserAuth list)
 		{
 			using (MenuLogic logic = new MenuLogic())
 			{
@@ -597,7 +597,7 @@ namespace EasyUI.Helpers
 
 		#region 权限
 
-        public List<UserRolePermissionEntity> GetPermissionList(int id)
+        public UserAuth GetPermissionList(int id)
 		{
 			using (UserLogic logic = new UserLogic())
 			{

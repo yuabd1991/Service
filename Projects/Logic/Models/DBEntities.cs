@@ -237,6 +237,20 @@ namespace Logic.Models
 		public DateTime? DateLastLogin { get; set; }
 
 		public string IsActive { get; set; }
+
+        public string PhotoFile { get; set; }
+
+        public string Question { get; set; }
+
+        public string Answer { get; set; }
+
+        public string Contact { get; set; }
+
+        public string RealName { get; set; }
+
+        public string Email { get; set; }
+
+        public string QQ { get; set; }
 	}
 
 	public class UserRole
@@ -244,6 +258,8 @@ namespace Logic.Models
 		public int ID { get; set; }
 
 		public string RoleName { get; set; }
+
+        public string IsManage { get; set; }
 	}
 
 	public class UserRoleJoin
@@ -264,8 +280,6 @@ namespace Logic.Models
 		public int TargetID { get; set; }
 
 		public string Type { get; set; } //Menu or Button or Page
-
-		public string IsManage { get; set; }
 	}
 
 	#endregion
@@ -504,19 +518,11 @@ namespace Logic.Models
 
 		public int UserID { get; set; }
 
-		public string Contact { get; set; }
-
-		public string ContactName { get; set; }
-
 		public string Address { get; set; }
 
 		public string Description { get; set; }
 
 		public string CompanyName { get; set; }
-
-        public string Email { get; set; }
-
-        public string QQ { get; set; }
 
         public string Website { get; set; }
 	}
