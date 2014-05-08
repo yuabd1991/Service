@@ -5,6 +5,7 @@ using System.Web;
 using Component;
 using Logic.Services;
 using Component.Component;
+using Entity.Entities;
 
 namespace EasyUI.Helpers
 {
@@ -21,6 +22,14 @@ namespace EasyUI.Helpers
 				return logic.Login(userName, clearPassword, rememberMe);
 			}
 		}
+
+        public BaseObject Register(RegisterUser param)
+        {
+            using (UserLogic logic = new UserLogic())
+            {
+                return logic.Register(param);
+            }
+        }
 
 		public static int UserID
 		{

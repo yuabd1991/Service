@@ -127,5 +127,50 @@
       </isNotEmpty>
     </dynamic>
   </report>
-
+  <report id="CourseTypeList" name="课程类型列表">
+    <sql>
+      <![CDATA[
+        select a.ID,a.TypeName, a.SortOrder, a.ParentID, a.AddDate,a.UserID,
+        (select UserName from [user] where ID = a.UserID) as UserName
+         from coursetype a
+      ]]>
+    </sql>
+    <dynamic prepend ="WHERE ">
+      <isNotEmpty property="TypeName" prepend="And" value="" type="">
+        <![CDATA[ a.TypeName like '%' + @TypeName + '%' ]]>
+      </isNotEmpty>
+      <isNotEmpty property="StartDate" prepend="And" value="" type="">
+        <![CDATA[ a.AddDate >= @StartDate ]]>
+      </isNotEmpty>
+      <isNotEmpty property="EndDate" prepend="And" value="" type="">
+        <![CDATA[ a.AddDate <= @EndDate ]]>
+      </isNotEmpty>
+    </dynamic>
+  </report>
+  <report id="CourseList" name="课程列表">
+    <sql>
+      <![CDATA[
+        select a.ID,a.AddDate, a.Contact, a.CourseName, a.Date,a.UserID,
+        (select UserName from [user] where ID = a.AddUserID) as UserName,
+        (select TypeName from CourseType where ID = a.CourseTypeID) as CourseType,
+        (select IndustryName from Industry where ID = a.IndustryID) as Industry
+         from course a
+      ]]>
+    </sql>
+    <dynamic prepend ="WHERE ">
+      <isNotEmpty property="TypeName" prepend="And" value="" type="">
+        <![CDATA[ a.TypeName like '%' + @TypeName + '%' ]]>
+      </isNotEmpty>
+      <isNotEmpty property="UserID" prepend="And" value="" type="">
+        <![CDATA[ a.UserID = @UserID ]]>
+      </isNotEmpty>
+      <isNotEmpty property="StartDate" prepend="And" value="" type="">
+        <![CDATA[ a.AddDate >= @StartDate ]]>
+      </isNotEmpty>
+      <isNotEmpty property="EndDate" prepend="And" value="" type="">
+        <![CDATA[ a.AddDate <= @EndDate ]]>
+      </isNotEmpty>
+    </dynamic>
+  </report>
+  
 </root>

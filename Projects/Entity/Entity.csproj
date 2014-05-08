@@ -49,6 +49,7 @@
     <Compile Include="Entities\ArticleEntity.cs" />
     <Compile Include="Entities\ColumnEntity.cs" />
     <Compile Include="Entities\CommentEntity.cs" />
+    <Compile Include="Entities\CourseEntity.cs" />
     <Compile Include="Entities\IndustryEntity.cs" />
     <Compile Include="Entities\LinksEntity.cs" />
     <Compile Include="Entities\LoginUserInfo.cs" />

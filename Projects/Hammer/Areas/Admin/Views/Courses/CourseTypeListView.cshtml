@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "CoursesListView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="/Scripts/WdatePicker.js" type="text/javascript"></script>
+<div class="searchBar">
+	<ul>
+		<li><span class="title">类型名称：</span>
+			<input type="text" col="Name" /></li>
+		<li><span class="title">发布时间：</span>
+			<input type="text" col="startdate" class="col-begintime" onfocus="WdatePicker()" />
+			至
+			<input type="text" col="enddate" class="col-endtime" onfocus="WdatePicker()" /></li>
+	</ul>
+</div>
+<div class="toolBar">
+    <table cellpadding="0" cellspacing="0">
+        <tr>
+            <td>
+                <a href="javascript:void(0)" class="easyui-linkbutton" plain="false" iconcls="icon-add"
+                    onclick="Add()">新增</a>
+            </td>
+        </tr>
+    </table>
+</div>
+<div id="linkList">
+</div>
+
+<script language="javascript" type="text/javascript">
+    Search = function () {
+        Reflesh();
+    };
+    var url = "/Admin/Courses/CourseTypeListJson";
+
+    //刷新
+    function Reflesh() {
+        var param = $(".searchBar").GetPostData();
+
+        DataGridExtend.searchGrid("linkList", param, url);
+    };
+
+    $(function () {
+        var param = $('.searchBar').GetPostData();
+        $('#linkList').U1EasyGrid({
+            queryParams: param,
+            singleSelect: false,
+            url: url,
+            columns: [[
+                { field: 'ck', title: '选择', checkbox: true },
+                { field: 'TypeName', title: '课程类型名称', align: 'center', width: 250 },
+                { field: 'SortOrder', title: '排名', align: 'center', width: 150 },
+                { field: 'AddDate', title: '操作时间', sortable: true, align: 'center', width: 120, formatter: DataGridExtend.datetimeFormat },
+				{ field: 'UserName', title: '操作用户', align: 'center', width: 100 },
+                { field: 'op', title: '操作', align: 'center', formatter: opFormat, width: 150 }
+          ]]
+        });
+    });
+    /*操作列*/
+    opFormat = function (val, row, rowIndex) {
+        return "<a href=\"javascript:void(0)\" onClick=\"Update('" + row.ID + "')\" >编辑</a> | <a href=\"javascript:void(0)\" onClick=\"Delete('" + row.ID + "')\">删除</a>";
+    };
+
+    function Add() {
+        PW.getWindow('/admin/Courses/AddCourseTypeView?tab=' + getTabTitle(), '增加课程类型', 450, 200);
+    };
+
+    function Update(id) {
+        PW.getWindow('/admin/Courses/EditCourseTypeView?tab=' + getTabTitle() + "&id=" + id, '修改课程类型', 450, 200);
+    };
+
+    function Delete(id) {
+        if (confirm('确认要删除该课程吗？')) {
+            $.U1Ajax('/admin/Courses/DelCourseTypeJson/' + id, null, function (result) {
+                if (result.Tag == 1) {
+                    alert("删除成功！");
+                    Reflesh();
+                } else {
+                    alert(result.Message);
+                }
+            }, false);
+        }
+    };
+</script>

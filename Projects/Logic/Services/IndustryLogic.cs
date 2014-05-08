@@ -162,5 +162,17 @@ namespace Logic.Services
                         ID = l.ID
                     }).ToList();
         }
+
+        public List<KeyName> GetIndustryKeyName()
+        {
+            var list = (from l in _db.Industries
+                        select new KeyName()
+                        {
+                            Name = l.IndustryName,
+                            ID = l.ID
+                        }).ToList();
+
+            return list;
+        }
     }
 }

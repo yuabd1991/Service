@@ -1,0 +1,122 @@
+﻿@{
+    ViewBag.Title = "AddCourseView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="@Url.Content("~/Plugins/KindEditor/default/default.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Plugins/KindEditor/kindeditor-min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Plugins/KindEditor/zh_CN.js")" type="text/javascript"></script>
+<style>
+	textarea {
+		display: block;
+	}
+</style>
+<script>
+    var editor;
+    KindEditor.ready(function (K) {
+        editor = K.create('textarea[id="Description"]', {
+            resizeType: 1,
+            allowPreviewEmoticons: true,
+            allowImageUpload: true
+        });
+    });
+</script>
+
+<table class="pagetable">
+    <tr>
+        <td class="title">
+            <span class="red">*</span>课程标题：
+        </td>
+        <td>
+            <input type="text" col="CourseName" class="textbox" validtype="required(课程标题)|maxLen(100)" />
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            <span class="red">*</span>联系方式：
+        </td>
+        <td>
+            <input type="text" col="Contact" class="textbox" validtype="required(联系方式)|maxLen(20)" />
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            <span class="red">*</span>开课时间：
+        </td>
+        <td>
+            <input type="text" col="Date" class="textbox" validtype="required(开课时间)|maxLen(100)" />
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            <span class="red">*</span>行业：
+        </td>
+        <td>
+            <select col="IndustryID" validtype="required(行业)">
+                <option value="">请选择行业</option>
+                @foreach (var item in ViewBag.Industry)
+                {
+                    <option value="@item.ID">@item.Name</option>
+                }
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            <span class="red">*</span>课程分类：
+        </td>
+        <td>
+            <select col="CourseTypeID" validtype="required(行业)">
+                <option value="">请选择课程分类</option>
+                @foreach (var item in ViewBag.Type)
+                {
+                    <option value="@item.ID">@item.Name</option>
+                }
+            </select>
+        </td>
+    </tr>
+    <tr>
+         <td class="title">
+            <span class="red">*</span>课程介绍：
+        </td>
+        <td>
+            <textarea class="textarea" style="width: 90%; height: 300px;" id="Description"  col="Description" cols="50" rows="8"></textarea>
+        </td>
+    </tr>
+    <tr>
+         <td class="title">
+            操作：
+        </td>
+        <td>
+            <input type="button" onclick="Save()" value="保存" />
+        </td>
+    </tr>
+</table>
+<script>
+    function Save() {
+        if (!$.validatebox.valid()) {
+            return;
+        }
+
+        var param = $('.pagetable').GetPostData();
+        var description = "";
+        if (editor)
+            description = editor.html();
+        if (description.length > 5000) {
+            alert("内容不能超过5000个字符！！");
+        }
+        if (description.length == 0) {
+            alert("文章内容不能为空！！");
+        }
+
+        param.Description = description;
+
+        $.U1Ajax('/admin/Courses/AddCourseJson', param, function (result) {
+            if (result.Tag > 0) {
+                alert('保存成功! ');
+                closeSelectTab(request.QueryString("tab"));
+            } else {
+                alert(result.Message);
+            }
+        }, false);
+    }
+</script>

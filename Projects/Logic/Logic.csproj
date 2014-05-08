@@ -58,6 +58,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ArticleLogic.cs" />
     <Compile Include="Services\ColumnLogic.cs" />
+    <Compile Include="Services\CourseLogic.cs" />
     <Compile Include="Services\IndustryLogic.cs" />
     <Compile Include="Services\LinkLogic.cs" />
     <Compile Include="Services\MenuLogic.cs" />

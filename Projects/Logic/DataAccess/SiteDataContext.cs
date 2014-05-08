@@ -174,7 +174,9 @@ namespace Logic.DataAccess
 
 		public DbSet<Industry> Industries { get; set; }
 
-		public DbSet<Company> Companies { get; set; }
+        public DbSet<Course> Courses { get; set; }
+
+        public DbSet<CourseType> CourseTypes { get; set; }
 
 		#endregion
 	}

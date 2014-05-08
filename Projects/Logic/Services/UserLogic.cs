@@ -229,7 +229,7 @@ namespace Logic.Services
             return obj;
         }
 
-        public BaseObject Register(User user)
+        public BaseObject Register(RegisterUser user)
         {
             BaseObject obj = new BaseObject();
 
@@ -241,9 +241,7 @@ namespace Logic.Services
                 return obj;
             }
 
-            var roles = new string[] { "2" };
-
-            InsertUser(user, roles);
+            InsertUser(user);
 
             _db.SaveChanges();
 
@@ -369,28 +367,51 @@ namespace Logic.Services
             return _db.Users.SingleOrDefault(u => u.ID == userID && u.Password == encryptedPassword);
         }
 
-        public void InsertUser(User user, string[] roles)
+        public void InsertUser(RegisterUser param)
         {
-            if (!string.IsNullOrEmpty(user.Password))
+            if (!string.IsNullOrEmpty(param.Password))
             {
+                var user = new User();
+                user.Answer = param.Answer;
+                user.Contact = param.Contact;
+                user.Email = param.Email;
+                user.IsActive = PublicType.No;
+                user.PhotoFile = "";
+                user.QQ = param.QQ;
+                user.Question = param.Question;
+                user.RealName = param.RealName;
+                user.UserName = param.UserName;
                 user.DateCreated = DateTime.Now;
                 user.DateLastLogin = DateTime.Now;
-                user.Password = EncryptPassword(user.Password);
+                user.Type = param.Type;
+                user.Password = EncryptPassword(param.Password);
+                //公司
+                user.Address = param.Address;
+                user.CompanyName = param.CompanyName;
+                user.Description = param.Description;
+                user.Website = param.Website;
 
                 _db.Users.Add(user);
 
                 _db.SaveChanges();
 
-                foreach (var item in roles)
+
+                UserRoleJoin userRoleJoin = new UserRoleJoin();
+
+                if (user.Type == UserType.Company)
                 {
-                    var roleID = Convert.ToInt32(item);
-
-                    UserRoleJoin userRoleJoin = new UserRoleJoin();
-
-                    userRoleJoin.RoleID = roleID;
+                    userRoleJoin.RoleID = 3;
                     userRoleJoin.UserID = user.ID;
                     _db.UserRoleJoins.Add(userRoleJoin);
                 }
+                else
+                {
+                    userRoleJoin.RoleID = 2;
+                    userRoleJoin.UserID = user.ID;
+                    _db.UserRoleJoins.Add(userRoleJoin);
+                }
+
+                _db.SaveChanges();
             }
         }
 

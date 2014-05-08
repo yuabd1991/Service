@@ -1,58 +1,58 @@
 /* ========================================================= 
- * 
- * 在原作者的基础修改支持 bootstrap3
- *
- * check-type=
- *   required 不能为空，并在后面自动加*号
- *   url  表示 输入网址
- *   date 日期格式 xxxx-xx-xx
- *   mail 邮箱
- *   number 数字，可以整型，浮点型。
- *   char 
- *   chinese 中文
- * mail-message="扩展提示内容" ， 可以扩展data-message,url-message  
- * minlength="6" 表示长度大于等于6
- * range="2.1~3"   表示值在[2.1~3]之间，并check-type="number"
- * range="2.1,2,4,5"   表示值在只能填现数字，并check-type="number" 
- *
- *
- * 例如:
- * $("form").validation(function(obj,params){
- *     if (obj.id=='mail'){
- *       $.post("/verifymail",{mail :$(obj).val()},function(data){
- *         params.err = !data.success;
- *         params.msg = data.msg;
- *       });
- *     }},
- *     {reqmark:false}
- *   );
- *
- *
- *  编号   版本号      作者     修改日期        修改内容
- *   1    1.0.0     mrlong    2013-10-2      创建文件
- ×   2    1.0.1     mrlong    2013-10-5      callback显示提示的信息。
- *   3.   1.0.2     mrlong    2013-10-7     增加基本表单与内联表单样式。
- *   4.   1.0.3     mrlong    2013-11-04     修改支持IE8，不能Array.indexOf() 改为 $.inArray()
- *
- *
+* 
+* 在原作者的基础修改支持 bootstrap3
+*
+* check-type=
+*   required 不能为空，并在后面自动加*号
+*   url  表示 输入网址
+*   date 日期格式 xxxx-xx-xx
+*   mail 邮箱
+*   number 数字，可以整型，浮点型。
+*   char 
+*   chinese 中文
+* mail-message="扩展提示内容" ， 可以扩展data-message,url-message  
+* minlength="6" 表示长度大于等于6
+* range="2.1~3"   表示值在[2.1~3]之间，并check-type="number"
+* range="2.1,2,4,5"   表示值在只能填现数字，并check-type="number" 
+*
+*
+* 例如:
+* $("form").validation(function(obj,params){
+*     if (obj.id=='mail'){
+*       $.post("/verifymail",{mail :$(obj).val()},function(data){
+*         params.err = !data.success;
+*         params.msg = data.msg;
+*       });
+*     }},
+*     {reqmark:false}
+*   );
+*
+*
+*  编号   版本号      作者     修改日期        修改内容
+*   1    1.0.0     mrlong    2013-10-2      创建文件
+×   2    1.0.1     mrlong    2013-10-5      callback显示提示的信息。
+*   3.   1.0.2     mrlong    2013-10-7     增加基本表单与内联表单样式。
+*   4.   1.0.3     mrlong    2013-11-04     修改支持IE8，不能Array.indexOf() 改为 $.inArray()
+*
+*
 /* =========================================================
- * bootstrap-validation.js 
- * Original Idea: http:/www.newkou.org (Copyright 2012 Stefan Petre)
- * Updated by 不会飞的羊 (https://github.com/FateSheep/Validation-for-Bootstrap)
- * =========================================================
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * ========================================================= */
+* bootstrap-validation.js 
+* Original Idea: http:/www.newkou.org (Copyright 2012 Stefan Petre)
+* Updated by 不会飞的羊 (https://github.com/FateSheep/Validation-for-Bootstrap)
+* =========================================================
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+* ========================================================= */
 !function ($) {
     $.fn.validation = function (callback, options) {
 
@@ -80,7 +80,7 @@
         formState = true;
         var validationError = false;
         //取出验证的
-        $('input, textarea', this).each(function () {
+        $('input, textarea, select', this).each(function () {
             var el = $(this),
                 controlGroup = el.parents('.form-group'),
             //check-type="required chinese"  //支持多个，以空格隔开。
@@ -139,6 +139,7 @@
     //验证字段
     var validateField = function (field, valid) {
         var el = $(field), error = false, errorMsg = '';
+
         var minlength = (el.attr('minlength') ? el.attr('minlength') : null);
         var range = (el.attr('range') ? el.attr('range') : null); //
         var msg;
@@ -155,14 +156,22 @@
             var rules = globalOptions.validRules;
             for (j = 0; j < rules.length; j++) {
                 var rule = rules[j];
+
                 if (flag == rule.name) {
                     var value;
                     if (el.attr('type') == 'checkbox') {
                         value = el.is(":checked") ? 'true' : '';
                     }
+                    else if (el.attr('type') == 'select') {
+                        value = el.val();
+                        if (value == "") {
+                            error = true;
+                        }
+                    }
                     else {
                         value = el.val();
                     };
+
                     if (rule.validate.call(field, value) == x) {
                         error = true;
                         if (el.attr('type').toLowerCase() == 'file') {
@@ -290,7 +299,7 @@
             }
             else if (fform_style == 2) {
 
-                $(obj).find('input, textarea').each(function () {
+                $(obj).find('input, textarea, select').each(function () {
                     var el = $(this);
                     var controlGroup = el.parents('.form-group');
                     controlGroup.removeClass('has-error has-success');
@@ -305,5 +314,15 @@
             };
         }; //end showrequired
 
+        //4.如是select选择则要处理事件
+        $(obj).find("select").each(function () {
+            var el = $(this);
+            el.on('blur', function () { // 失去焦点时
+                valid = (el.attr('check-type') == undefined) ? null : el.attr('check-type').split(' ');
+                if (valid) {
+                    validateField(this, valid);
+                }
+            });
+        });
     };
 } (window.jQuery);

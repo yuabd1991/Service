@@ -70,5 +70,13 @@ namespace EasyUI.Helpers
                 return logic.GetIndustryList();
             }
         }
+
+        public List<KeyName> GetIndustryKeyName()
+        {
+            using (IndustryLogic logic = new IndustryLogic())
+            {
+                return logic.GetIndustryKeyName();
+            }
+        }
     }
 }

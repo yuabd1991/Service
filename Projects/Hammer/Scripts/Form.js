@@ -1,6 +1,33 @@
-﻿$.extend({
+﻿function getParUrl(url, par) {
+    if (url.indexOf("?") == -1) {
+        if (par) {
+            url = url + "?" + par;
+        }
+        else {
+            url = url;
+        }
+
+    }
+    else {
+        var baseUrl = url.split('?')[0];
+        var paraString = url.split('?')[1];
+        if (paraString.indexOf("ua=") == -1) {
+            if (par) {
+                url = baseUrl + "?" + paraString + "&" + par;
+            }
+            else {
+                //				url = baseUrl + "?" + paraString + "&ua=" + parent.active_UserName();
+                url = baseUrl + "?" + paraString;
+            }
+
+        }
+    }
+    return url;
+}
+
+$.extend({
     U1Ajax: function (url, postData, successHandle, Async, errorHandle) {
-        parent.$("body").mask("操作中,请稍后!");
+        //parent.$("body").mask("操作中,请稍后!");
         if (url == null) {
             alert("Ajax 地址错误！");
         }
@@ -25,12 +52,12 @@
                 if (successHandle) {
                     successHandle(result);
                 }
-                parent.$("body").unmask();
+                //parent.$("body").unmask();
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 if (errorHandle)
                     errorHandle();
-                parent.$("body").unmask();
+                //parent.$("body").unmask();
             }
         });
     }
@@ -119,3 +146,20 @@ $.fn.GetExcelPostData = function () {
 	return data;
 }
 
+function getFormJson(frm) {
+    var o = {};
+    var a = $(frm).serializeArray();
+    $.each(a, function () {
+        if(o[this.name] != undefined)
+        {
+            if(!o[this.name].push){
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
+        }
+    });
+
+    return o;
+}

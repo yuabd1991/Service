@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "AddCourseTypeView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="pagetable">
+    <tr>
+        <td class="title">
+            <span class="red">*</span>课程类型:
+        </td>
+        <td>
+            <input type="text" class="textbox" validtype="required|maxLen(30)" col="TypeName" />
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            <span class="red">*</span>排序:
+        </td>
+        <td>
+            <input type="text" class="textbox" validtype="required" value="0" col="SortOrder" />
+        </td>
+    </tr>
+    <tr>
+        <td class="title">操作</td>
+        <td>
+            <input type="button" onclick="Save()" value="保存" />
+        </td>
+    </tr>
+</table>
+<script>
+    function Save() {
+        if (!$.validatebox.valid()) {
+            return;
+        }
+
+        var param = $('.pagetable').GetPostData();
+
+        $.U1Ajax('/admin/Courses/AddCourseTypeJson', param, function (result) {
+            if (result.Tag > 0) {
+                alert('保存成功! ');
+                getCD().Reflesh();
+                PW.closeWindow();
+            } else {
+                alert(result.Message);
+            }
+        }, false);
+    }
+</script>

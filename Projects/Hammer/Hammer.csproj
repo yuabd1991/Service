@@ -80,6 +80,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CourseHelper.cs" />
     <Compile Include="Helpers\IndustryHelper.cs" />
     <Compile Include="Helpers\LoginHelper.cs" />
     <Compile Include="Helpers\SystemHelper.cs" />
@@ -649,6 +650,12 @@
     <Content Include="Areas\Admin\Views\Industry\IndustryListView.cshtml" />
     <Content Include="Areas\Admin\Views\Industry\AddIndustryView.cshtml" />
     <Content Include="Areas\Admin\Views\Industry\EditIndustryView.cshtml" />
+    <Content Include="Areas\Admin\Views\Courses\CourseTypeListView.cshtml" />
+    <Content Include="Areas\Admin\Views\Courses\AddCourseTypeView.cshtml" />
+    <Content Include="Areas\Admin\Views\Courses\EditCourseTypeView.cshtml" />
+    <Content Include="Areas\Admin\Views\Courses\CoursesListView.cshtml" />
+    <Content Include="Areas\Admin\Views\Courses\AddCourseView.cshtml" />
+    <Content Include="Areas\Admin\Views\Courses\EditCourseView.cshtml" />
     <None Include="assets\plugins\font-awesome\fonts\fontawesome-webfont.ttf" />
     <None Include="assets\plugins\font-awesome\fonts\fontawesome-webfont.woff" />
     <None Include="Plugins\uploadify\com\adobe\air\logging\FileTarget.as" />
@@ -713,6 +720,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Register\Index.cshtml" />
+    <Content Include="Views\Register\Company.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Components\Component.csproj">

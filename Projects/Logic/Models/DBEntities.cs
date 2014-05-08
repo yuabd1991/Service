@@ -238,6 +238,8 @@ namespace Logic.Models
 
 		public string IsActive { get; set; }
 
+        public string Type { get; set; }
+
         public string PhotoFile { get; set; }
 
         public string Question { get; set; }
@@ -251,6 +253,14 @@ namespace Logic.Models
         public string Email { get; set; }
 
         public string QQ { get; set; }
+
+        public string Address { get; set; }
+
+        public string Description { get; set; }
+
+        public string CompanyName { get; set; }
+
+        public string Website { get; set; }
 	}
 
 	public class UserRole
@@ -510,22 +520,45 @@ namespace Logic.Models
 
 	#endregion
 
-	#region 企业
+	#region 课程
 
-	public class Company
-	{
-		public int ID { get; set; }
+    public class Course
+    {
+        public int ID { get; set; }
 
-		public int UserID { get; set; }
+        public int IndustryID { get; set; }
 
-		public string Address { get; set; }
+        public int UserID { get; set; }
 
-		public string Description { get; set; }
+        public string CourseName { get; set; }
 
-		public string CompanyName { get; set; }
+        public string Description { get; set; }
 
-        public string Website { get; set; }
-	}
+        public string Date { get; set; }
+
+        public string Contact { get; set; }
+
+        public int AddUserID { get; set; }
+
+        public DateTime AddDate { get; set; }
+
+        public int CourseTypeID { get; set; }
+    }
+
+    public class CourseType
+    {
+        public int ID { get; set; }
+
+        public string TypeName { get; set; }
+
+        public int SortOrder { get; set; }
+
+        public int ParentID { get; set; }
+
+        public int UserID { get; set; }
+
+        public DateTime AddDate { get; set; }
+    }
 
 	#endregion
 }

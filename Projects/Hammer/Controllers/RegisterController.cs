@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Entity.Entities;
+using EasyUI.Helpers;
 
 namespace EasyUI.Controllers
 {
@@ -17,11 +18,16 @@ namespace EasyUI.Controllers
             return View();
         }
 
+        public ActionResult Company()
+        {
+            return View();
+        }
+
         public ActionResult Post(RegisterUser param)
         {
+            var result = new LoginHelper().Register(param);
 
-
-            return View();
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }
