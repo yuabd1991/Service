@@ -122,7 +122,7 @@ namespace Component
 
 		private ActionResult PageLoginRedirect(ActionExecutingContext filterContext)
 		{
-			return new RedirectResult("/Home/NoLogin");
+			return new RedirectResult("/Login/Logout");
 
 		}
 

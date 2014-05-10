@@ -11,6 +11,8 @@ namespace Entity.Entities
 
         public string Industry { get; set; }
 
+        public string PictureFile { get; set; }
+
         public int IndustryID { get; set; }
 
         public int UserID { get; set; }

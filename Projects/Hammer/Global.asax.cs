@@ -30,7 +30,7 @@ namespace XpMain
 			routes.MapRoute("NoAction", "{controller}.html", new { controller = "Home", action = "index", id = UrlParameter.Optional }, new[] { "EasyUI.Controllers" });//无Action的匹配
 			routes.MapRoute("NoID", "{controller}/{action}.html", new { controller = "Home", action = "index", id = UrlParameter.Optional }, new[] { "EasyUI.Controllers" });//无ID的匹配
 			routes.MapRoute("Default", "{controller}/{action}/{id}.html", new { controller = "Home", action = "index", id = UrlParameter.Optional }, new[] { "EasyUI.Controllers" });//默认匹配
-			routes.MapRoute("Root", "", new { controller = "Home", action = "index", id = UrlParameter.Optional }, new[] { "EasyUI.Controllers" });//根目录匹配
+            routes.MapRoute("Root", "{controller}/{action}/{id}", new { controller = "Home", action = "index", id = UrlParameter.Optional }, new[] { "EasyUI.Controllers" });//根目录匹配
 			routes.MapRoute("Admin", "{areas}", new { controller = "Home", action = "index", id = UrlParameter.Optional }, new[] { "EasyUI.Areas.Admin.Controllers" });//根目录匹配
         }
 

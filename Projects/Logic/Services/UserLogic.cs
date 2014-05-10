@@ -233,20 +233,35 @@ namespace Logic.Services
         {
             BaseObject obj = new BaseObject();
 
-            if (_db.Users.Any(m => m.UserName == user.UserName))
+            try
             {
-                obj.Tag = -1;
-                obj.Message = "用户名已经存在! ";
 
-                return obj;
+                if (_db.Users.Any(m => m.UserName == user.UserName))
+                {
+                    obj.Tag = -1;
+                    obj.Message = "用户名已经存在! ";
+
+                    return obj;
+                }
+
+                var inobj = InsertUser(user);
+                if (inobj.Tag == 1)
+                {
+                    _db.SaveChanges();
+                    obj.Tag = 1;
+                }
+                else
+                {
+                    obj = inobj;
+                    return obj;
+                }
             }
+            catch (Exception e)
+            {
 
-            InsertUser(user);
-
-            _db.SaveChanges();
-
-            obj.Tag = 1;
-
+                obj.Tag = -1;
+                obj.Message = e.Message;
+            }
             return obj;
         }
 
@@ -367,8 +382,9 @@ namespace Logic.Services
             return _db.Users.SingleOrDefault(u => u.ID == userID && u.Password == encryptedPassword);
         }
 
-        public void InsertUser(RegisterUser param)
+        public BaseObject InsertUser(RegisterUser param)
         {
+            var obj = new BaseObject();
             if (!string.IsNullOrEmpty(param.Password))
             {
                 var user = new User();
@@ -412,7 +428,16 @@ namespace Logic.Services
                 }
 
                 _db.SaveChanges();
+
+                obj.Tag = 1;
             }
+            else
+            {
+                obj.Tag = -1;
+                obj.Message = "系统错误";
+            }
+
+            return obj;
         }
 
         #endregion

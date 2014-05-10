@@ -17,25 +17,24 @@
         $(function () {
             //var type = $("#Type").val();
             $('.form-horizontal').validation();
-
-            $("#submit").on('click', function (event) {
-                // 2.最后要调用 valid()方法。
-                if ($(".form-horizontal").valid() == false) {
-                    $("#error-text").text("填写信息不完整。")
-                    return false;
-                }
-                var param = getFormJson('.form-horizontal');
-
-                $.U1Ajax("/register/post.html", param, function (data) {
-                    if (data.Tag == 1) {
-                        alert("注册成功！");
-                        window.location.href = '/';
-                    } else {
-                        alert(data.Message);
-                    }
-                });
-            })
         });
+        function PostRegister() {
+            // 2.最后要调用 valid()方法。
+            if ($(".form-horizontal").valid() == false) {
+                $("#error-text").text("填写信息不完整。")
+                return false;
+            }
+            var param = $('.form-horizontal').GetPostData();
+
+            $.U1Ajax("/register/post.html", param, function (data) {
+                if (data.Tag == 1) {
+                    alert("注册成功！");
+                    window.location.href = '/';
+                } else {
+                    alert(data.Message);
+                }
+            });
+        }
     </script>
 }
 <header class="page-heading clearfix">
@@ -68,102 +67,103 @@
                 <div class="row">
                     <div class="col-md-8">
                         @*<div class="bs-example">*@
-                        <div class="form-horizontal" role="form">
-                        <input type="hidden" name="Type" value="Personal" id="Type" />
-                        <div class="form-group">
-                            <label for="UserName" class="col-sm-2 control-label">
-                                用户名:</label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" check-type="required" minlength="4" maxlength="20"
-                                    id="UserName" name="UserName" placeholder="用户名..." />
+                        <div class="form-horizontal" id="postForm" role="form">
+                            <input type="hidden" name="Type" value="Personal" id="Type" />
+                            <div class="form-group">
+                                <label for="UserName" class="col-sm-2 control-label">
+                                    用户名:</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" check-type="required" minlength="4" maxlength="20" col="UserName"
+                                        id="UserName" name="UserName" placeholder="用户名..." />
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="Password" class="col-sm-2 control-label">
-                                密码:</label>
-                            <div class="col-sm-6">
-                                <input type="password" class="form-control" check-type="required" id="Password" maxlength="20"
-                                    name="Password" placeholder="密码..." />
+                            <div class="form-group">
+                                <label for="Password" class="col-sm-2 control-label">
+                                    密码:</label>
+                                <div class="col-sm-6">
+                                    <input type="password" class="form-control" check-type="required" id="Password" maxlength="20" col="Password"
+                                        name="Password" placeholder="密码..." />
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="Password2" class="col-sm-2 control-label">
-                                确认密码:</label>
-                            <div class="col-sm-6">
-                                <input type="password" class="form-control" check-type="required" id="Password2"
-                                    maxlength="20" name="Password2" placeholder="确认密码..." />
+                            <div class="form-group">
+                                <label for="Password2" class="col-sm-2 control-label">
+                                    确认密码:</label>
+                                <div class="col-sm-6">
+                                    <input type="password" class="form-control" check-type="required" id="Password2" col="Password2"
+                                        maxlength="20" name="Password2" placeholder="确认密码..." />
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="Question" class="col-sm-2 control-label">
-                                提示问题:
-                            </label>
-                            <div class="col-sm-6">
-                                <select class="form-control" type="select" id="Question" name="Question" check-type="required">
-                                    <option value="" selected="selected">请选择任一问题</option>
-                                    <option value="你在哪所中学读初中？">你在哪所中学读初中？</option>
-                                    <option value="你的宠物叫什么名字？">你的宠物叫什么名字？</option>
-                                    <option value="你最喜欢的音乐是？">你最喜欢的音乐是？</option>
-                                    <option value="你最喜欢的球队是？">你最喜欢的球队是？</option>
-                                    <option value="你最喜欢的书是？">你最喜欢的书是？</option>
-                                    <option value="你最好的朋友是？">你最好的朋友是？</option>
-                                    <option value="你的出生年月是？">你的出生年月是？</option>
-                                    <option value="你爱人的名字是？">你爱人的名字是？</option>
-                                    <option value="你父亲的名字是？">你父亲的名字是？</option>
-                                    <option value="你母亲的名字是？">你母亲的名字是？</option>
-                                </select>
+                            <div class="form-group">
+                                <label for="Question" class="col-sm-2 control-label">
+                                    提示问题:
+                                </label>
+                                <div class="col-sm-6">
+                                    <select class="form-control" type="select" id="Question" col="Question" name="Question" check-type="required">
+                                        <option value="" selected="selected">请选择任一问题</option>
+                                        <option value="你在哪所中学读初中？">你在哪所中学读初中？</option>
+                                        <option value="你的宠物叫什么名字？">你的宠物叫什么名字？</option>
+                                        <option value="你最喜欢的音乐是？">你最喜欢的音乐是？</option>
+                                        <option value="你最喜欢的球队是？">你最喜欢的球队是？</option>
+                                        <option value="你最喜欢的书是？">你最喜欢的书是？</option>
+                                        <option value="你最好的朋友是？">你最好的朋友是？</option>
+                                        <option value="你的出生年月是？">你的出生年月是？</option>
+                                        <option value="你爱人的名字是？">你爱人的名字是？</option>
+                                        <option value="你父亲的名字是？">你父亲的名字是？</option>
+                                        <option value="你母亲的名字是？">你母亲的名字是？</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="Answer" class="col-sm-2 control-label">
-                                提示答案:
-                            </label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" check-type="required" maxlength="50" id="Answer"
-                                    name="Answer" placeholder="请输入密码提示答案!" />
+                            <div class="form-group">
+                                <label for="Answer" class="col-sm-2 control-label">
+                                    提示答案:
+                                </label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" check-type="required" maxlength="50" id="Answer" col="Answer"
+                                        name="Answer" placeholder="请输入密码提示答案!" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="RealName" class="col-sm-2 control-label">
-                                姓名:
-                            </label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" check-type="required" maxlength="20" id="RealName"
-                                    name="RealName" placeholder="请输入真实姓名" />
+                            <div class="form-group">
+                                <label for="RealName" class="col-sm-2 control-label">
+                                    姓名:
+                                </label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" check-type="required" maxlength="20" id="RealName" col="RealName"
+                                        name="RealName" placeholder="请输入真实姓名" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="Email" class="col-sm-2 control-label">
-                                Email:
-                            </label>
-                            <div class="col-sm-6">
-                                <input type="email" class="form-control" check-type="required mail" maxlength="50"
-                                    id="Email" name="Email" placeholder="Email.建议使用QQ,163,gmail等" />
+                            <div class="form-group">
+                                <label for="Email" class="col-sm-2 control-label">
+                                    Email:
+                                </label>
+                                <div class="col-sm-6">
+                                    <input type="email" class="form-control" check-type="required mail" maxlength="50" col="Email"
+                                        id="Email" name="Email" placeholder="Email.建议使用QQ,163,gmail等" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="Contact" class="col-sm-2 control-label">
-                                联系电话:
-                            </label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" maxlength="20" id="Contact" name="Contact"
-                                    placeholder="请输入联系方式，如0592-6150545" />
+                            <div class="form-group">
+                                <label for="Contact" class="col-sm-2 control-label">
+                                    联系电话:
+                                </label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" maxlength="20" id="Contact" name="Contact" col="Contact"
+                                        placeholder="请输入联系方式，如0592-6150545" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="QQ" class="col-sm-2 control-label">
-                                QQ:
-                            </label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" maxlength="15" id="QQ" name="QQ" placeholder="QQ号" />
+                            <div class="form-group">
+                                <label for="QQ" class="col-sm-2 control-label">
+                                    QQ:
+                                </label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" maxlength="15" id="QQ" name="QQ" placeholder="QQ号" col="QQ" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" id="submit" class="btn btn-default">
-                                    提交注册</button>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <input type="button" onclick="PostRegister()" class="btn btn-default" value="提交注册" />
+                                    @*<button type="submit" id="submit" class="btn btn-default">
+                                        提交注册</button>*@
+                                </div>
                             </div>
-                        </div>
                         </div>
                     </div>
                     <div class="col-md-4">
