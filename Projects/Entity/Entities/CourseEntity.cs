@@ -34,6 +34,10 @@ namespace Entity.Entities
         public string CourseType { get; set; }
 
         public int CourseTypeID { get; set; }
+
+        public string Photo { get; set; }
+
+        public List<PictureEntity> Photos { get; set; }
     }
 
     public class CourseTypeEntity

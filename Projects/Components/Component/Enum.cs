@@ -24,6 +24,8 @@ namespace Component
 		public const string Product = "Product";
 
 		public const string Photo = "Photo";
+
+        public const string CourseImage = "CourseImage";
 	}
 	/// <summary>
 	/// 内容类型

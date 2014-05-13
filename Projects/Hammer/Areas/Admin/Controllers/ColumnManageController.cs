@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Component;
 using Entity.Entities;
 using EasyUI.Helpers;
+using Component.Component;
 
 namespace EasyUI.Areas.Admin.Controllers
 {
@@ -88,6 +89,8 @@ namespace EasyUI.Areas.Admin.Controllers
 
 		public ActionResult AddColumnJson(ColumnEntity param)
 		{
+            param.UpdateUser = User.Identity.Name.Uint();
+
 			var result = new SystemHelper().InsertColumn(param);
 
 			return Json(result);

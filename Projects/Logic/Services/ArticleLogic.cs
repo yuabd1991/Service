@@ -408,7 +408,7 @@ namespace Logic.Services
 						   select new ArticleImageEntity
 						   {
 							   Author = l.Field<string>("Author"),
-							   UpdateUser = l.Field<string>("UpdateUser"),
+							   UpdateUser = l.Field<string>("UserName"),
 							   Title = l.Field<string>("Title"),
 							   Source = l.Field<string>("Source"),
 							   SortOrder = l.Field<int>("SortOrder"),
@@ -634,13 +634,13 @@ namespace Logic.Services
 
 				_db.SaveChanges();
 
+                obj.Tag = 1;
+
 				if (HandlePicture(param, image.ID).Tag != 1)
 				{
 					obj.Tag = -1;
 					return obj;
 				}
-
-				obj.Tag = 1;
 			}
 			catch (Exception e)
 			{

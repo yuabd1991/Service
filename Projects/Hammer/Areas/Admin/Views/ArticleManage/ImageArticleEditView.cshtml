@@ -247,7 +247,7 @@
             for (var j = i * size; j < i * size + size; j++) {
                 if (max > j) {
                     html.push("<td>");
-                    html.push(Img.formatImageUrl(imgList[j].PictureUrl, 100, 100, 'border: 1px solid #C3C3C3;') + '"<div style="text-align:center;" >');
+                    html.push(Img.formatImageUrl(imgList[j].PictureUrl, 100, 100, 'border: 1px solid #C3C3C3;') + '<div style="text-align:center;" >');
                     if (imgList[j].IsDefault == "N") {
                         html.push('<a href="javascript:void(0);" onclick="SetTop(' + imgList[j].ID + ')">置顶</a> | ');
                     }

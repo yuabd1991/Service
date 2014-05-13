@@ -8,6 +8,7 @@ using Entity.Entities;
 using Logic.Models;
 using System.Data;
 using Component.Component;
+using Newtonsoft.Json;
 
 namespace Logic.Services
 {
@@ -156,6 +157,74 @@ namespace Logic.Services
 
             obj.Tag = 1;
 
+            if (HandlePicture(param, course.ID).Tag != 1)
+            {
+                obj.Tag = -2;
+            }
+
+            return obj;
+        }
+
+        private class Photo
+        {
+            public int ID { get; set; }
+
+            public string Url { get; set; }
+
+            public string IsDefault { get; set; }
+
+            public string PictureUrl { get; set; }
+        }
+
+        private BaseObject HandlePicture(CourseEntity param, int id)
+        {
+            BaseObject obj = new BaseObject();
+            if (string.IsNullOrEmpty(param.Photo))
+            {
+                obj.Tag = 1;
+                return obj;
+            }
+            var photo = JsonConvert.DeserializeObject<List<Photo>>(param.Photo);
+
+            //TODO
+
+            try
+            {
+                var ids = photo.Select(q => q.ID).ToList();
+                var phos = _db.Pictures.Where(m => m.TargetID == id && !ids.Contains(m.ID) && m.Type == PictureType.CourseImage).ToList();
+
+                foreach (var item in phos)
+                {
+                    var pho = _db.Pictures.Find(item.ID);
+                    if (pho == null)
+                    {
+                        continue;
+                    }
+                    _db.Pictures.Remove(pho);
+                }
+                _db.SaveChanges();
+
+                foreach (var item in photo)
+                {
+                    var pho = _db.Pictures.Find(item.ID);
+                    if (pho == null)
+                    {
+                        continue;
+                    }
+                    pho.IsDefault = item.IsDefault;
+                    pho.Type = PictureType.CourseImage;
+                    pho.TargetID = id;
+                    pho.PictureUrl = item.PictureUrl;
+                }
+
+                _db.SaveChanges();
+
+                obj.Tag = 1;
+            }
+            catch (Exception e)
+            {
+                obj.Tag = -1;
+            }
             return obj;
         }
 
@@ -176,6 +245,30 @@ namespace Logic.Services
                             IndustryID = l.IndustryID,
                             UserID = l.UserID
                         }).FirstOrDefault();
+            if (type == null)
+            {
+                return type;
+            }
+            var photos = (from l in _db.Pictures
+                          where l.TargetID == type.ID && l.Type == PictureType.CourseImage
+                          orderby l.IsDefault descending
+                          select new PictureEntity()
+                          {
+                              ID = l.ID,
+                              IsDefault = l.IsDefault,
+                              TargetID = l.TargetID,
+                              Type = l.Type,
+                              PictureUrl = l.PictureUrl
+                          }).ToList();
+
+            var html = "";
+            foreach (var item in photos)
+            {
+                html += ";" + item.ID + "," + item.IsDefault + "," + item.PictureUrl;
+            }
+            type.Photo = html.Trim(';');
+            type.Photos = photos;
+
             return type;
         }
 
@@ -202,6 +295,12 @@ namespace Logic.Services
 
             _db.SaveChanges();
             obj.Tag = 1;
+
+            if (HandlePicture(param, courseType.ID).Tag != 1)
+            {
+                obj.Tag = -1;
+                return obj;
+            }
 
             return obj;
         }

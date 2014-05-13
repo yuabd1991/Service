@@ -3,8 +3,11 @@
 	<report id="ArticleImageList" name="图文集列表">
 		<sql>
 			<![CDATA[
-	  select b.*, (select top 1 PictureUrl from picture p where type = 'ArticleImage' and p.TargetID = b.id order by p.IsDefault desc) as Photo
-	  from (select a.* from ArticleImage a) b
+	  select b.ID, b.Author, b.ColumnID, b.Content, b.DateCreated,b.IsDelete, b.MetaDescription, b.MetaKeywords, 
+ b.Overview, b.PageTitle, b.PageVisits, b.ShortTitle, b.Slug, b.SortOrder, b.Source, b.Title,
+ (select top 1 username from [user] where ID = b.UpdateUser ) as username,
+ (select top 1 PictureUrl from picture p where type = 'ArticleImage' and p.TargetID = b.id order by p.IsDefault desc) as Photo
+	  from ArticleImage b
       ]]>
 		</sql>
 		<dynamic prepend ="WHERE ">
@@ -50,7 +53,7 @@
 		<sql>
 			<![CDATA[
         select a.*, b.UserName from [column] a
-		left join [user] b on a.UpdateUser = b.ID
+		    left join [user] b on a.UpdateUser = b.ID
       ]]>
 		</sql>
 		<dynamic prepend ="WHERE ">

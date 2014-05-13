@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.IO;
 using Component;
+using Component.Component;
 
 namespace EasyUI.Controllers
 {
@@ -18,16 +19,16 @@ namespace EasyUI.Controllers
 			HttpPostedFileBase file = Request.Files["Filedata"];
 			
 			var param = new Entity.Entities.PictureEntity();
-			//param.Type = Request["Type"];
-			//param.TargetID = Convert.ToInt32(Request["ID"]);
-			
-			var picture = new Helpers.SystemHelper().InsertPicture(param);
+			param.Type = Request["Type"];
+			param.TargetID = Request["ID"].Uint();
 
 			var guid = Guid.NewGuid();
 
-            string saveUrl = DateTime.Now.ToString("yyyyMM") + @"\" + picture.Result + ".jpg";
-
+            string saveUrl = DateTime.Now.ToString("yyyyMM") + @"\" + guid + ".jpg";
+            param.PictureUrl = saveUrl;
             string url = System.Web.HttpContext.Current.Server.MapPath("/Content/Upload/images/" + saveUrl);
+
+            var picture = new Helpers.SystemHelper().InsertPicture(param);
 
 			string directory = Path.GetDirectoryName(url);
 			if (directory != null && !Directory.Exists(directory))

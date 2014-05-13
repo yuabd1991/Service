@@ -241,7 +241,6 @@ Img.formatImageUrl = function (imgUrl, width, height, style) {
 	} else {
         return "../../Content/upload/images/NoImage.jpg";
 	}
-
 };
 Img.formatOriginalImageUrl = function (imgUrl) {
 	var array = imgUrl.split('.');

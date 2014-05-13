@@ -561,6 +561,8 @@
     <Content Include="Plugins\WDatePicker\skin\whyGreen\datepicker.css" />
     <Content Include="Plugins\WDatePicker\skin\whyGreen\img.gif" />
     <Content Include="Plugins\WDatePicker\WdatePicker.js" />
+    <Content Include="Scripts\body.js" />
+    <Content Include="Scripts\bodyAjax.js" />
     <Content Include="Scripts\Cookies.js" />
     <Content Include="Scripts\DataGridExtend.js" />
     <Content Include="Scripts\easing.js" />
