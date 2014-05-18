@@ -527,7 +527,7 @@ a:hover, .top-menu-icon:hover
 /* Easy ui    */
 .tabs-scroller-left
 {
-    background: url("../../../Resource/Themes/default/images/tabs_leftarrow.png") no-repeat scroll 1px 7px rgb(129, 129, 129);
+    background: url("images/tabs_leftarrow.png") no-repeat scroll 1px 7px rgb(129, 129, 129);
     border-bottom: 1px solid rgb(141, 141, 141);
     border-right: 1px solid rgb(141, 141, 141);
     height: 31px !important;
@@ -536,7 +536,7 @@ a:hover, .top-menu-icon:hover
 }
 .tabs-scroller-right
 {
-    background: url("../../../Resource/Themes/default/images/tabs_rightarrow.png") no-repeat scroll 2px 7px rgb(129, 129, 129);;
+    background: url("images/tabs_rightarrow.png") no-repeat scroll 2px 7px rgb(129, 129, 129);;
     border-bottom: 1px solid rgb(141, 141, 141);
     border-left: 1px solid rgb(141, 141, 141);
     border-right: none;
@@ -646,13 +646,13 @@ a:hover, .top-menu-icon:hover
     float: left;
     margin-left: 5px;
     margin-right: 5px;
-    background: url('/Resource/Themes/icons/deletemark.png') no-repeat;
+    background: url('images/deletemark.png') no-repeat;
     width: 16px;
     height: 16px;
 }
 .mark_List .ico:hover
 {
-    /*background: url('/Resource/Themes/icons/no.png') no-repeat;*/
+    /*background: url('images/no.png') no-repeat;*/
 }
 
 .actionLog_menu
@@ -681,42 +681,42 @@ a:hover, .top-menu-icon:hover
 
 .downarrow
 {
-    background: url('/Resource/Themes/icons/down_no.png') no-repeat;
+    background: url('images/down_no.png') no-repeat;
     width: 15px;
     height: 15px;
     display: inline-block;
 }
 .downarrow:hover
 {
-    background: url('/Resource/Themes/icons/down_sel.png') no-repeat;
+    background: url('images/down_sel.png') no-repeat;
     width: 15px;
     height: 15px;
     display: inline-block;
 }
 .downarrowsel
 {
-    background: url('/Resource/Themes/icons/down_sel.png') no-repeat;
+    background: url('images/down_sel.png') no-repeat;
     width: 15px;
     height: 15px;
     display: inline-block;
 }
 .uparrow
 {
-    background: url('/Resource/Themes/icons/up_no.png') no-repeat;
+    background: url('images/up_no.png') no-repeat;
     width: 15px;
     height: 15px;
     display: inline-block;
 }
 .uparrow:hover
 {
-    background: url('/Resource/Themes/icons/up_sel.png') no-repeat;
+    background: url('images/up_sel.png') no-repeat;
     width: 15px;
     height: 15px;
     display: inline-block;
 }
 .uparrowsel
 {
-    background: url('/Resource/Themes/icons/up_sel.png') no-repeat;
+    background: url('images/up_sel.png') no-repeat;
     width: 15px;
     height: 15px;
     display: inline-block;
@@ -771,7 +771,7 @@ a:hover, .top-menu-icon:hover
 .loadmask-msg div
 {
     padding: 5px 10px 5px 25px;
-    background: #fbfbfb url('/Content/Themes/Default/Images/loading.gif') no-repeat 5px 5px;
+    background: #fbfbfb url('Images/loading.gif') no-repeat 5px 5px;
     line-height: 16px;
     border: 1px solid #a3bad9;
     color: #222;

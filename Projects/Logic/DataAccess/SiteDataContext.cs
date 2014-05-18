@@ -59,80 +59,10 @@ namespace Logic.DataAccess
             }
             var ChangeTrackerData = base.ChangeTracker.Entries().ToList();
 
-			//var logList = DBExtend.GetLogList(ChangeTrackerData);
-
             int result = base.SaveChanges();
-			//if (result > 0)
-			//{
-			//    //数据库日志
-			//    DBExtend.LogDb(logList);
-			//    //数据层缓存
-			//    ResetCache(ChangeTrackerData);
-			//}
 
             return result;
         }
-		/// <summary>  
-		/// 单表操作批量删除  
-		/// </summary>  
-		/// <typeparam name="T"></typeparam>  
-		/// <param name="source"></param>  
-		/// <param name="query"></param>  
-		/// <returns></returns>  
-		//public static int Delete<T>(this System.Data.Linq.Table<T> source, Expression<Func<T, bool>> query)
-		//    where T : class
-		//{
-		//    if (source == null)
-		//        throw new ArgumentException("source");
-		//    if (query == null)
-		//        throw new ArgumentException("query");
-		//    //query = t => true;  
-		//    //为空DELETE  FROM [dbo].[test] 全删除；个人觉得为空全删除，很不人道，所以还是抛异常  
-		//    System.Data.Linq.DataContext db = source.Context;
-		//    IQueryable q = source.Where(query).AsQueryable();
-		//    DbCommand cmd = db.GetCommand(q);
-		//    string sql = cmd.CommandText;
-		//    string regex = @"from\s*\[\s*dbo\s*\]\s*\.\s*\[\s*\w+\s*\]\s*(?<tableparam>(as\s*(?<tablepname>(\[\s*\w+\s*\]))))(\.|(\r)|(\n))*";
-		//    MatchCollection matches = Regex.Matches(sql, regex, RegexOptions.Multiline | RegexOptions.IgnoreCase);
-		//    Debug.Assert(matches != null, "regex match :null");
-		//    Debug.Assert(matches.Count == 1, "regex match length :" + matches.Count);
-		//    if (matches != null && matches.Count > 0)
-		//    {
-		//        Match match = matches[0];
-		//        sql = ("DELETE  " + match.Value.Replace(match.Groups["tableparam"].Value, "") +
-		//        sql.Substring(match.Index + match.Length)).Replace(match.Groups["tablepname"].Value + ".", " ");
-		//        List<object> dbparams = new List<object>();
-		//        foreach (SqlParameter item in cmd.Parameters)
-		//        {
-		//            SqlParameter p = new SqlParameter(item.ParameterName, item.SqlDbType, item.Size);
-		//            p.Value = item.Value;
-		//            dbparams.Add(item.Value);
-		//        }
-		//        q = null;
-		//        cmd = null;
-		//        matches = null;
-		//        Debug.WriteLine("delete sql :" + sql);
-		//        return db.ExecuteCommand(sql, dbparams.ToArray());
-		//    }
-		//    return 0;
-		//}
-
-		//private void ResetCache(object par)
-		//{
-		//    List<System.Data.Entity.Infrastructure.DbEntityEntry> entryList = (List<System.Data.Entity.Infrastructure.DbEntityEntry>)par;
-		//    foreach (var item in entryList)
-		//    {
-		//        CacheHelp.RemoveCache(item.Entity.GetType().BaseType.Name);
-		//    }
-		//}
-
-		//public class SiteDataContextInitializer : DropCreateDatabaseAlways<SiteDataContext>
-		//{
-		//    protected override void Seed(SiteDataContext context)
-		//    {
-		//        context.SaveChanges();
-		//    }
-		//}
 
 		#region DbSet
 
@@ -177,6 +107,10 @@ namespace Logic.DataAccess
         public DbSet<Course> Courses { get; set; }
 
         public DbSet<CourseType> CourseTypes { get; set; }
+        /// <summary>
+        /// 字典
+        /// </summary>
+        public DbSet<Dictionary> Dictionaries { get; set; }
 
 		#endregion
 	}

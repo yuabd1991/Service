@@ -140,16 +140,27 @@ namespace Logic.Services
         public BaseObject InsertCourse(CourseEntity param)
         {
             var obj = new BaseObject();
+
+            if (_db.Courses.Any(m => m.CourseName == param.CourseName && m.IsDelete != PublicType.No))
+            {
+                obj.Tag = -1;
+                obj.Message = "名称已存在！";
+
+                return obj;
+            }
+
             var course = new Course();
             course.AddDate = DateTime.Now;
             course.AddUserID = param.AddUserID;
             course.Contact = param.Contact;
             course.CourseName = param.CourseName;
             course.CourseTypeID = param.CourseTypeID;
-            course.Date = param.Date;
+            course.StartDate = param.StartDate;
+            course.EndDate = param.EndDate;
             course.Description = param.Description;
             course.IndustryID = param.IndustryID;
             course.UserID = param.UserID;
+            course.IsDelete = PublicType.No;
 
             _db.Courses.Add(course);
 
@@ -240,7 +251,8 @@ namespace Logic.Services
                             Contact = l.Contact,
                             CourseName = l.CourseName,
                             CourseTypeID = l.CourseTypeID,
-                            Date = l.Date,
+                            StartDate = l.StartDate,
+                            EndDate = l.EndDate,
                             Description = l.Description,
                             IndustryID = l.IndustryID,
                             UserID = l.UserID
@@ -287,7 +299,8 @@ namespace Logic.Services
             courseType.Contact = param.Contact;
             courseType.CourseName = param.CourseName;
             courseType.CourseTypeID = param.CourseTypeID;
-            courseType.Date = param.Date;
+            courseType.StartDate = param.StartDate;
+            courseType.EndDate = param.EndDate;
             courseType.Description = param.Description;
             courseType.IndustryID = param.IndustryID;
             courseType.UserID = param.UserID;
@@ -346,7 +359,8 @@ namespace Logic.Services
                                AddUserName = l.Field<string>("UserName"),
                                Contact = l.Field<string>("Contact"),
                                AddDate = l.Field<DateTime>("AddDate"),
-                               Date = l.Field<string>("Date"),
+                               StartDate = l.Field<DateTime?>("StartDate"),
+                               EndDate = l.Field<DateTime?>("EndDate"),
                                CourseName = l.Field<string>("CourseName"),
                                Industry = l.Field<string>("Industry"),
                                CourseType = l.Field<string>("CourseType")

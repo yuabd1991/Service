@@ -3,12 +3,12 @@
     ViewBag.Title = "EditCourseView";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<link href="@Url.Content("~/Plugins/KindEditor/default/default.css")" rel="stylesheet" type="text/css" />
 <script src="@Url.Content("~/Plugins/KindEditor/kindeditor-min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Plugins/KindEditor/zh_CN.js")" type="text/javascript"></script>
 <link href="@Url.Content("~/Plugins/uploadify/uploadify.css")" rel="stylesheet" type="text/css" />
 <script src="@Url.Content("~/Plugins/uploadify/swfobject.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Plugins/uploadify/jquery.uploadify.js")" type="text/javascript"></script>
+<script src="/Plugins/WDatePicker/WdatePicker.js" type="text/javascript"></script>
 <style>
 	textarea {
 		display: block;
@@ -47,7 +47,8 @@
             <span class="red">*</span>开课时间：
         </td>
         <td>
-            <input type="text" col="Date" class="textbox" value="@Model.Date" validtype="required(开课时间)|maxLen(100)" />
+            <input type="text" col="StartDate" class="textbox" value="@Model.StartDate.Value.ToShortDateString()" onfocus="WdatePicker()" validtype="required(开课时间)" /> 至 
+            <input type="text" col="EndDate" class="textbox" value="@Model.EndDate.Value.ToShortDateString()" onfocus="WdatePicker()" validtype="required(开课时间)" />
         </td>
     </tr>
     <tr>

@@ -534,9 +534,13 @@ namespace Logic.Models
 
         public string Description { get; set; }
 
-        public string Date { get; set; }
+        public DateTime? StartDate { get; set; }
+
+        public DateTime? EndDate { get; set; }
 
         public string Contact { get; set; }
+
+        public string IsDelete { get; set; }
 
         public int AddUserID { get; set; }
 
@@ -561,4 +565,29 @@ namespace Logic.Models
     }
 
 	#endregion
+
+    #region 字典
+
+    public class Dictionary
+    {
+        public int ID { get; set; }
+        /// <summary>
+        /// 父级ID
+        /// </summary>
+        public int? ParentID { get; set; }
+        /// <summary>
+        /// 名称
+        /// </summary>
+        public string Name { get; set; }
+        /// <summary>
+        /// 值
+        /// </summary>
+        public string Value { get; set; }
+        /// <summary>
+        /// 是否启用
+        /// </summary>
+        public string Enable { get; set; }
+    }
+
+    #endregion
 }

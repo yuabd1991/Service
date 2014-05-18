@@ -305,7 +305,7 @@ a.l-btn span.l-btn-left
 .loadmask-msg div
 {
     padding: 5px 10px 5px 25px;
-    background: #fbfbfb url('/Content/Themes/Default/Images/loading.gif') no-repeat 5px 5px;
+    background: #fbfbfb url('Images/loading.gif') no-repeat 5px 5px;
     line-height: 16px;
     border: 1px solid #a3bad9;
     color: #222;
@@ -410,12 +410,12 @@ ul, ol
 }
 .flow-steps-order ol
 {
-    background: url('/Content/Themes/Default/Images/progress.png') repeat-x scroll 0 1px transparent;
+    background: url('Images/progress.png') repeat-x scroll 0 1px transparent;
     height: 60px;
 }
 .flow-steps-order li
 {
-    background: url('/Content/Themes/Default/Images/go.png') no-repeat scroll right 1px transparent;
+    background: url('Images/go.png') no-repeat scroll right 1px transparent;
     color: #808080;
     float: left;
     font-size: 14px;
@@ -471,7 +471,7 @@ ul, ol
 }
 i.step-point
 {
-    background: url('/Content/Themes/Default/Images/select.png') repeat scroll 0 0 transparent;
+    background: url('Images/select.png') repeat scroll 0 0 transparent;
     display: block;
     height: 10px;
     left: 12%;
@@ -483,7 +483,7 @@ i.step-point
 }
 .flow-steps-order li.current .state
 {
-    background: url('/Content/Themes/Default/Images/detail_on.png') no-repeat scroll 0 0 #F58B0F;
+    background: url('Images/detail_on.png') no-repeat scroll 0 0 #F58B0F;
     color: #FFFFFF;
     height: 40px;
     margin: 0 auto;
@@ -526,7 +526,7 @@ i.step-point
 }
 .tabs-nav li
 {
-    background: url('/Content/Themes/Default/Images/tabview_bg.gif') no-repeat scroll 0 6px transparent;
+    background: url('Images/tabview_bg.gif') no-repeat scroll 0 6px transparent;
     cursor: pointer;
     float: left;
     height: 27px;
@@ -594,7 +594,7 @@ hr
 }
 .pro_hide
 {
-    background: url('/Content/Themes/Default/Images/r_expand.png') no-repeat;
+    background: url('Images/r_expand.png') no-repeat;
     cursor: pointer;
     margin-right: 10px;
     float: right;
@@ -603,7 +603,7 @@ hr
 }
 .pro_show
 {
-    background: url('/Content/Themes/Default/Images/r_collapse.png') no-repeat;
+    background: url('Images/r_collapse.png') no-repeat;
     cursor: pointer;
     margin-right: 10px;
     float: right;
@@ -668,7 +668,7 @@ hr
 }*/
 .togglebtn
 {
-    background: url("/Content/Themes/Default/Images/toggle.gif") no-repeat scroll 0 0 transparent;
+    background: url("Images/toggle.gif") no-repeat scroll 0 0 transparent;
     cursor: pointer;
     height: 12px;
     position: absolute;

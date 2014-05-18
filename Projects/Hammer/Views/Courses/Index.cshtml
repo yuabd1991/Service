@@ -2,5 +2,389 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_SiteLayout.cshtml";
 }
-
-
+<header class="page-heading clearfix">
+                    <h1 class="heading-title pull-left">课程列表</h1>
+                    <div class="breadcrumbs pull-right">
+                        <ul class="breadcrumbs-list">
+                            <li class="breadcrumbs-label">您的位置:</li>
+                            <li><a href="/">首页</a><i class="fa fa-angle-right"></i></li>
+                            <li class="current">课程列表</li>
+                        </ul>
+                    </div><!--//breadcrumbs-->
+                </header>
+<div class="page-content">
+    <div class="row page-row">
+        <div class="courses-wrapper col-md-8 col-sm-7">
+            <div class="featured-courses tabbed-info page-row">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab1" data-toggle="tab">推荐课程</a></li>
+                    <li><a href="#tab2" data-toggle="tab">热门课程</a></li>
+                    <li><a href="#tab3" data-toggle="tab">最新课程</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tab1">
+                        <div class="row">
+                            <div class="item col-md-3 col-sm-6 col-xs-6">
+                                <img class="img-responsive" src="/assets/images/courses/course-thumb-1.jpg" alt="" />
+                                <p class="text-center">
+                                    <a href="#">美发</a></p>
+                            </div>
+                            <!--//item-->
+                            <div class="item col-md-3 col-sm-6 col-xs-6">
+                                <img class="img-responsive" src="/assets/images/courses/course-thumb-1.jpg" alt="" />
+                                <p class="text-center">
+                                    <a href="#">美发</a></p>
+                            </div>
+                            <!--//item-->
+                            <div class="clearfix visible-xs">
+                            </div>
+                            <div class="item col-md-3 col-sm-6 col-xs-6">
+                                <img class="img-responsive" src="/assets/images/courses/course-thumb-1.jpg" alt="" />
+                                <p class="text-center">
+                                    <a href="#">美发</a></p>
+                            </div>
+                            <!--//item-->
+                            <div class="item col-md-3 col-sm-6 col-xs-6">
+                                <img class="img-responsive" src="/assets/images/courses/course-thumb-1.jpg" alt="" />
+                                <p class="text-center">
+                                    <a href="#">美发</a></p>
+                            </div>
+                            <!--//item-->
+                        </div>
+                        <!--//row-->
+                    </div>
+                    <div class="tab-pane" id="tab2">
+                        <div class="row">
+                            <div class="item col-md-3 col-sm-6 col-xs-6">
+                                <img class="img-responsive" src="assets/images/courses/course-thumb-4.jpg" alt="" />
+                                <p class="text-center">
+                                    <a href="#">摄影</a></p>
+                            </div>
+                            <!--//item-->
+                            <div class="item col-md-3 col-sm-6 col-xs-6">
+                                <img class="img-responsive" src="assets/images/courses/course-thumb-4.jpg" alt="" />
+                                <p class="text-center">
+                                    <a href="#">摄影</a></p>
+                            </div>
+                            <!--//item-->
+                            <div class="clearfix visible-xs">
+                            </div>
+                            <div class="item col-md-3 col-sm-6 col-xs-6">
+                                <img class="img-responsive" src="assets/images/courses/course-thumb-4.jpg" alt="" />
+                                <p class="text-center">
+                                    <a href="#">摄影</a></p>
+                            </div>
+                            <!--//item-->
+                            <div class="item col-md-3 col-sm-6 col-xs-6">
+                                <img class="img-responsive" src="assets/images/courses/course-thumb-4.jpg" alt="" />
+                                <p class="text-center">
+                                    <a href="#">摄影</a></p>
+                            </div>
+                            <!--//item-->
+                        </div>
+                        <!--//row-->
+                    </div>
+                    <div class="tab-pane" id="tab3">
+                        <div class="row">
+                            <div class="item col-md-3 col-sm-6 col-xs-6">
+                                <img class="img-responsive" src="assets/images/courses/course-thumb-3.jpg" alt="" />
+                                <p class="text-center">
+                                    <a href="#">养生</a></p>
+                            </div>
+                            <!--//item-->
+                            <div class="item col-md-3 col-sm-6 col-xs-6">
+                                <img class="img-responsive" src="assets/images/courses/course-thumb-3.jpg" alt="" />
+                                <p class="text-center">
+                                    <a href="#">养生</a></p>
+                            </div>
+                            <!--//item-->
+                            <div class="clearfix visible-xs">
+                            </div>
+                            <div class="item col-md-3 col-sm-6 col-xs-6">
+                                <img class="img-responsive" src="assets/images/courses/course-thumb-3.jpg" alt="" />
+                                <p class="text-center">
+                                    <a href="#">养生</a></p>
+                            </div>
+                            <!--//item-->
+                            <div class="item col-md-3 col-sm-6 col-xs-6">
+                                <img class="img-responsive" src="assets/images/courses/course-thumb-3.jpg" alt="" />
+                                <p class="text-center">
+                                    <a href="#">养生</a></p>
+                            </div>
+                            <!--//item-->
+                        </div>
+                        <!--//row-->
+                    </div>
+                </div>
+            </div>
+            <!--//featured-courses-->
+            <p class="text-muted page-row">
+                更多分类: 摄影, 美发,</p>
+            <div class="course-list-header box clearfix">
+                <div class="summary pull-left">
+                    <strong>89</strong> 线下课程 | <strong>68</strong> 网络课程</div>
+                <div class="sort pull-right">
+                    <label class="control-label pull-left">
+                        排序:
+                    </label>
+                    <select class="sort-options form-control pull-left">
+                        <option>默认</option>
+                        <option>日期</option>
+                        <option>热度</option>
+                    </select>
+                </div>
+                <!--//sort-->
+            </div>
+            <!--//course-list-header-->
+            <div class="course-item-header row-divider hidden-sm hidden-xs">
+                <div class="row">
+                    <div class="col-title col-md-4 col-sm-6">
+                        <strong>课程名称</strong></div>
+                    <div class="col-meta col-md-8 col-sm-6">
+                        <div class="row">
+                            <div class="col-start col-md-3">
+                                <strong>开始日期</strong></div>
+                            <div class="col-duration col-md-2">
+                                <strong>课时</strong></div>
+                            <div class="col-level col-md-3">
+                                <strong>级别</strong></div>
+                            <div class="col-location col-md-4">
+                                <strong>地点</strong></div>
+                        </div>
+                    </div>
+                    <!--//col-meta-->
+                </div>
+                <!---//row-->
+            </div>
+            <!--//course-item-header-->
+            <article class="course-item row-divider">   
+                                <div class="details row">
+                                    <div class="col-title col-md-4 col-sm-6"><a href="course-single.html">美发美发美发</a> <span class="label label-success">新</span></div>
+                                    <div class="col-meta col-md-8 col-sm-6">
+                                        <div class="row">
+                                            <div class="col-start col-md-3">2014/05/18</div>                                    
+                                            <div class="col-duration col-md-2">1年</div>
+                                            <div class="col-level col-md-3">高级美发师</div>
+                                            <div class="col-location col-md-4">北京</div>   
+                                        </div>                                 
+                                    </div><!--//col-meta-->                           
+                                </div><!--//details-->
+                            </article>
+            <!--//course-item-->
+            <article class="course-item row-divider">   
+                                <div class="details row">
+                                    <div class="col-title col-md-4 col-sm-6"><a href="course-single.html">美发美发美发</a> <span class="label label-success">新</span></div>
+                                    <div class="col-meta col-md-8 col-sm-6">
+                                        <div class="row">
+                                            <div class="col-start col-md-3">2014/05/18</div>                                    
+                                            <div class="col-duration col-md-2">1年</div>
+                                            <div class="col-level col-md-3">高级美发师</div>
+                                            <div class="col-location col-md-4">北京</div>   
+                                        </div>                                 
+                                    </div><!--//col-meta-->                           
+                                </div><!--//details-->
+                            </article>
+            <!--//course-item-->
+            <article class="course-item row-divider">   
+                                <div class="details row">
+                                    <div class="col-title col-md-4 col-sm-6"><a href="course-single.html">摄影摄影摄影摄影摄影摄影</a></div>
+                                    <div class="col-meta col-md-8 col-sm-6">
+                                        <div class="row">
+                                            <div class="col-start col-md-3">2014/05/18</div>                                    
+                                            <div class="col-duration col-md-2">1年</div>
+                                            <div class="col-level col-md-3">高级美发师</div>
+                                            <div class="col-location col-md-4">北京</div>   
+                                        </div>                                 
+                                    </div><!--//col-meta-->                           
+                                </div><!--//details-->
+                            </article>
+            <!--//course-item-->
+            <article class="course-item row-divider">   
+                                <div class="details row">
+                                    <div class="col-title col-md-4 col-sm-6"><a href="course-single.html">摄影摄影摄影摄影摄影摄影</a></div>
+                                    <div class="col-meta col-md-8 col-sm-6">
+                                        <div class="row">
+                                            <div class="col-start col-md-3">2014/05/18</div>                                    
+                                            <div class="col-duration col-md-2">1年</div>
+                                            <div class="col-level col-md-3">高级美发师</div>
+                                            <div class="col-location col-md-4">北京</div>   
+                                        </div>                                 
+                                    </div><!--//col-meta-->                           
+                                </div><!--//details-->
+                            </article>
+            <!--//course-item-->
+            <article class="course-item row-divider">       
+                                <div class="details row">
+                                    <div class="col-title col-md-4 col-sm-6"><a href="course-single.html">摄影摄影摄影摄影摄影摄影</a>  <span class="label label-warning">满员</span></div>
+                                    <div class="col-meta col-md-8 col-sm-6">
+                                        <div class="row">
+                                            <div class="col-start col-md-3">2014/05/18</div>                                    
+                                            <div class="col-duration col-md-2">1年</div>
+                                            <div class="col-level col-md-3">高级摄影</div>
+                                            <div class="col-location col-md-4">北京</div>   
+                                        </div>                                 
+                                    </div><!--//col-meta-->                      
+                                </div><!--//details-->
+                            </article>
+            <!--//course-item-->
+            <article class="course-item row-divider">       
+                                <div class="details row">
+                                    <div class="col-title col-md-4 col-sm-6"><a href="course-single.html">摄影摄影摄影摄影摄影摄影</a>  <span class="label label-warning">满员</span></div>
+                                    <div class="col-meta col-md-8 col-sm-6">
+                                        <div class="row">
+                                            <div class="col-start col-md-3">2014/05/18</div>                                    
+                                            <div class="col-duration col-md-2">1年</div>
+                                            <div class="col-level col-md-3">高级摄影</div>
+                                            <div class="col-location col-md-4">北京</div>   
+                                        </div>                                 
+                                    </div><!--//col-meta-->                      
+                                </div><!--//details-->
+                            </article>
+            <!--//course-item-->
+            <article class="course-item row-divider">   
+                                <div class="details row">
+                                    <div class="col-title col-md-4 col-sm-6"><a href="course-single.html">摄影摄影摄影摄影摄影摄影</a></div>
+                                    <div class="col-meta col-md-8 col-sm-6">
+                                        <div class="row">
+                                            <div class="col-start col-md-3">2014/05/18</div>                                    
+                                            <div class="col-duration col-md-2">1年</div>
+                                            <div class="col-level col-md-3">高级美发师</div>
+                                            <div class="col-location col-md-4">北京</div>   
+                                        </div>                                 
+                                    </div><!--//col-meta-->                           
+                                </div><!--//details-->
+                            </article>
+            <!--//course-item-->
+            <article class="course-item row-divider">   
+                                <div class="details row">
+                                    <div class="col-title col-md-4 col-sm-6"><a href="course-single.html">摄影摄影摄影摄影摄影摄影</a></div>
+                                    <div class="col-meta col-md-8 col-sm-6">
+                                        <div class="row">
+                                            <div class="col-start col-md-3">2014/05/18</div>                                    
+                                            <div class="col-duration col-md-2">1年</div>
+                                            <div class="col-level col-md-3">高级美发师</div>
+                                            <div class="col-location col-md-4">北京</div>   
+                                        </div>                                 
+                                    </div><!--//col-meta-->                           
+                                </div><!--//details-->
+                            </article>
+            <!--//course-item-->
+            <article class="course-item row-divider">   
+                                <div class="details row">
+                                    <div class="col-title col-md-4 col-sm-6"><a href="course-single.html">摄影摄影摄影摄影摄影摄影</a></div>
+                                    <div class="col-meta col-md-8 col-sm-6">
+                                        <div class="row">
+                                            <div class="col-start col-md-3">2014/05/18</div>                                    
+                                            <div class="col-duration col-md-2">1年</div>
+                                            <div class="col-level col-md-3">高级美发师</div>
+                                            <div class="col-location col-md-4">北京</div>   
+                                        </div>                                 
+                                    </div><!--//col-meta-->                           
+                                </div><!--//details-->
+                            </article>
+            <!--//course-item-->
+            <article class="course-item row-divider">   
+                                <div class="details row">
+                                    <div class="col-title col-md-4 col-sm-6"><a href="course-single.html">摄影摄影摄影摄影摄影摄影</a></div>
+                                    <div class="col-meta col-md-8 col-sm-6">
+                                        <div class="row">
+                                            <div class="col-start col-md-3">2014/05/18</div>                                    
+                                            <div class="col-duration col-md-2">1年</div>
+                                            <div class="col-level col-md-3">高级美发师</div>
+                                            <div class="col-location col-md-4">北京</div>   
+                                        </div>                                 
+                                    </div><!--//col-meta-->                           
+                                </div><!--//details-->
+                            </article>
+            <!--//course-item-->
+            <article class="course-item row-divider">   
+                                <div class="details row">
+                                    <div class="col-title col-md-4 col-sm-6"><a href="course-single.html">摄影摄影摄影摄影摄影摄影</a></div>
+                                    <div class="col-meta col-md-8 col-sm-6">
+                                        <div class="row">
+                                            <div class="col-start col-md-3">2014/05/18</div>                                    
+                                            <div class="col-duration col-md-2">1年</div>
+                                            <div class="col-level col-md-3">高级美发师</div>
+                                            <div class="col-location col-md-4">北京</div>   
+                                        </div>                                 
+                                    </div><!--//col-meta-->                           
+                                </div><!--//details-->
+                            </article>
+            <!--//course-item-->
+            <ul class="pagination">
+                <li class="disabled"><a href="#">&laquo;</a></li>
+                <li class="active"><a href="#">1<span class="sr-only">(current)</span></a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#">&raquo;</a></li>
+            </ul>
+        </div>
+        <!--//courses-wrapper-->
+        <aside class="page-sidebar  col-md-3 col-md-offset-1 col-sm-4 col-sm-offset-1">  
+                            <section class="widget has-divider"> 
+                                <h3 class="title">网络报名中</h3>
+                                <p>摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影</p>
+                                <p class="promo-badge">
+                                    <a class="FireBush" href="#">
+                                        <span class="percentage">8 <span class="off">折</span></span>                    
+                                        <br>
+                                        <span class="desc">在线报名</span>                  
+                                    </a>
+                                </p>
+                            </section><!--//widget-->    
+                            <section class="widget has-divider">
+                                <h3 class="title">下载报名资料</h3>
+                                <p>摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影</p>
+                                <a class="btn btn-theme" href="#"><i class="fa fa-download"></i>点击下载</a>
+                            </section><!--//widget-->              
+                            <section class="widget row-divider">
+                                <h3 class="title">学生反馈</h3>
+                                <div id="testimonials-carousel" class="testimonials-carousel carousel slide">
+                                    <div class="carousel-inner">
+                                        <div class="item">
+                                            <blockquote class="quote">
+                                                <i class="fa fa-quote-left"></i>
+                                                摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影.
+                                            </blockquote>                
+                                            <div class="row">
+                                                <p class="people col-md-8 col-md-push-1"><span class="name">Jerry</span><br><span class="title">Chan</span></p>
+                                                <img class="profile col-md-4" src="assets/images/testimonials/profile-1.png" alt="">
+                                            </div>                               
+                                        </div><!--//item-->
+                                        <div class="item">
+                                            <blockquote class="quote">
+                                                <i class="fa fa-quote-left"></i>
+                                                摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影
+                                            </blockquote>
+                                            <div class="row">
+                                                <p class="people col-md-8 col-md-push-1"><span class="name">Jasper</span><br><span class="title"> Zhou</span></p>
+                                                <img class="profile col-md-4" src="assets/images/testimonials/profile-2.png" alt="">
+                                            </div>                 
+                                        </div><!--//item-->
+                                        <div class="item active">
+                                            <blockquote class="quote">
+                                                <i class="fa fa-quote-left"></i>
+                                                摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影
+                                            </blockquote>
+                                            <div class="row">
+                                                <p class="people col-md-8 col-md-push-1"><span class="name">Jasper</span><br><span class="title"> Zhou</span></p>
+                                                <img class="profile col-md-4" src="assets/images/testimonials/profile-3.png" alt="">
+                                            </div>                 
+                                        </div><!--//item-->
+                                        
+                                    </div><!--//carousel-inner-->
+                                    <div class="carousel-controls">
+                                        <a class="prev" href="#testimonials-carousel" data-slide="prev"><i class="fa fa-caret-left"></i></a>
+                                        <a class="next" href="#testimonials-carousel" data-slide="next"><i class="fa fa-caret-right"></i></a>
+                                    </div><!--//carousel-controls-->
+                                </div><!--//testimonials-carousel-->                             
+                            </section><!--//widget-->
+                             
+                        </aside>
+    </div>
+    <!--//page-row-->
+</div>
+<!--//page-content-->
+</div><!--//page-->

@@ -112,7 +112,7 @@
 			</isNotEmpty>
 		</dynamic>
 	</report>
-  <report id="IndustryList" name="用户列表">
+  <report id="IndustryList" name="行业列表">
     <sql>
       <![CDATA[
         select a.*, (select UserName from [user] where ID = a.UserID) as UserName from [Industry] a
@@ -153,7 +153,7 @@
   <report id="CourseList" name="课程列表">
     <sql>
       <![CDATA[
-        select a.ID,a.AddDate, a.Contact, a.CourseName, a.Date,a.UserID,
+        select a.ID,a.AddDate, a.Contact, a.CourseName, a.StartDate, a.EndDate,a.UserID,
         (select UserName from [user] where ID = a.AddUserID) as UserName,
         (select TypeName from CourseType where ID = a.CourseTypeID) as CourseType,
         (select IndustryName from Industry where ID = a.IndustryID) as Industry
@@ -161,6 +161,9 @@
       ]]>
     </sql>
     <dynamic prepend ="WHERE ">
+      <isNotEmpty property="" prepend="And" value="fixed" type="">
+        <![CDATA[a.IsDelete <> 'Y']]>
+      </isNotEmpty>
       <isNotEmpty property="TypeName" prepend="And" value="" type="">
         <![CDATA[ a.TypeName like '%' + @TypeName + '%' ]]>
       </isNotEmpty>
