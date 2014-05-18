@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Component;
 using Entity.Entities;
+using EasyUI.Helpers;
 
 namespace EasyUI.Areas.Admin.Controllers
 {
@@ -27,7 +28,10 @@ namespace EasyUI.Areas.Admin.Controllers
             int tCount = 0;
             GetReportDataParams param = new GetReportDataParams();
             List<KeyValue> where = new Functions().GetParam(Request);
-            //where.Add(new KeyValue() { Key = "ChlBusinessID", Value = new UserHelper().CurrentChlBussinessID.ToString() });
+            if (!LoginHelper.IsManage)
+            {
+                where.Add(new KeyValue() { Key = "UserID", Value = LoginHelper.UserID.ToString() });
+            }
 
             param.PageIndex = string.IsNullOrEmpty(Request["page"]) ? 1 : Convert.ToInt32(Request["page"]);
             param.PageSize = string.IsNullOrEmpty(Request["rows"]) ? 20 : Convert.ToInt32(Request["rows"]);

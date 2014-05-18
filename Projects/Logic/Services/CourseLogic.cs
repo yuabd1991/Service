@@ -161,6 +161,10 @@ namespace Logic.Services
             course.IndustryID = param.IndustryID;
             course.UserID = param.UserID;
             course.IsDelete = PublicType.No;
+            course.CountPeople = param.CountPeople;
+            course.Amount = param.Amount;
+            course.Visit = 0;
+            course.ApplyCount = 0;
 
             _db.Courses.Add(course);
 
@@ -261,6 +265,11 @@ namespace Logic.Services
             {
                 return type;
             }
+
+            var course = _db.Courses.FirstOrDefault(m => m.ID == id);
+            course.Visit += 1;
+            _db.SaveChanges();
+
             var photos = (from l in _db.Pictures
                           where l.TargetID == type.ID && l.Type == PictureType.CourseImage
                           orderby l.IsDefault descending
@@ -305,6 +314,8 @@ namespace Logic.Services
             courseType.IndustryID = param.IndustryID;
             courseType.UserID = param.UserID;
             courseType.AddDate = DateTime.Now;
+            courseType.Amount = param.Amount;
+            courseType.CountPeople = param.CountPeople;
 
             _db.SaveChanges();
             obj.Tag = 1;
@@ -363,7 +374,8 @@ namespace Logic.Services
                                EndDate = l.Field<DateTime?>("EndDate"),
                                CourseName = l.Field<string>("CourseName"),
                                Industry = l.Field<string>("Industry"),
-                               CourseType = l.Field<string>("CourseType")
+                               CourseType = l.Field<string>("CourseType"),
+                               ApplyCount = l.Field<int?>("ApplyCount")
                            }).ToList();
 
             return article;

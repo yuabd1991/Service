@@ -39,6 +39,23 @@ namespace Entity.Entities
 
         public int CourseTypeID { get; set; }
 
+        /// <summary>
+        /// 课程费用
+        /// </summary>
+        public decimal? Amount { get; set; }
+        /// <summary>
+        /// 可报名人数
+        /// </summary>
+        public int? CountPeople { get; set; }
+        /// <summary>
+        /// 浏览次数
+        /// </summary>
+        public int? Visit { get; set; }
+        /// <summary>
+        /// 报名人数
+        /// </summary>
+        public int? ApplyCount { get; set; }
+
         public string Photo { get; set; }
 
         public List<PictureEntity> Photos { get; set; }

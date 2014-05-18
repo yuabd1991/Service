@@ -156,7 +156,8 @@
         select a.ID,a.AddDate, a.Contact, a.CourseName, a.StartDate, a.EndDate,a.UserID,
         (select UserName from [user] where ID = a.AddUserID) as UserName,
         (select TypeName from CourseType where ID = a.CourseTypeID) as CourseType,
-        (select IndustryName from Industry where ID = a.IndustryID) as Industry
+        (select IndustryName from Industry where ID = a.IndustryID) as Industry,
+        a.ApplyCount
          from course a
       ]]>
     </sql>

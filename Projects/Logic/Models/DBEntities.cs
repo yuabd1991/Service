@@ -525,28 +525,66 @@ namespace Logic.Models
     public class Course
     {
         public int ID { get; set; }
-
+        /// <summary>
+        /// 行业ID
+        /// </summary>
         public int IndustryID { get; set; }
-
+        /// <summary>
+        /// 用户ID
+        /// </summary>
         public int UserID { get; set; }
-
+        /// <summary>
+        /// 课程名称
+        /// </summary>
         public string CourseName { get; set; }
-
+        /// <summary>
+        /// 描述
+        /// </summary>
         public string Description { get; set; }
-
+        /// <summary>
+        /// 开始时间
+        /// </summary>
         public DateTime? StartDate { get; set; }
-
+        /// <summary>
+        /// 结束时间
+        /// </summary>
         public DateTime? EndDate { get; set; }
-
+        /// <summary>
+        /// 联系方式
+        /// </summary>
         public string Contact { get; set; }
-
+        /// <summary>
+        /// 课程费用
+        /// </summary>
+        public decimal? Amount { get; set; }
+        /// <summary>
+        /// 是否删除
+        /// </summary>
         public string IsDelete { get; set; }
-
+        /// <summary>
+        /// 新增用户
+        /// </summary>
         public int AddUserID { get; set; }
-
+        /// <summary>
+        /// 新增时间
+        /// </summary>
         public DateTime AddDate { get; set; }
-
+        /// <summary>
+        /// 课程类型
+        /// </summary>
         public int CourseTypeID { get; set; }
+        /// <summary>
+        /// 可报名人数
+        /// </summary>
+        public int? CountPeople { get; set; }
+        /// <summary>
+        /// 浏览次数
+        /// </summary>
+        public int? Visit { get; set; }
+        /// <summary>
+        /// 报名人数
+        /// </summary>
+        public int? ApplyCount { get; set; }
     }
 
     public class CourseType
@@ -562,6 +600,31 @@ namespace Logic.Models
         public int UserID { get; set; }
 
         public DateTime AddDate { get; set; }
+    }
+
+    public class ApplyCourse
+    {
+        public int ID { get; set; }
+        /// <summary>
+        /// 报名的用户
+        /// </summary>
+        public int UserID { get; set; }
+        /// <summary>
+        /// 课程ID
+        /// </summary>
+        public int? CourseID { get; set; }
+        /// <summary>
+        /// 报名人姓名
+        /// </summary>
+        public string Name { get; set; }
+        /// <summary>
+        /// 联系人
+        /// </summary>
+        public string Contact { get; set; }
+        /// <summary>
+        /// 报名时间
+        /// </summary>
+        public DateTime? AddDate { get; set; }
     }
 
 	#endregion

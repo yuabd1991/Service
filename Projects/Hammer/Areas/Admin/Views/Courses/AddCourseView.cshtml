@@ -43,11 +43,27 @@
     </tr>
     <tr>
         <td class="title">
-            <span class="red">*</span>开课时间：
+            <span class="red">*</span>报名时间：
         </td>
         <td>
             <input type="text" col="StartDate" class="textbox" onfocus="WdatePicker()" validtype="required(开课时间)" /> 至 
             <input type="text" col="EndDate" class="textbox" onfocus="WdatePicker()" validtype="required(开课时间)" />
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            <span class="red">*</span>报名人数限制：
+        </td>
+        <td>
+            <input type="text" col="CountPeople" class="textbox" validtype="required(报名人数限制)|NotZeroNum" />
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            <span class="red">*</span>课程经费：
+        </td>
+        <td>
+            <input type="text" col="Amount" class="textbox" validtype="required(课程经费)|Price" />
         </td>
     </tr>
     <tr>
