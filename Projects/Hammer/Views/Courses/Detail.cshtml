@@ -1,0 +1,160 @@
+﻿@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_SiteLayout.cshtml";
+}
+@model Entity.Entities.CourseEntity
+<header class="page-heading clearfix">
+    <h1 class="heading-title pull-left">@Model.CourseName</h1>
+    <div class="breadcrumbs pull-right">
+        <ul class="breadcrumbs-list">
+            <li class="breadcrumbs-label">您的位置:</li>
+            <li><a href="/">首页</a><i class="fa fa-angle-right"></i></li>
+            <li><a href="/courses.html">课程</a><i class="fa fa-angle-right"></i></li>
+            <li class="current">@Model.CourseName</li>
+        </ul>
+    </div><!--//breadcrumbs-->
+</header>
+<div class="page-content">
+    <div class="row page-row">
+        <div class="course-wrapper col-md-8 col-sm-7">
+            <article class="course-item">
+                       <p class="featured-image page-row"><img class="img-responsive" src="/Content/Upload/images/@Model.PictureFile" alt=""/></p>
+                       <div class="page-row box box-border">
+                           <ul class="list-unstyled no-margin-bottom">
+                               <li><strong>报名时间:</strong> <em>@Model.StartDate - @Model.EndDate</em></li>
+                                        <li><strong>招生人数: </strong> <em>@Model.CountPeople 人</em></li>
+                                        <li><strong>已报名人数: </strong> <em>@Model.ApplyCount</em></li>
+                                        <li><strong>课程费用: </strong> <em>@Model.Amount</em></li>
+                                        <li><strong>联系方式: </strong> <em>@Model.Contact</em></li>
+                                    </ul>
+                                </div><!--//page-row-->
+                                <div class="page-row">
+                                    @Html.Raw(Model.Description)
+                                </div><!--//page-row-->
+                                @*<div class="tabbed-info page-row">             
+                                    <ul class="nav nav-tabs">
+                                      <li class="active"><a href="#tab1" data-toggle="tab">热门课程</a></li>
+                                      <li><a href="#tab2" data-toggle="tab">最新课程</a></li>
+                                      <li><a href="#tab3" data-toggle="tab">推荐课程</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="tab1">
+                                            <p>Duis ut ornare dui. Ut dapibus porta mattis. Ut eget enim sed nisl tristique lobortis non et dolor. Phasellus et venenatis metus. Duis nisl est, dictum id lacus consequat, tristique placerat orci. Sed porta leo sed lorem rhoncus, et ullamcorper lectus malesuada. </p>
+                                        <div class="table-responsive">  
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Nullam consequat</th>
+                                                        <th>Commodo metus</th>
+                                                        <th>Dapibus porta</th>
+                                                        <th>Sed porta</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Faucibus purus convallis</td>
+                                                        <td>Aliquam sit amet</td>
+                                                        <td>Sed porta leo</td>
+                                                        <td>Duis ut ornare dui</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Condimentum fermentum</td>
+                                                        <td>Curabitur tempus mauris</td>
+                                                        <td>Fusce vehicula malesuada</td>
+                                                        <td>Nascetur ridiculus</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Neque a condimentum</td>
+                                                        <td>Cum sociis natoque</td>
+                                                        <td>Penatibus magnis</td>
+                                                        <td>Curabitur tempus mauris</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div><!--//table-responsive-->
+                                        </div>
+                                        <div class="tab-pane" id="tab2">
+                                            <p>Donec suscipit rhoncus est, vitae pretium purus laoreet et. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed iaculis risus felis, sit amet porta urna volutpat vel. Integer vestibulum, neque a condimentum fermentum, est nunc tincidunt nunc, eget sagittis turpis elit nec arcu. Curabitur tempus mauris vitae dignissim vehicula. Fusce vehicula malesuada aliquam.</p>
+                                            <ul>
+                                                <li><a href="#">Vitae pretium purus</a></li>
+                                                <li><a href="#">Eget sagittis turpis </a></li>
+                                                <li><a href="#">Curabitur tempus</a></li>
+                                                <li><a href="#">Fusce vehicula</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="tab-pane" id="tab3">
+                                            <p>Mauris blandit in massa in rhoncus. Aliquam sit amet sollicitudin nulla. Ut nec mauris facilisis, pretium enim et, tristique risus. Fusce a ligula in velit congue hendrerit eu eget tortor.</p>
+                                            <ol>
+                                                <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
+                                                <li>Aliquam tincidunt mauris eu risus.</li>
+                                                <li>Vestibulum auctor dapibus neque.</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div><!--//tabbed-info-->*@                
+                            </article>
+            <!--//course-item-->
+        </div>
+        <!--//course-wrapper-->
+        <aside class="page-sidebar  col-md-3 col-md-offset-1 col-sm-4 col-sm-offset-1">     
+                            <section class="widget has-divider"> 
+                                <h3 class="title">网络报名中</h3>
+                                <p>摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影</p>
+                                <p class="promo-badge">
+                                    <a class="FireBush" href="#">
+                                        <span class="percentage">8 <span class="off">折</span></span>                    
+                                        <br>
+                                        <span class="desc">在线报名</span>                  
+                                    </a>
+                                </p>
+                            </section><!--//widget-->    
+                            <section class="widget has-divider">
+                                <h3 class="title">下载报名资料</h3>
+                                <p>摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影</p>
+                                <a class="btn btn-theme" href="#"><i class="fa fa-download"></i>点击下载</a>
+                            </section><!--//widget-->              
+                            <section class="widget row-divider">
+                                <h3 class="title">学生反馈</h3>
+                                <div id="testimonials-carousel" class="testimonials-carousel carousel slide">
+                                    <div class="carousel-inner">
+                                        <div class="item">
+                                            <blockquote class="quote">
+                                                <i class="fa fa-quote-left"></i>
+                                                摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影.
+                                            </blockquote>                
+                                            <div class="row">
+                                                <p class="people col-md-8 col-md-push-1"><span class="name">Jerry</span><br><span class="title">Chan</span></p>
+                                                <img class="profile col-md-4" src="assets/images/testimonials/profile-1.png" alt="">
+                                            </div>                               
+                                        </div><!--//item-->
+                                        <div class="item">
+                                            <blockquote class="quote">
+                                                <i class="fa fa-quote-left"></i>
+                                                摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影
+                                            </blockquote>
+                                            <div class="row">
+                                                <p class="people col-md-8 col-md-push-1"><span class="name">Jasper</span><br><span class="title"> Zhou</span></p>
+                                                <img class="profile col-md-4" src="assets/images/testimonials/profile-2.png" alt="">
+                                            </div>                 
+                                        </div><!--//item-->
+                                        <div class="item active">
+                                            <blockquote class="quote">
+                                                <i class="fa fa-quote-left"></i>
+                                                摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影
+                                            </blockquote>
+                                            <div class="row">
+                                                <p class="people col-md-8 col-md-push-1"><span class="name">Jasper</span><br><span class="title"> Zhou</span></p>
+                                                <img class="profile col-md-4" src="assets/images/testimonials/profile-3.png" alt="">
+                                            </div>                 
+                                        </div><!--//item-->
+                                        
+                                    </div><!--//carousel-inner-->
+                                    <div class="carousel-controls">
+                                        <a class="prev" href="#testimonials-carousel" data-slide="prev"><i class="fa fa-caret-left"></i></a>
+                                        <a class="next" href="#testimonials-carousel" data-slide="next"><i class="fa fa-caret-right"></i></a>
+                                    </div><!--//carousel-controls-->
+                                </div><!--//testimonials-carousel-->                             
+                            </section><!--//widget-->
+                        </aside>
+    </div>
+</div>

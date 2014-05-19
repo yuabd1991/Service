@@ -73,6 +73,7 @@
     <Compile Include="Areas\Admin\Controllers\SettingsController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserManageController.cs" />
     <Compile Include="Areas\Admin\Controllers\ControlController.cs" />
+    <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -701,6 +702,8 @@
     <Content Include="Views\Register\Index.cshtml" />
     <Content Include="Views\Register\Company.cshtml" />
     <Content Include="Views\Courses\Index.cshtml" />
+    <Content Include="Views\About\Index.cshtml" />
+    <Content Include="Views\Courses\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Components\Component.csproj">
