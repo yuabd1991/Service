@@ -145,7 +145,7 @@
                             <div class="col-start col-md-3">
                                 <strong>开始日期</strong></div>
                             <div class="col-duration col-md-2">
-                                <strong>课时</strong></div>
+                                <strong>报名人数</strong></div>
                             <div class="col-level col-md-3">
                                 <strong>级别</strong></div>
                             <div class="col-location col-md-4">
@@ -157,19 +157,24 @@
                 <!---//row-->
             </div>
             <!--//course-item-header-->
-            <article class="course-item row-divider">   
-                                <div class="details row">
-                                    <div class="col-title col-md-4 col-sm-6"><a href="course-single.html">美发美发美发</a> <span class="label label-success">新</span></div>
-                                    <div class="col-meta col-md-8 col-sm-6">
-                                        <div class="row">
-                                            <div class="col-start col-md-3">2014/05/18</div>                                    
-                                            <div class="col-duration col-md-2">1年</div>
-                                            <div class="col-level col-md-3">高级美发师</div>
-                                            <div class="col-location col-md-4">北京</div>   
-                                        </div>                                 
-                                    </div><!--//col-meta-->                           
-                                </div><!--//details-->
-                            </article>
+            @model List<Entity.Entities.CourseEntity>
+            @foreach (var item in Model)
+            {
+                <article class="course-item row-divider">   
+                    <div class="details row">
+                        <div class="col-title col-md-4 col-sm-6"><a href="/Courses/Detail/@item.ID">@item.CourseName</a> <span class="label label-success">新</span></div>
+                        <div class="col-meta col-md-8 col-sm-6">
+                            <div class="row">
+                                <div class="col-start col-md-3">@item.StartDate</div>                                    
+                                <div class="col-duration col-md-2">@item.ApplyCount</div>
+                                <div class="col-level col-md-3">高级美发师</div>
+                                <div class="col-location col-md-4">北京</div>   
+                            </div>                                 
+                        </div><!--//col-meta-->                           
+                    </div><!--//details-->
+                </article>
+            }
+            @*
             <!--//course-item-->
             <article class="course-item row-divider">   
                                 <div class="details row">
@@ -310,7 +315,7 @@
                                     </div><!--//col-meta-->                           
                                 </div><!--//details-->
                             </article>
-            <!--//course-item-->
+            <!--//course-item-->*@
             <ul class="pagination">
                 <li class="disabled"><a href="#">&laquo;</a></li>
                 <li class="active"><a href="#">1<span class="sr-only">(current)</span></a></li>
