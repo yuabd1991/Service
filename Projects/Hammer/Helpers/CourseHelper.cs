@@ -128,7 +128,19 @@ namespace EasyUI.Helpers
                 return logic.GetCourseList();
             }
         }
-
+        /// <summary>
+        /// 审核
+        /// </summary>
+        /// <param name="id">课程ID</param>
+        /// <param name="auditID">审核ID</param>
+        /// <returns></returns>
+        public BaseObject AuditCourse(int id, int auditID)
+        {
+            using (CourseLogic logic = new CourseLogic())
+            {
+                return logic.AuditCourse(id, auditID);
+            }
+        }
         #endregion
     }
 }

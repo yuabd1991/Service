@@ -12,5 +12,6 @@ namespace Component.Component
 		public static string ImageCacheDirectory = ConfigurationManager.AppSettings["ImageCacheDirectory"];
 		public static string ImageSysRelDirectory = ConfigurationManager.AppSettings["ImageSysRelDirectory"];
 		public static string ImageWebDir = ConfigurationManager.AppSettings["ImageWebDir"];
+        public static string Password = ConfigurationManager.AppSettings["Password"];
 	}
 }

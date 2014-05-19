@@ -8,8 +8,8 @@
     <div class="breadcrumbs pull-right">
         <ul class="breadcrumbs-list">
             <li class="breadcrumbs-label">您的位置:</li>
-            <li><a href="/">首页</a><i class="fa fa-angle-right"></i></li>
-            <li><a href="/courses.html">课程</a><i class="fa fa-angle-right"></i></li>
+            <li><a href="/"><i class="fa fa-home"></i>首页</a><i class="fa fa-angle-right"></i></li>
+            <li><a href="/courses">课程</a><i class="fa fa-angle-right"></i></li>
             <li class="current">@Model.CourseName</li>
         </ul>
     </div><!--//breadcrumbs-->
@@ -19,15 +19,20 @@
         <div class="course-wrapper col-md-8 col-sm-7">
             <article class="course-item">
                        <p class="featured-image page-row"><img class="img-responsive" src="/Content/Upload/images/@Model.PictureFile" alt=""/></p>
-                       <div class="page-row box box-border">
-                           <ul class="list-unstyled no-margin-bottom">
-                               <li><strong>报名时间:</strong> <em>@Model.StartDate - @Model.EndDate</em></li>
-                                        <li><strong>招生人数: </strong> <em>@Model.CountPeople 人</em></li>
-                                        <li><strong>已报名人数: </strong> <em>@Model.ApplyCount</em></li>
-                                        <li><strong>课程费用: </strong> <em>@Model.Amount</em></li>
-                                        <li><strong>联系方式: </strong> <em>@Model.Contact</em></li>
-                                    </ul>
-                                </div><!--//page-row-->
+                            <div class="page-row box box-border">
+                                <ul class="list-unstyled no-margin-bottom">
+                                    <li><i class="fa fa-calendar"></i><strong>报名时间:</strong> <em>@Model.StartDate.Value.ToShortDateString() - @Model.EndDate.Value.ToShortDateString()</em></li>
+                                    <li><i class="fa fa-male"></i><strong>招生人数: </strong> <em>@Model.CountPeople 人</em></li>
+                                    <li><i class="fa fa-users"></i><strong>已报名人数: </strong> <em>@Model.ApplyCount</em></li>
+                                    <li><i class="fa fa-yen"></i><strong>课程费用: </strong> <em>@Model.Amount</em></li>
+                                    <li><i class="fa fa-map-marker"></i><strong>地址: </strong> <em>@Model.Address</em></li>
+                                    <li><i class="fa fa-phone"></i><strong>联系方式: </strong> <em>@Model.Contact</em></li>
+                                </ul>
+                                <p>
+                                    <a class="btn btn-theme" href="javascript:void();"><i class="fa fa-heart"></i>报名参加</a>
+                                </p>
+                            </div><!--//page-row-->
+                                
                                 <div class="page-row">
                                     @Html.Raw(Model.Description)
                                 </div><!--//page-row-->
@@ -97,64 +102,80 @@
         </div>
         <!--//course-wrapper-->
         <aside class="page-sidebar  col-md-3 col-md-offset-1 col-sm-4 col-sm-offset-1">     
-                            <section class="widget has-divider"> 
-                                <h3 class="title">网络报名中</h3>
-                                <p>摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影</p>
-                                <p class="promo-badge">
-                                    <a class="FireBush" href="#">
-                                        <span class="percentage">8 <span class="off">折</span></span>                    
-                                        <br>
-                                        <span class="desc">在线报名</span>                  
-                                    </a>
-                                </p>
-                            </section><!--//widget-->    
-                            <section class="widget has-divider">
-                                <h3 class="title">下载报名资料</h3>
-                                <p>摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影</p>
-                                <a class="btn btn-theme" href="#"><i class="fa fa-download"></i>点击下载</a>
-                            </section><!--//widget-->              
-                            <section class="widget row-divider">
-                                <h3 class="title">学生反馈</h3>
-                                <div id="testimonials-carousel" class="testimonials-carousel carousel slide">
-                                    <div class="carousel-inner">
-                                        <div class="item">
-                                            <blockquote class="quote">
-                                                <i class="fa fa-quote-left"></i>
-                                                摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影.
-                                            </blockquote>                
-                                            <div class="row">
-                                                <p class="people col-md-8 col-md-push-1"><span class="name">Jerry</span><br><span class="title">Chan</span></p>
-                                                <img class="profile col-md-4" src="assets/images/testimonials/profile-1.png" alt="">
-                                            </div>                               
-                                        </div><!--//item-->
-                                        <div class="item">
-                                            <blockquote class="quote">
-                                                <i class="fa fa-quote-left"></i>
-                                                摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影
-                                            </blockquote>
-                                            <div class="row">
-                                                <p class="people col-md-8 col-md-push-1"><span class="name">Jasper</span><br><span class="title"> Zhou</span></p>
-                                                <img class="profile col-md-4" src="assets/images/testimonials/profile-2.png" alt="">
-                                            </div>                 
-                                        </div><!--//item-->
-                                        <div class="item active">
-                                            <blockquote class="quote">
-                                                <i class="fa fa-quote-left"></i>
-                                                摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影
-                                            </blockquote>
-                                            <div class="row">
-                                                <p class="people col-md-8 col-md-push-1"><span class="name">Jasper</span><br><span class="title"> Zhou</span></p>
-                                                <img class="profile col-md-4" src="assets/images/testimonials/profile-3.png" alt="">
-                                            </div>                 
-                                        </div><!--//item-->
+            <section class="widget has-divider"> 
+                <h3 class="title">网络报名中</h3>
+                <p>摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影</p>
+                <p class="promo-badge">
+                    <a class="FireBush" href="#">
+                        <span class="percentage">8 <span class="off">折</span></span>                    
+                        <br />
+                        <span class="desc">在线报名</span>                  
+                    </a>
+                </p>
+            </section><!--//widget-->    
+            <section class="widget has-divider">
+                <h3 class="title">下载报名资料</h3>
+                <p>摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影</p>
+                <a class="btn btn-theme" href="#"><i class="fa fa-download"></i>点击下载</a>
+            </section><!--//widget-->              
+            <section class="widget row-divider">
+                <h3 class="title">学生反馈</h3>
+                <div id="testimonials-carousel" class="testimonials-carousel carousel slide">
+                    <div class="carousel-inner">
+                        <div class="item">
+                            <blockquote class="quote">
+                                <i class="fa fa-quote-left"></i>
+                                摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影.
+                            </blockquote>                
+                            <div class="row">
+                                <p class="people col-md-8 col-md-push-1"><span class="name">Jerry</span><br><span class="title">Chan</span></p>
+                                <img class="profile col-md-4" src="assets/images/testimonials/profile-1.png" alt="">
+                            </div>                               
+                        </div><!--//item-->
+                        <div class="item">
+                            <blockquote class="quote">
+                                <i class="fa fa-quote-left"></i>
+                                摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影
+                            </blockquote>
+                            <div class="row">
+                                <p class="people col-md-8 col-md-push-1"><span class="name">Jasper</span><br><span class="title"> Zhou</span></p>
+                                <img class="profile col-md-4" src="assets/images/testimonials/profile-2.png" alt="">
+                            </div>                 
+                        </div><!--//item-->
+                        <div class="item active">
+                            <blockquote class="quote">
+                                <i class="fa fa-quote-left"></i>
+                                摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影摄影
+                            </blockquote>
+                            <div class="row">
+                                <p class="people col-md-8 col-md-push-1"><span class="name">Jasper</span><br><span class="title"> Zhou</span></p>
+                                <img class="profile col-md-4" src="assets/images/testimonials/profile-3.png" alt="">
+                            </div>                 
+                        </div><!--//item-->
                                         
-                                    </div><!--//carousel-inner-->
-                                    <div class="carousel-controls">
-                                        <a class="prev" href="#testimonials-carousel" data-slide="prev"><i class="fa fa-caret-left"></i></a>
-                                        <a class="next" href="#testimonials-carousel" data-slide="next"><i class="fa fa-caret-right"></i></a>
-                                    </div><!--//carousel-controls-->
-                                </div><!--//testimonials-carousel-->                             
-                            </section><!--//widget-->
-                        </aside>
+                    </div><!--//carousel-inner-->
+                    <div class="carousel-controls">
+                        <a class="prev" href="#testimonials-carousel" data-slide="prev"><i class="fa fa-caret-left"></i></a>
+                        <a class="next" href="#testimonials-carousel" data-slide="next"><i class="fa fa-caret-right"></i></a>
+                    </div><!--//carousel-controls-->
+                </div><!--//testimonials-carousel-->                             
+            </section><!--//widget-->
+        </aside>
     </div>
 </div>
+@section scripts{
+    <script src="/Scripts/Form.js" type="text/javascript"></script>
+    <script>
+        function Apply() {
+            $.U1City("/Courses/ApplyJson", { id: '@Model.ID' }, function (data) {
+                if (data.Tag == 1) {
+                    alert("报名成功！");
+                    window.location.reload();
+                }
+                else {
+                    alert(data.Message);
+                }
+            });
+        }
+    </script>
+}

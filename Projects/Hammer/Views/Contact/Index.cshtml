@@ -1,11 +1,7 @@
-﻿@model Entity.Entities.DocumentEntity
-@{
-    ViewBag.Title = Model.PageTitle;
-    ViewBag.MetaDescription = Model.MetaDescription;
-    ViewBag.MetaKeywords = Model.MetaKeywords;
+﻿@{
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_SiteLayout.cshtml";
 }
-
 
 <header class="page-heading clearfix">
     <h1 class="heading-title pull-left">关于我们</h1>
@@ -13,7 +9,7 @@
         <ul class="breadcrumbs-list">
             <li class="breadcrumbs-label">您的位置:</li>
             <li><a href="/">首页</a><i class="fa fa-angle-right"></i></li>
-            <li><a href="">平台介绍</a></li>
+            <li><a href="">联系我们</a></li>
         </ul>
     </div><!--//breadcrumbs-->
 </header>
@@ -22,16 +18,16 @@
 		<aside class="page-sidebar col-md-2 col-sm-4 affix-top">                    
             <section class="widget">
                 <ul class="nav">
-                    <li class="active"><a href="/about/Index">平台介绍</a></li>
+                    <li><a href="/about/Index">平台介绍</a></li>
                     <li><a href="/about/service">服务范围</a></li>
                     <li><a href="/about/opera">操作流程</a></li>
+                    <li class="active"><a href="/contact">联系我们</a></li>
                 </ul>                    
             </section><!--//widget-->
         </aside>
         <!--//page-sidebar-->
         <div class="content-wrapper col-md-10 col-sm-8">
-            <h2>@Model.Title</h2>
-            @Html.Raw(Model.Content)
+            
         </div>
     </div>
 </div>

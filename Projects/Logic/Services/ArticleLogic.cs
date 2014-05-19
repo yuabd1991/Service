@@ -360,7 +360,7 @@ namespace Logic.Services
 
 		#region 图文集
 
-		public List<ArticleImageEntity> GetArticleImageList(GetReportDataParams param)
+		public List<ArticleImageEntity> GetArticleImageList(GetReportExportDataParams param)
 		{
 			DataSet ds = MSSqlHelper.GetReportExportData("ArticleImageList", param.Where, param.Order);
 			var dt = ds.Tables[0];
@@ -373,7 +373,7 @@ namespace Logic.Services
 						   select new ArticleImageEntity
 						   {
 							   Author = l.Field<string>("Author"),
-							   UpdateUser = l.Field<string>("UpdateUser"),
+                               UpdateUser = l.Field<string>("username"),
 							   Title = l.Field<string>("Title"),
 							   Source = l.Field<string>("Source"),
 							   SortOrder = l.Field<int>("SortOrder"),
@@ -700,6 +700,8 @@ namespace Logic.Services
 
 			_db.Documents.Add(article);
 			_db.SaveChanges();
+            article.Slug = article.ID.ToString();
+            _db.SaveChanges();
 
 			obj.Tag = 1;
 			obj.Message = "保存成功！";
@@ -731,7 +733,7 @@ namespace Logic.Services
 						   PageVisits = l.PageVisits,
 						   Slug = l.Slug,
 						   Title = l.Title,
-						   UpdateUser = l.UpdateUser
+						   //UpdateUser = _db.Users.fi
 					   }).FirstOrDefault();
 
 			return doc;
@@ -811,8 +813,9 @@ namespace Logic.Services
 							   PageVisits = l.Field<int?>("PageVisits"),
 							   Slug = l.Field<string>("Slug"),
 							   Title = l.Field<string>("Title"),
-							   UpdateUser = l.Field<string>("UpdateUser"),
-							   DateCreated = l.Field<DateTime>("DateCreated")
+							   UpdateUser = l.Field<int?>("UpdateUser"),
+							   DateCreated = l.Field<DateTime>("DateCreated"),
+                               UpdateUserName = l.Field<string>("UpdateUserName")
 						   }).ToList();
 
 			return article;

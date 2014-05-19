@@ -1,0 +1,129 @@
+﻿@model Entity.Entities.UserEntity
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<table class="pagetable">
+    <tr>
+        <td class="title">
+            用户名:
+        </td>
+        <td>
+            @Model.UserName
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            密码:
+        </td>
+        <td>
+            <input type="text" class="textbox" col="password" id="password" />
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            确认密码:
+        </td>
+        <td>
+            <input type="text" class="textbox" col="password1" id="password1" validtype="equalTo(password)" />
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            姓名:
+        </td>
+        <td>
+            <input type="text" class="textbox" col="RealName"  value="@Model.RealName" validtype="required(姓名)|maxLen(100)" />
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            Email邮箱:
+        </td>
+        <td>
+            @Model.Email
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            QQ:
+        </td>
+        <td>
+            <input type="text" class="textbox" col="QQ"  value="@Model.QQ" validtype="required(QQ)|QQ"/>
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            联系方式:
+        </td>
+        <td>
+            <input type="text" class="textbox" col="Contact"  value="@Model.Contact" validtype="required(联系方式)" />
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            地址:
+        </td>
+        <td>
+            <input type="text" class="textbox" col="Address"  value="@Model.Address" validtype="required(联系方式)" />
+        </td>
+    </tr>
+    @if (Model.Type == Component.UserType.Company)
+    {
+        <tr>
+            <td class="title">
+                机构名称:
+            </td>
+            <td>
+                <input type="text" class="textbox" col="CompanyName"  value="@Model.CompanyName" validtype="required(机构名称)|maxLen(150)" />
+            </td>
+        </tr>
+        <tr>
+            <td class="title">
+                网址:
+            </td>
+            <td>
+                <input type="text" class="textbox" col="Website"  value="@Model.Website" validtype="url" />
+            </td>
+        </tr>
+    }
+    else
+    {
+        <input col="CompanyName" type="hidden" value="@Model.CompanyName" />
+        <input col="Website" type="hidden" value="@Model.Website" />
+    }
+    <tr>
+        <td class="title">
+            描述:
+        </td>
+        <td>
+            <textarea col="Description" cols="50" rows="5">@Model.Description</textarea>
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            操作:
+        </td>
+        <td>
+            <input type="hidden" value="@Model.ID" col="ID" />
+            <input type="button" value="保存" onclick="Save()" />
+        </td>
+    </tr>
+</table>
+<script>
+    function Save() {
+        if (!$.validatebox.valid()) {
+            return;
+        }
+        var param = $('.pagetable').GetPostData();
+
+        $.U1Ajax('/admin/Settings/ProfileJson', param, function (result) {
+            if (result.Tag > 0) {
+                alert('保存成功! ');
+                window.location.reload();
+            } else {
+                alert(result.Message);
+            }
+        }, false);
+    }
+</script>

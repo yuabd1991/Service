@@ -24,6 +24,7 @@ namespace EasyUI.Controllers
 		public ActionResult Index()
 		{
 			ViewBag.Home = "home-page";
+            ViewBag.HomeActive = "active";
 			return View();
 		}
 	}

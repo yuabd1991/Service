@@ -223,20 +223,18 @@ namespace EasyUI.Helpers
 
 		#region ArticleImage
 
-		public List<ArticleImageEntity> GetArticleImageList(int id)
+		public List<ArticleImageEntity> GetArticleImageList(int? id)
 		{
 			using (ArticleLogic logic = new ArticleLogic())
 			{
-				GetReportDataParams param = new GetReportDataParams();
+                GetReportExportDataParams param = new GetReportExportDataParams();
 				List<KeyValue> where = new List<KeyValue>();
-				where.Add(new KeyValue { Key = "ColumnID", Value = id.ToString() });
+                if (id != null && id != 0)
+                {
+                    where.Add(new KeyValue { Key = "ColumnID", Value = id.ToString() });   
+                }
 
-				param.PageIndex = 1;
-				param.PageSize = 100;
-				//param.Order = ;
 				param.Where = where;
-
-				//return logic.GetArticleImageList(param, out tCount);
 
 				return logic.GetArticleImageList(param);
 			}
@@ -550,6 +548,25 @@ namespace EasyUI.Helpers
 				return logic.GetUserListReport(param, out totalCount);
 			}
 		}
+        public BaseObject UpdateUser(UserEntity param)
+        {
+            using (UserLogic logic = new UserLogic())
+            {
+                return logic.UpdateUser(param);
+            }
+        }
+        /// <summary>
+        /// 获取用户信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public UserEntity GetUserByID(int id)
+        {
+            using (UserLogic logic = new UserLogic())
+            {
+                return logic.GetUserByID(id);
+            }
+        }
 
 		#region 角色
 

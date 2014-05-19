@@ -195,6 +195,7 @@ namespace EasyUI.Areas.Admin.Controllers
 		[ValidateInput(false)]
 		public ActionResult AddDocumentJson(DocumentEntity param)
 		{
+            param.UpdateUser = Helpers.LoginHelper.UserID;
 			var result = new Helpers.SystemHelper().InsertDocument(param);
 
 			return Json(result);
@@ -210,6 +211,7 @@ namespace EasyUI.Areas.Admin.Controllers
 		[ValidateInput(false)]
 		public ActionResult EditDocumentJson(DocumentEntity param)
 		{
+            param.UpdateUser = Helpers.LoginHelper.UserID;
 			var result = new Helpers.SystemHelper().UpdateDocument(param);
 
 			return Json(result);

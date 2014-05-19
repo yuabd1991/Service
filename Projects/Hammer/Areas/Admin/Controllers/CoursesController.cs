@@ -23,6 +23,20 @@ namespace EasyUI.Areas.Admin.Controllers
             return View();
         }
 
+        public ActionResult AuditListView()
+        {
+            ViewBag.Type = new Helpers.CourseHelper().GetCourseTypeKeyName();
+
+            return View();
+        }
+
+        public ActionResult AuditCourseJson(int id, int auditID)
+        {
+            var result = new Helpers.CourseHelper().AuditCourse(id, auditID);
+
+            return Json(result);
+        }
+
         public ActionResult CourseListJson()
         {
             int tCount = 0;

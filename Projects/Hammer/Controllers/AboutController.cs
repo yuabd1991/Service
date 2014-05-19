@@ -13,7 +13,26 @@ namespace EasyUI.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            ViewBag.About = "active";
+            var doc = new Helpers.SystemHelper().GetDocumentByID(1);
+
+            return View(doc);
+        }
+
+        public ActionResult Service()
+        {
+            ViewBag.About = "active";
+            var doc = new Helpers.SystemHelper().GetDocumentByID(2);
+
+            return View(doc);
+        }
+
+        public ActionResult Opera()
+        {
+            ViewBag.About = "active";
+            var doc = new Helpers.SystemHelper().GetDocumentByID(3);
+
+            return View(doc);
         }
 
     }

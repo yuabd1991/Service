@@ -36,14 +36,6 @@
     </tr>
     <tr>
         <td class="title">
-            <span class="red">*</span>联系方式：
-        </td>
-        <td>
-            <input type="text" col="Contact" value="@Model.Contact" class="textbox" validtype="required(联系方式)|maxLen(20)" />
-        </td>
-    </tr>
-    <tr>
-        <td class="title">
             <span class="red">*</span>开课时间：
         </td>
         <td>
@@ -65,6 +57,22 @@
         </td>
         <td>
             <input type="text" col="Amount" class="textbox" value="@Model.Amount" validtype="required(课程经费)|Price" />
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            <span class="red">*</span>授课地点：
+        </td>
+        <td>
+            <input type="text" col="Address" class="textbox" value="@Model.Address" validtype="required(授课地点)maxLen(200)" />
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            <span class="red">*</span>联系方式：
+        </td>
+        <td>
+            <input type="text" col="Contact" value="@Model.Contact" class="textbox" validtype="required(联系方式)|maxLen(20)" />
         </td>
     </tr>
     <tr>

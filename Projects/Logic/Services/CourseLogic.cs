@@ -155,6 +155,8 @@ namespace Logic.Services
             course.Description = param.Description;
             course.IndustryID = param.IndustryID;
             course.UserID = param.UserID;
+            course.State = CourseState.NoAudit;
+            course.Address = param.Address;
 
             _db.Courses.Add(course);
 
@@ -181,6 +183,11 @@ namespace Logic.Services
                             Description = l.Description,
                             IndustryID = l.IndustryID,
                             UserID = l.UserID,
+                            Amount = l.Amount,
+                            ApplyCount = l.ApplyCount,
+                            CountPeople = l.CountPeople,
+                            EndDate = l.EndDate,
+                            Address = l.Address,
                             PictureFile = _db.Pictures.Where(m => m.TargetID == l.ID && m.Type == PictureType.CourseImage).OrderBy(m => m.IsDefault).Select(m => m.PictureUrl).FirstOrDefault()
                         }).FirstOrDefault();
             return type;
@@ -210,6 +217,7 @@ namespace Logic.Services
             courseType.Amount = param.Amount;
             courseType.CountPeople = param.CountPeople;
             courseType.EndDate = param.EndDate;
+            courseType.Address = param.Address;
 
             _db.SaveChanges();
             obj.Tag = 1;
@@ -261,7 +269,9 @@ namespace Logic.Services
                                StartDate = l.Field<DateTime?>("StartDate"),
                                CourseName = l.Field<string>("CourseName"),
                                Industry = l.Field<string>("Industry"),
-                               CourseType = l.Field<string>("CourseType")
+                               CourseType = l.Field<string>("CourseType"),
+                               ApplyCount = l.Field<int?>("ApplyCount"),
+                               State = l.Field<int>("State")
                            }).ToList();
 
             return article;
@@ -277,12 +287,39 @@ namespace Logic.Services
                             ApplyCount = l.ApplyCount,
                             StartDate = l.StartDate,
                             CourseName = l.CourseName,
-
+                            Address = l.Address,
+                            Amount = l.Amount,
+                            PictureFile = _db.Pictures.Where(m => m.TargetID == l.ID && m.Type == PictureType.CourseImage).OrderBy(m => m.IsDefault).Select(m => m.PictureUrl).FirstOrDefault()
                         }).ToList();
 
             return list;
         }
 
+        /// <summary>
+        /// 审核
+        /// </summary>
+        /// <param name="id">课程ID</param>
+        /// <param name="auditID">审核ID</param>
+        /// <returns></returns>
+        public BaseObject AuditCourse(int id, int auditID)
+        {
+            var obj = new BaseObject();
+            var course = _db.Courses.FirstOrDefault(m => m.ID == id);
+
+            if (course == null)
+            {
+                obj.Tag = -1;
+                obj.Message = "该记录未找到，请联系管理员";
+                return obj;
+            }
+
+            course.State = auditID;
+            _db.SaveChanges();
+
+            obj.Tag = 1;
+
+            return obj;
+        }
         #endregion
     }
 }

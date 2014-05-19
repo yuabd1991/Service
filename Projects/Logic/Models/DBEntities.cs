@@ -162,7 +162,7 @@ namespace Logic.Models
 
 		public DateTime DateCreated { get; set; }
 
-		public string UpdateUser { get; set; }
+		public int? UpdateUser { get; set; }
 
 		public int? PageVisits { get; set; }
 
@@ -554,6 +554,10 @@ namespace Logic.Models
         /// </summary>
         public string Contact { get; set; }
         /// <summary>
+        /// 地址
+        /// </summary>
+        public string Address { get; set; }
+        /// <summary>
         /// 课程费用
         /// </summary>
         public decimal? Amount { get; set; }
@@ -585,6 +589,10 @@ namespace Logic.Models
         /// 报名人数
         /// </summary>
         public int? ApplyCount { get; set; }
+        /// <summary>
+        /// 状态
+        /// </summary>
+        public int State { get; set; }
     }
 
     public class CourseType

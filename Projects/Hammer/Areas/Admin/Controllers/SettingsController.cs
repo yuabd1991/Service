@@ -30,5 +30,19 @@ namespace EasyUI.Areas.Admin.Controllers
 
 			return Json(result);
 		}
+
+        public ActionResult Profile()
+        {
+            var profile = new Helpers.SystemHelper().GetUserByID(Helpers.LoginHelper.UserID);
+
+            return View(profile);
+        }
+
+        public ActionResult ProfileJson(UserEntity param)
+        {
+            var result = new Helpers.SystemHelper().UpdateUser(param);
+
+            return Json(result);
+        }
     }
 }

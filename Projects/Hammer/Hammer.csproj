@@ -74,9 +74,11 @@
     <Compile Include="Areas\Admin\Controllers\UserManageController.cs" />
     <Compile Include="Areas\Admin\Controllers\ControlController.cs" />
     <Compile Include="Controllers\AboutController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Global.asax.cs">
@@ -636,6 +638,8 @@
     <Content Include="Areas\Admin\Views\Courses\CoursesListView.cshtml" />
     <Content Include="Areas\Admin\Views\Courses\AddCourseView.cshtml" />
     <Content Include="Areas\Admin\Views\Courses\EditCourseView.cshtml" />
+    <Content Include="Areas\Admin\Views\Settings\Profile.cshtml" />
+    <Content Include="Areas\Admin\Views\Courses\AuditListView.cshtml" />
     <None Include="assets\plugins\font-awesome\fonts\fontawesome-webfont.ttf" />
     <None Include="assets\plugins\font-awesome\fonts\fontawesome-webfont.woff" />
     <None Include="Plugins\uploadify\com\adobe\air\logging\FileTarget.as" />
@@ -704,6 +708,11 @@
     <Content Include="Views\Courses\Index.cshtml" />
     <Content Include="Views\About\Index.cshtml" />
     <Content Include="Views\Courses\Detail.cshtml" />
+    <Content Include="Views\About\Service.cshtml" />
+    <Content Include="Views\About\Opera.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\News\Index.cshtml" />
+    <Content Include="Views\News\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Components\Component.csproj">

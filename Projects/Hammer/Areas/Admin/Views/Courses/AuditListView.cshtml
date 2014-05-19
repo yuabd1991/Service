@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "CoursesListView";
+    ViewBag.Title = "AuditListView";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -26,17 +26,6 @@
 			至
 			<input type="text" col="EndDate" class="col-endtime" onfocus="WdatePicker()" />
         </li>
-        <li><span class="title">状态：</span>
-			 <select col="State">
-                <option value=""> - 请选择课程状态 - </option>
-                <option value="0">待审核</option>
-                <option value="1">已审核</option>
-                <option value="2">审核不通过</option>
-                <option value="3">报名未开始</option>
-                <option value="4">报名进行中</option>
-                <option value="5">报名结束</option>
-             </select>
-        </li>
 	</ul>
 </div>
 <div class="toolBar">
@@ -61,12 +50,13 @@
     //刷新
     function Reflesh() {
         var param = $(".searchBar").GetPostData();
-
+        param.State = 0;
         DataGridExtend.searchGrid("linkList", param, url);
     };
 
     $(function () {
         var param = $('.searchBar').GetPostData();
+        param.State = 0;
         $('#linkList').U1EasyGrid({
             queryParams: param,
             singleSelect: false,
@@ -99,22 +89,18 @@
     });
     /*操作列*/
     opFormat = function (val, row, rowIndex) {
-        return "<a href=\"javascript:void(0)\" onClick=\"Update('" + row.ID + "')\" >编辑</a> | <a href=\"javascript:void(0)\" onClick=\"Delete('" + row.ID + "')\">删除</a>";
-    };
-
-    function Add() {
-        openPage('增加课程', '/admin/Courses/AddCourseView?tab=' + getTabTitle());
+        return "<a href=\"javascript:void(0)\" onClick=\"Update('" + row.ID + "')\" >编辑</a> | <a href=\"javascript:void(0)\" onClick=\"Audit('" + row.ID + "','1')\">审核通过</a> | <a href=\"javascript:void(0)\" onClick=\"Audit('" + row.ID + "','2')\">审核不通过</a>";
     };
 
     function Update(id) {
         openPage('修改课程', '/admin/Courses/EditCourseView?tab=' + getTabTitle() + "&id=" + id);
     };
 
-    function Delete(id) {
-        if (confirm('确认要删除该课程吗？')) {
-            $.U1Ajax('/admin/Courses/DelCourseJson/' + id, null, function (result) {
+    function Audit(id, auditID) {
+        if (confirm('确认要审核该课程吗？')) {
+            $.U1Ajax('/admin/Courses/AuditCourseJson?id=' + id + "&auditID=" + auditID, null, function (result) {
                 if (result.Tag == 1) {
-                    alert("删除成功！");
+                    alert("审核成功！");
                     Reflesh();
                 } else {
                     alert(result.Message);

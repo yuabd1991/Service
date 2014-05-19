@@ -355,9 +355,9 @@ namespace Component.Component
 					list.Remove(list.Last());
 					fromList.Remove(fromList[0]);
 				}
-				else if (selectList.Count == 0 && list.Count == 1)
+				else if (selectList.Count == 0 && list.Count == 1 && fromList.Count > 0)
 				{
-					index = fromList[0];
+                    index = fromList[0];
 					list.Clear();
 					break;
 				}

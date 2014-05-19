@@ -16,7 +16,7 @@
 	<link rel="stylesheet" href="/assets/plugins/bootstrap/css/bootstrap.min.css" />
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet'
 		type='text/css' />
-	<link rel="stylesheet" href="/assets/plugins/font-awesome/css/font-awesome.css" />
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" />
 	<link rel="stylesheet" href="/assets/plugins/flexslider/flexslider.css" />
 	<link rel="stylesheet" href="/assets/plugins/pretty-photo/css/prettyPhoto.css" />
 	<link id="theme-style" rel="stylesheet" href="/assets/css/styles.css" />
@@ -57,13 +57,13 @@
                 <div class="info col-md-8 col-sm-8">
                     <ul class="menu-top navbar-right hidden-xs">
                         @*<li class="divider"><a href="/">首页</a></li>*@
-                        <li class="divider"><a href="/login.html">登录</a></li>
-                        <li><a href="/register.html">注册</a></li>
+                        <li class="divider"><a href="/login">登录</a></li>
+                        <li><a href="/register">注册</a></li>
                     </ul><!--//menu-top-->
                     <br />
                     <div class="contact pull-right">
-                        <p class="phone"><i class="fa fa-phone"></i>电话: 0592-6150545</p> 
-                        <p class="email"><i class="fa fa-envelope"></i><a href="mailto:jerry@henhaoji.com.cn">jerry@henhaoji.com.cn</a></p>
+                        <p class="phone"><i class="fa fa-phone"></i>考证联系人: 159-8075-2892 金主任, 186-8050-5969 周主任</p> 
+                        <p class="email"><i class="fa fa-qq"></i><a href="#">421336432</a></p>
                     </div><!--//contact-->
                 </div><!--//info-->
             </div><!--//header-main-->
@@ -82,24 +82,33 @@
                 </div><!--//navbar-header-->            
                 <div class="navbar-collapse collapse" id="navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active nav-item"><a href="/">首页</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">课程 <i class="fa fa-angle-down"></i></a>
+                        <li class="nav-item @ViewBag.HomeActive"><a href="/">首页</a></li>
+                        <li class="nav-item dropdown @ViewBag.About">
+                            <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="/About/Index">关于我们 <i class="fa fa-angle-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/about/Index">平台介绍</a></li>
+                                <li><a href="/about/service">服务范围</a></li>
+                                <li><a href="/about/opera">操作流程</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown @ViewBag.Course">
+                            <a href="/courses">课程</a>
+                            @*<a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">课程 <i class="fa fa-angle-down"></i></a>
                             <ul class="dropdown-menu">
                                 <li><a href="/courses">所有课程</a></li>
                                 <li><a href="/courses">摄影课程</a></li>
                                 <li><a href="/courses">美发课程</a></li>
-                            </ul>
+                            </ul>*@
                         </li>
                         <li class="nav-item dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">行业动态 <i class="fa fa-angle-down"></i></a>
                             <ul class="dropdown-menu">
-                                <li><a href="news.html">所有动态</a></li>
-                                <li><a href="news-single.html">摄影动态</a></li>   
-                                <li><a href="news-single-2.html">美发动态</a></li>          
+                                <li><a href="/news/index">所有动态</a></li>
+                                <li><a href="/news/index/1">摄影动态</a></li>   
+                                <li><a href="/news/index/2">美发动态</a></li>          
                             </ul>
                         </li>
-                        <li class="nav-item"><a href="events.html">活动</a></li>
+                        <li class="nav-item"><a href="events">活动</a></li>
                         @*<li class="nav-item dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">页面 <i class="fa fa-angle-down"></i></a>
                             <ul class="dropdown-menu">
@@ -128,7 +137,7 @@
                                 <li><a href="icons.html"><i class="fa fa-heart"></i> Icons</a></li>                                                 
                             </ul>
                         </li><!--//dropdown-->*@
-                        <li class="nav-item"><a href="contact.html">联系我们</a></li>
+                        <li class="nav-item"><a href="/contact">联系我们</a></li>
                     </ul><!--//nav-->
                 </div><!--//navabr-collapse-->
             </div><!--//container-->
@@ -149,11 +158,11 @@
                 <div class="row">
                 <div class="footer-col col-md-3 col-sm-4 about">
                     <div class="footer-col-inner">
-                        <h3>简介</h3>
+                        <h3>关于平台</h3>
                         <ul>
-                            <li><a href="about.html"><i class="fa fa-caret-right"></i>关于我们</a></li>
-                            <li><a href="contact.html"><i class="fa fa-caret-right"></i>联系我们</a></li>
-                            <li><a href="privacy.html"><i class="fa fa-caret-right"></i>隐私政策</a></li>
+                            <li><i class="fa fa-caret-right"></i><a href="/about/Index">平台介绍</a></li>
+                            <li><i class="fa fa-caret-right"></i><a href="/about/service">服务范围</a></li>
+                            <li><i class="fa fa-caret-right"></i><a href="/about/opera">操作流程</a></li>
                         </ul>
                     </div><!--//footer-col-inner-->
                 </div><!--//foooter-col-->
@@ -161,9 +170,9 @@
                     <div class="footer-col-inner">
                         <h3>简介</h3>
                         <ul>
-                            <li><a href="about.html"><i class="fa fa-caret-right"></i>关于我们</a></li>
-                            <li><a href="contact.html"><i class="fa fa-caret-right"></i>联系我们</a></li>
-                            <li><a href="privacy.html"><i class="fa fa-caret-right"></i>隐私政策</a></li>
+                            <li><a href="about"><i class="fa fa-caret-right"></i>关于我们</a></li>
+                            <li><a href="contact"><i class="fa fa-caret-right"></i>联系我们</a></li>
+                            <li><a href="privacy"><i class="fa fa-caret-right"></i>隐私政策</a></li>
                         </ul>
                     </div><!--//footer-col-inner-->
                 </div><!--//foooter-col-->
@@ -171,9 +180,9 @@
                     <div class="footer-col-inner">
                         <h3>简介</h3>
                         <ul>
-                            <li><a href="about.html"><i class="fa fa-caret-right"></i>关于我们</a></li>
-                            <li><a href="contact.html"><i class="fa fa-caret-right"></i>联系我们</a></li>
-                            <li><a href="privacy.html"><i class="fa fa-caret-right"></i>隐私政策</a></li>
+                            <li><a href="about"><i class="fa fa-caret-right"></i>关于我们</a></li>
+                            <li><a href="contact"><i class="fa fa-caret-right"></i>联系我们</a></li>
+                            <li><a href="privacy"><i class="fa fa-caret-right"></i>隐私政策</a></li>
                         </ul>
                     </div><!--//footer-col-inner-->
                 </div><!--//foooter-col-->
@@ -192,18 +201,19 @@
                 </div><!--//foooter-col--> *@
                 <div class="footer-col col-md-3 col-sm-12 contact">
                     <div class="footer-col-inner">
-                        <h3>Contact us</h3>
+                        <h3>联系我们</h3>
                         <div class="row">
                             <p class="adr clearfix col-md-12 col-sm-4">
                                 <i class="fa fa-map-marker pull-left"></i>        
                                 <span class="adr-group pull-left">       
-                                    <span class="street-address">厦门市集美区</span><br />
-                                    <span class="region">集源路46路611室</span><br />
-                                    <span class="postal-code">361000</span><br />
-                                    @*<span class="country-name">UK</span>*@
+                                    <span class="street-address"> 北京市西城区大酱坊</span><br />
+                                    <span class="region">胡同甲26号301</span><br />
+                                    @*<span class="postal-code">361000</span><br />
+                                    <span class="country-name">UK</span>*@
                                 </span>
                             </p>
-                            <p class="tel col-md-12 col-sm-4"><i class="fa fa-phone"></i>0592 - 6150545</p>
+                            <p class="tel col-md-12 col-sm-4"><i class="fa fa-phone"></i>15980752892</p>
+                            <p class="tel col-md-12 col-sm-4"><i class="fa fa-qq"></i>421336432</p>
                             <p class="email col-md-12 col-sm-4"><i class="fa fa-envelope"></i><a href="#">jerry@henhaoji.com.cn</a></p>  
                         </div> 
                     </div><!--//footer-col-inner-->            
@@ -214,7 +224,7 @@
         <div class="bottom-bar">
             <div class="container">
                 <div class="row">
-                    <small class="copyright col-md-6 col-sm-12 col-xs-12">Copyright @@ 2014 厦门巨易网络科技有限公司</small>
+                    <small class="copyright col-md-6 col-sm-12 col-xs-12">Copyright @@ 2014 北京市摄影行业协会职业教育培训中心</small>
                     <ul class="social pull-right col-md-6 col-sm-12 col-xs-12">
                         <li><a href="#" ><i class="fa fa-twitter"></i></a></li>
                         <li><a href="#" ><i class="fa fa-facebook"></i></a></li>

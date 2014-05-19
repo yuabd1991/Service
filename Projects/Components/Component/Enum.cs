@@ -60,4 +60,34 @@ namespace Component
 	{
 		public const string Article = "Article";
 	}
+    /// <summary>
+    /// 课程状态
+    /// </summary>
+    public static class CourseState
+    {
+        /// <summary>
+        /// 未审核
+        /// </summary>
+        public const int NoAudit = 0;
+        /// <summary>
+        /// 审核通过
+        /// </summary>
+        public const int Pass = 1;
+        /// <summary>
+        /// 审核不通过
+        /// </summary>
+        public const int UnPass = 2;
+        /// <summary>
+        /// 报名未开始
+        /// </summary>
+        public const int NoStart = 3;
+        /// <summary>
+        /// 报名进行中
+        /// </summary>
+        public const int Process = 4;
+        /// <summary>
+        /// 报名结束
+        /// </summary>
+        public const int End = 5;
+    }
 }

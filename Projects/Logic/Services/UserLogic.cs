@@ -19,29 +19,6 @@ namespace Logic.Services
         {
         }
 
-        public List<UserEntity> GetUserListReport(GetReportDataParams param, out int totalCount)
-        {
-            DataSet ds = MSSqlHelper.GetReportData("UserList", param, out totalCount);
-            var dt = ds.Tables[0];
-            if (dt == null)
-            {
-                return new List<UserEntity>();
-            }
-
-            var article = (from l in dt.AsEnumerable()
-                           select new UserEntity
-                           {
-
-                               ID = l.Field<int>("ID"),
-                               DateCreated = l.Field<DateTime>("DateCreated"),
-                               DateLastLogin = l.Field<DateTime>("DateLastLogin"),
-                               IsActive = l.Field<string>("IsActive"),
-                               UserName = l.Field<string>("UserName")
-                           }).ToList();
-
-            return article;
-        }
-
         #region 角色
 
         public List<UserRoleEntity> GetUserRoleList(GetReportDataParams param, out int totalCount)
@@ -204,7 +181,7 @@ namespace Logic.Services
 
                 return obj;
             }
-            if (UserAuthenticated(user.ID, clearPassword))
+            if (UserAuthenticated(user.ID, Config.Password + clearPassword))
             {
                 //var user = GetUser(userID);
 
@@ -321,7 +298,7 @@ namespace Logic.Services
                 return obj;
             }
 
-            user.Password = EncryptPassword(clearNewPassword);
+            user.Password = EncryptPassword(Config.Password + clearNewPassword);
             obj.Tag = 1;
 
             return obj;
@@ -400,7 +377,7 @@ namespace Logic.Services
                 user.DateCreated = DateTime.Now;
                 user.DateLastLogin = DateTime.Now;
                 user.Type = param.Type;
-                user.Password = EncryptPassword(param.Password);
+                user.Password = EncryptPassword(Config.Password + param.Password);
                 //公司
                 user.Address = param.Address;
                 user.CompanyName = param.CompanyName;
@@ -440,6 +417,91 @@ namespace Logic.Services
             return obj;
         }
 
+        #endregion
+
+        #region 用户信息
+
+        public List<UserEntity> GetUserListReport(GetReportDataParams param, out int totalCount)
+        {
+            DataSet ds = MSSqlHelper.GetReportData("UserList", param, out totalCount);
+            var dt = ds.Tables[0];
+            if (dt == null)
+            {
+                return new List<UserEntity>();
+            }
+
+            var article = (from l in dt.AsEnumerable()
+                           select new UserEntity
+                           {
+
+                               ID = l.Field<int>("ID"),
+                               DateCreated = l.Field<DateTime>("DateCreated"),
+                               DateLastLogin = l.Field<DateTime>("DateLastLogin"),
+                               IsActive = l.Field<string>("IsActive"),
+                               UserName = l.Field<string>("UserName")
+                           }).ToList();
+
+            return article;
+        }
+
+        /// <summary>
+        /// 获取用户信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public UserEntity GetUserByID(int id)
+        {
+            var user = (from l in _db.Users
+                        where l.ID == id
+                        select new UserEntity()
+                        {
+                            ID = l.ID,
+                            Contact = l.Contact,
+                            Email = l.Email,
+                            QQ = l.QQ,
+                            RealName = l.RealName,
+                            UserName = l.UserName,
+                            Address = l.Address,
+                            CompanyName = l.CompanyName,
+                            Description = l.Description,
+                            Website = l.Website,
+                            Type = l.Type
+                        }).FirstOrDefault();
+
+            return user;
+        }
+
+        public BaseObject UpdateUser(UserEntity param)
+        {
+            var obj = new BaseObject();
+            var user = _db.Users.FirstOrDefault(m => m.ID == param.ID);
+            if (user == null)
+            {
+                obj.Tag = -1;
+                obj.Message = "找不到该记录！";
+
+                return obj;
+            }
+
+            if (!string.IsNullOrEmpty(param.Password))
+            {
+                user.Password = EncryptPassword(Config.Password + user.Password);
+            }
+
+            user.Address = param.Address;
+            user.CompanyName = param.CompanyName;
+            user.Description = param.Description;
+            user.QQ = param.QQ;
+            user.RealName = param.RealName;
+            user.Website = param.Website;
+            user.Contact = param.Contact;
+
+            _db.SaveChanges();
+
+            obj.Tag = 1;
+
+            return obj;
+        }
         #endregion
     }
 }

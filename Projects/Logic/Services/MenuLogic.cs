@@ -22,7 +22,7 @@ namespace Logic.Services
         {
             var qu = list.UserRolePermissionEntities.Where(m => m.Type.ToLower() == "page").Select(m => m.TargetID).Distinct().ToArray();
             var query = (from l in _db.Pages
-                         where l.Enable == PublicType.Yes && list.IsManage == PublicType.No ? qu.Contains(l.ID) : true
+                         where l.Enable == PublicType.Yes && (list.IsManage == PublicType.No ? qu.Contains(l.ID) : true)
                          orderby l.OrderIndex descending
                          select new MenuEntity
                          {
@@ -42,7 +42,7 @@ namespace Logic.Services
             var qu = list.UserRolePermissionEntities.Where(m => m.Type.ToLower() == "menu").Select(m => m.TargetID).Distinct().ToArray();
 
             var query = (from l in _db.Menus
-                         where l.Enable == PublicType.Yes && list.IsManage == PublicType.No ? qu.Contains(l.ID) : true
+                         where l.Enable == PublicType.Yes && (list.IsManage == PublicType.No ? qu.Contains(l.ID) : true)
                          orderby l.OrderIndex descending
                          select new MenuEntity
                          {

@@ -80,7 +80,9 @@ namespace Entity.Entities
 
         public DateTime DateCreated { get; set; }
 
-        public string UpdateUser { get; set; }
+        public int? UpdateUser { get; set; }
+
+        public string UpdateUserName { get; set; }
 
         public int? PageVisits { get; set; }
 

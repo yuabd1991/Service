@@ -26,6 +26,10 @@ namespace Entity.Entities
         public DateTime? EndDate { get; set; }
 
         public string Contact { get; set; }
+        /// <summary>
+        /// 地址
+        /// </summary>
+        public string Address { get; set; }
 
         public string IsDelete { get; set; }
 
@@ -59,6 +63,11 @@ namespace Entity.Entities
         public string Photo { get; set; }
 
         public List<PictureEntity> Photos { get; set; }
+
+        /// <summary>
+        /// 状态
+        /// </summary>
+        public int State { get; set; }
     }
 
     public class CourseTypeEntity
@@ -76,5 +85,30 @@ namespace Entity.Entities
         public int UserID { get; set; }
 
         public DateTime AddDate { get; set; }
+    }
+
+    public class ApplyCourseEntity
+    {
+        public int ID { get; set; }
+        /// <summary>
+        /// 报名的用户
+        /// </summary>
+        public int UserID { get; set; }
+        /// <summary>
+        /// 课程ID
+        /// </summary>
+        public int? CourseID { get; set; }
+        /// <summary>
+        /// 报名人姓名
+        /// </summary>
+        public string Name { get; set; }
+        /// <summary>
+        /// 联系人
+        /// </summary>
+        public string Contact { get; set; }
+        /// <summary>
+        /// 报名时间
+        /// </summary>
+        public DateTime? AddDate { get; set; }
     }
 }

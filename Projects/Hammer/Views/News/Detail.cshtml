@@ -1,0 +1,109 @@
+﻿@model Entity.Entities.ArticleImageEntity
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_SiteLayout.cshtml";
+}
+<header class="page-heading clearfix">
+                    <h1 class="heading-title pull-left">行业动态</h1>
+                    <div class="breadcrumbs pull-right">
+                        <ul class="breadcrumbs-list">
+                            <li class="breadcrumbs-label">您的位置:</li>
+                            <li><a href="/">首页</a><i class="fa fa-angle-right"></i></li>
+                            <li class="current">行业动态</li>
+                        </ul>
+                    </div><!--//breadcrumbs-->
+                </header>
+<div class="page-content">
+    <div class="row page-row">
+        <div class="news-wrapper col-md-8 col-sm-7">
+            <article class="news-item">
+                <p class="meta text-muted">By: <a href="#">@Model.UpdateUser</a> | Posted on: @Model.DateCreated</p>
+                <p class="featured-image"><img class="img-responsive" src="/Content/upload/images/@Model.Photo" alt="" /></p>                @Html.Raw(Model.Content)            </article>
+            <!--//news-item-->
+        </div>
+        <!--//news-wrapper-->
+        <aside class="page-sidebar  col-md-3 col-md-offset-1 col-sm-4 col-sm-offset-1 col-xs-12">                    
+            <section class="widget has-divider">
+                <h3 class="title">相关新闻</h3>
+                @foreach (var item in new EasyUI.Helpers.SystemHelper().GetArticleImageList(0).Take(5))
+                {
+                    <article class="news-item row">       
+                        <figure class="thumb col-md-2 col-sm-3 col-xs-3">
+                            <img src="/Content/upload/images/@item.Photo" alt="" />
+                        </figure>
+                        <div class="details col-md-10 col-sm-9 col-xs-9">
+                            <h4 class="title"><a href="/News/Detail/@(item.ID).html">@item.Title</a></h4>
+                        </div>
+                    </article><!--//news-item-->
+                }
+                @*
+                <article class="news-item row">       
+                    <figure class="thumb col-md-2 col-sm-3 col-xs-3">
+                        <img src="assets/images/news/news-thumb-2.jpg" alt="" />
+                    </figure>
+                    <div class="details col-md-10 col-sm-9 col-xs-9">
+                        <h4 class="title"><a href="news-single.html">Sed tincidunt urna eget turpis pretium hendrerit</a></h4>
+                    </div>
+                </article><!--//news-item-->
+                <article class="news-item row">       
+                    <figure class="thumb col-md-2 col-sm-3 col-xs-3">
+                        <img src="assets/images/news/news-thumb-3.jpg" alt="" />
+                    </figure>
+                    <div class="details col-md-10 col-sm-9 col-xs-9">
+                        <h4 class="title"><a href="news-single.html">Duis scelerisque erat iaculis</a></h4>
+                    </div>
+                </article><!--//news-item-->
+                <article class="news-item row">       
+                    <figure class="thumb col-md-2 col-sm-3 col-xs-3">
+                        <img src="assets/images/news/news-thumb-4.jpg" alt="" />
+                    </figure>
+                    <div class="details col-md-10 col-sm-9 col-xs-9">
+                        <h4 class="title"><a href="news-single.html">Duis scelerisque erat iaculis</a></h4>
+                    </div>
+                </article><!--//news-item-->*@
+            </section><!--//widget-->
+            <section class="widget has-divider">
+                <h3 class="title">即将开始的活动</h3>
+                <article class="events-item row page-row">                                    
+                        <div class="date-label-wrapper col-md-3 col-sm-4 col-xs-4">
+                            <p class="date-label">
+                                <span class="month">六月</span>
+                                <span class="date-number">18</span>
+                            </p>
+                        </div><!--//date-label-wrapper-->
+                        <div class="details col-md-9 col-sm-8 col-xs-8">
+                            <h5 class="title">摄影展</h5>  
+                            <p class="time text-muted">10:00 - 18:00<br />北京博物馆</p>                  
+                        </div><!--//details-->                                    
+                </article>
+                <article class="events-item row page-row">                                    
+                        <div class="date-label-wrapper col-md-3 col-sm-4 col-xs-4">
+                            <p class="date-label">
+                                <span class="month">六月</span>
+                                <span class="date-number">18</span>
+                            </p>
+                        </div><!--//date-label-wrapper-->
+                        <div class="details col-md-9 col-sm-8 col-xs-8">
+                            <h5 class="title">摄影展</h5>  
+                            <p class="time text-muted">10:00 - 18:00<br />北京博物馆</p>                  
+                        </div><!--//details-->                                    
+                </article>
+                <article class="events-item row page-row">                                    
+                        <div class="date-label-wrapper col-md-3 col-sm-4 col-xs-4">
+                            <p class="date-label">
+                                <span class="month">六月</span>
+                                <span class="date-number">18</span>
+                            </p>
+                        </div><!--//date-label-wrapper-->
+                        <div class="details col-md-9 col-sm-8 col-xs-8">
+                            <h5 class="title">摄影展</h5>  
+                            <p class="time text-muted">10:00 - 18:00<br />北京博物馆</p>                  
+                        </div><!--//details-->                                    
+                </article>
+            </section><!--//widget-->
+        </aside>
+    </div>
+    <!--//page-row-->
+</div>
+<!--//page-content-->
+</div><!--//page-->

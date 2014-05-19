@@ -24,94 +24,64 @@
                 <div class="tab-content">
                     <div class="tab-pane active" id="tab1">
                         <div class="row">
-                            <div class="item col-md-3 col-sm-6 col-xs-6">
-                                <img class="img-responsive" src="/assets/images/courses/course-thumb-1.jpg" alt="" />
-                                <p class="text-center">
-                                    <a href="#">美发</a></p>
-                            </div>
-                            <!--//item-->
-                            <div class="item col-md-3 col-sm-6 col-xs-6">
-                                <img class="img-responsive" src="/assets/images/courses/course-thumb-1.jpg" alt="" />
-                                <p class="text-center">
-                                    <a href="#">美发</a></p>
-                            </div>
-                            <!--//item-->
-                            <div class="clearfix visible-xs">
-                            </div>
-                            <div class="item col-md-3 col-sm-6 col-xs-6">
-                                <img class="img-responsive" src="/assets/images/courses/course-thumb-1.jpg" alt="" />
-                                <p class="text-center">
-                                    <a href="#">美发</a></p>
-                            </div>
-                            <!--//item-->
-                            <div class="item col-md-3 col-sm-6 col-xs-6">
-                                <img class="img-responsive" src="/assets/images/courses/course-thumb-1.jpg" alt="" />
-                                <p class="text-center">
-                                    <a href="#">美发</a></p>
-                            </div>
-                            <!--//item-->
+                            @{int i = 1;}
+                            @foreach (var item in new EasyUI.Helpers.CourseHelper().GetCourseList().Take(4))
+                            {
+                                <div class="item col-md-3 col-sm-6 col-xs-6">
+                                    <img class="img-responsive" src="/Content/Upload/images/@item.PictureFile" alt="@item.CourseName" />
+                                    <p class="text-center">
+                                        <a href="/Courses/Detail/@item.ID" title="@item.CourseName">@item.CourseName</a>
+                                    </p>
+                                </div>
+                                <!--//item-->
+                                if (i % 2 == 0)
+                                {
+                                    @Html.Raw("<div class='clearfix visible-xs'></div>")
+                                }
+                                i++;
+                            }
                         </div>
                         <!--//row-->
                     </div>
                     <div class="tab-pane" id="tab2">
                         <div class="row">
-                            <div class="item col-md-3 col-sm-6 col-xs-6">
-                                <img class="img-responsive" src="assets/images/courses/course-thumb-4.jpg" alt="" />
-                                <p class="text-center">
-                                    <a href="#">摄影</a></p>
-                            </div>
-                            <!--//item-->
-                            <div class="item col-md-3 col-sm-6 col-xs-6">
-                                <img class="img-responsive" src="assets/images/courses/course-thumb-4.jpg" alt="" />
-                                <p class="text-center">
-                                    <a href="#">摄影</a></p>
-                            </div>
-                            <!--//item-->
-                            <div class="clearfix visible-xs">
-                            </div>
-                            <div class="item col-md-3 col-sm-6 col-xs-6">
-                                <img class="img-responsive" src="assets/images/courses/course-thumb-4.jpg" alt="" />
-                                <p class="text-center">
-                                    <a href="#">摄影</a></p>
-                            </div>
-                            <!--//item-->
-                            <div class="item col-md-3 col-sm-6 col-xs-6">
-                                <img class="img-responsive" src="assets/images/courses/course-thumb-4.jpg" alt="" />
-                                <p class="text-center">
-                                    <a href="#">摄影</a></p>
-                            </div>
-                            <!--//item-->
+                            @{int j = 1;}
+                            @foreach (var item in new EasyUI.Helpers.CourseHelper().GetCourseList().Take(4))
+                            {
+                                <div class="item col-md-3 col-sm-6 col-xs-6">
+                                    <img class="img-responsive" src="/Content/Upload/images/@item.PictureFile" alt="@item.CourseName" />
+                                    <p class="text-center">
+                                        <a href="/Courses/Detail/@item.ID" title="@item.CourseName">@item.CourseName</a>
+                                    </p>
+                                </div>
+                                <!--//item-->
+                                if (j % 2 == 0)
+                                {
+                                    @Html.Raw("<div class='clearfix visible-xs'></div>")
+                                }
+                                i++;
+                            }
                         </div>
                         <!--//row-->
                     </div>
                     <div class="tab-pane" id="tab3">
                         <div class="row">
-                            <div class="item col-md-3 col-sm-6 col-xs-6">
-                                <img class="img-responsive" src="assets/images/courses/course-thumb-3.jpg" alt="" />
-                                <p class="text-center">
-                                    <a href="#">养生</a></p>
-                            </div>
-                            <!--//item-->
-                            <div class="item col-md-3 col-sm-6 col-xs-6">
-                                <img class="img-responsive" src="assets/images/courses/course-thumb-3.jpg" alt="" />
-                                <p class="text-center">
-                                    <a href="#">养生</a></p>
-                            </div>
-                            <!--//item-->
-                            <div class="clearfix visible-xs">
-                            </div>
-                            <div class="item col-md-3 col-sm-6 col-xs-6">
-                                <img class="img-responsive" src="assets/images/courses/course-thumb-3.jpg" alt="" />
-                                <p class="text-center">
-                                    <a href="#">养生</a></p>
-                            </div>
-                            <!--//item-->
-                            <div class="item col-md-3 col-sm-6 col-xs-6">
-                                <img class="img-responsive" src="assets/images/courses/course-thumb-3.jpg" alt="" />
-                                <p class="text-center">
-                                    <a href="#">养生</a></p>
-                            </div>
-                            <!--//item-->
+                            @{int k = 1;}
+                            @foreach (var item in new EasyUI.Helpers.CourseHelper().GetCourseList().Take(4))
+                            {
+                                <div class="item col-md-3 col-sm-6 col-xs-6">
+                                    <img class="img-responsive" src="/Content/Upload/images/@item.PictureFile" alt="@item.CourseName" />
+                                    <p class="text-center">
+                                        <a href="/Courses/Detail/@item.ID" title="@item.CourseName">@item.CourseName</a>
+                                    </p>
+                                </div>
+                                <!--//item-->
+                                if (k % 2 == 0)
+                                {
+                                    @Html.Raw("<div class='clearfix visible-xs'></div>")
+                                }
+                                i++;
+                            }
                         </div>
                         <!--//row-->
                     </div>
@@ -147,7 +117,7 @@
                             <div class="col-duration col-md-2">
                                 <strong>报名人数</strong></div>
                             <div class="col-level col-md-3">
-                                <strong>级别</strong></div>
+                                <strong>费用</strong></div>
                             <div class="col-location col-md-4">
                                 <strong>地点</strong></div>
                         </div>
@@ -167,8 +137,8 @@
                             <div class="row">
                                 <div class="col-start col-md-3">@item.StartDate</div>                                    
                                 <div class="col-duration col-md-2">@item.ApplyCount</div>
-                                <div class="col-level col-md-3">高级美发师</div>
-                                <div class="col-location col-md-4">北京</div>   
+                                <div class="col-level col-md-3">@item.Amount</div>
+                                <div class="col-location col-md-4">@item.Address</div>   
                             </div>                                 
                         </div><!--//col-meta-->                           
                     </div><!--//details-->
